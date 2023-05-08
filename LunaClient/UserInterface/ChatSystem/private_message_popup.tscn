@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://da8uc6t7amd86"]
+
+[ext_resource type="PackedScene" uid="uid://i5beirl7tqx" path="res://UserInterface/Popups/ok_popup.tscn" id="1_7yjwp"]
+[ext_resource type="Script" path="res://UserInterface/ChatSystem/private_message_popup.gd" id="2_6bv7r"]
+[ext_resource type="Theme" uid="uid://cdkul5slbycdi" path="res://UserInterface/Themes/pixel_theme.tres" id="3_03rhu"]
+[ext_resource type="Script" path="res://Utils/limit_character_use.gd" id="4_unefn"]
+
+[node name="PrivateMessagePopup" instance=ExtResource("1_7yjwp")]
+offset_bottom = 56.0
+script = ExtResource("2_6bv7r")
+show_close_button = true
+header = "Message Target"
+
+[node name="Header" parent="." index="0"]
+text = "Message target:"
+
+[node name="Content" parent="." index="2"]
+visible = false
+
+[node name="LineEdit" type="LineEdit" parent="." index="3"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -8.0
+offset_right = -5.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_03rhu")
+caret_blink = true
+script = ExtResource("4_unefn")
+allowed_characters = "[a-zA-Z0-9]"
+
+[connection signal="text_changed" from="LineEdit" to="LineEdit" method="_on_text_changed"]

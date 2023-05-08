@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Desolate Road",
+    "spawnpoint": {
+      "x": 100,
+      "y": 100
+    },
+    "returnscene": -1,
+    "doors": [
+      {
+        "id": 1,
+        "destination": 2,
+        "destinationpoint": {
+          "x": 100,
+          "y": 100
+        }
+      }
+    ],
+    "npcs": [
+      {
+        "id": 1,
+        "position": {
+          "x": 100,
+          "y": 100
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Desolate Road 2",
+    "spawnpoint": {
+      "x": 100,
+      "y": 100
+    },
+    "returnscene": 1,
+    "doors": [
+      {
+        "id": 1,
+        "destination": 1,
+        "destinationpoint": {
+          "x": 100,
+          "y": 100
+        }
+      }
+    ],
+    "npcs": []
+  }
+]

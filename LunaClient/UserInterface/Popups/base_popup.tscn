@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://bx2l7j40wo3b2"]
+
+[ext_resource type="Texture2D" uid="uid://ch3gpfyquudwb" path="res://UserInterface/Assets/nineslice_background_opaque.png" id="1_ymkxs"]
+[ext_resource type="Script" path="res://UserInterface/Popups/base_popup.gd" id="2_wm1lj"]
+[ext_resource type="FontFile" uid="uid://gaghg2pnqqys" path="res://UserInterface/Fonts/Luna Pixel Art.ttf" id="3_squm3"]
+[ext_resource type="Texture2D" uid="uid://xinwcji0hiaw" path="res://UserInterface/Assets/close_button.png" id="4_ak54q"]
+[ext_resource type="Texture2D" uid="uid://blixi4xhqjeqx" path="res://UserInterface/Assets/close_button_hover.png" id="5_j4av1"]
+[ext_resource type="Texture2D" uid="uid://frt4on5ga35e" path="res://UserInterface/Assets/close_button_press.png" id="6_xb8rl"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_muu50"]
+texture = ExtResource("4_ak54q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kfgst"]
+texture = ExtResource("5_j4av1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nj3cp"]
+texture = ExtResource("6_xb8rl")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66nbm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mi1ap"]
+
+[node name="BasePopup" type="NinePatchRect"]
+offset_right = 140.0
+offset_bottom = 70.0
+mouse_filter = 0
+texture = ExtResource("1_ymkxs")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("2_wm1lj")
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.941176, 0.960784, 0.980392, 1)
+theme_override_fonts/font = ExtResource("3_squm3")
+theme_override_font_sizes/font_size = 8
+text = "<Header>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -13.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = 12.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_muu50")
+theme_override_styles/hover = SubResource("StyleBoxTexture_kfgst")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nj3cp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_66nbm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mi1ap")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

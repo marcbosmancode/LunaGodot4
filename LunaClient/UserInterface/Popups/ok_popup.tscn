@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://i5beirl7tqx"]
+
+[ext_resource type="PackedScene" uid="uid://bx2l7j40wo3b2" path="res://UserInterface/Popups/base_popup.tscn" id="1_2i1cv"]
+[ext_resource type="Script" path="res://UserInterface/Popups/ok_popup.gd" id="2_7s4mi"]
+[ext_resource type="Theme" uid="uid://cdkul5slbycdi" path="res://UserInterface/Themes/pixel_theme.tres" id="3_em8qi"]
+[ext_resource type="Texture2D" uid="uid://ktwwfq4y776t" path="res://UserInterface/Assets/ok_button.png" id="3_jxcqv"]
+[ext_resource type="Texture2D" uid="uid://dkmbn2ds3yyya" path="res://UserInterface/Assets/ok_button_hover.png" id="4_kdqve"]
+[ext_resource type="Texture2D" uid="uid://dehfxhhb23gyh" path="res://UserInterface/Assets/ok_button_press.png" id="5_f0q4l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dyar7"]
+texture = ExtResource("3_jxcqv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0sdpv"]
+texture = ExtResource("4_kdqve")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eotgm"]
+texture = ExtResource("5_f0q4l")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2j3g0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7e12d"]
+
+[node name="OkPopup" instance=ExtResource("1_2i1cv")]
+script = ExtResource("2_7s4mi")
+content = ""
+show_close_button = false
+
+[node name="Content" type="Label" parent="." index="2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 16.0
+offset_right = -5.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_em8qi")
+theme_override_colors/font_color = Color(0.941176, 0.960784, 0.980392, 1)
+text = "<Content>"
+autowrap_mode = 2
+
+[node name="OkButton" type="Button" parent="." index="3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = -17.0
+offset_right = 14.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_dyar7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0sdpv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_eotgm")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2j3g0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7e12d")
+
+[connection signal="pressed" from="OkButton" to="." method="_on_ok_button_pressed"]

@@ -1,0 +1,139 @@
+[gd_scene load_steps=14 format=3 uid="uid://d24ywyas8b5yb"]
+
+[ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="1_3uf64"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_kmhxu"]
+[ext_resource type="Texture2D" uid="uid://dxbfc8a7l4n2i" path="res://Player/Assets/Body/body_1.png" id="3_bgfsk"]
+[ext_resource type="Texture2D" uid="uid://bom0e25xcskfu" path="res://Player/Assets/Eyes/eyes_1.png" id="3_htwjr"]
+[ext_resource type="Texture2D" uid="uid://djye83mxn0id4" path="res://Player/Assets/Hairstyles/hairstyle_f_1.png" id="3_pr822"]
+[ext_resource type="Texture2D" uid="uid://dy1wm715vg3wj" path="res://Player/Assets/Outfits/outfit_1.png" id="4_dk740"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32pn5"]
+size = Vector2(12, 24)
+
+[sub_resource type="Animation" id="Animation_pw4a7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_c508o"]
+resource_name = "fall"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_xj1e0"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 2.1, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_gdccc"]
+resource_name = "jump"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_r6424"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtbe3"]
+_data = {
+"RESET": SubResource("Animation_pw4a7"),
+"fall": SubResource("Animation_c508o"),
+"idle": SubResource("Animation_xj1e0"),
+"jump": SubResource("Animation_gdccc"),
+"run": SubResource("Animation_r6424")
+}
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_kmhxu")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="HairstyleBack" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -18)
+texture = ExtResource("1_3uf64")
+
+[node name="Body" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("3_bgfsk")
+hframes = 12
+
+[node name="Outfit" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("4_dk740")
+hframes = 12
+
+[node name="HairstyleFront" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -18)
+texture = ExtResource("3_pr822")
+
+[node name="Eyes" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(1, -20)
+texture = ExtResource("3_htwjr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_32pn5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_vtbe3")
+}

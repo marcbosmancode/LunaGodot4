@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtk7ovdyxs3tp"]
+
+[ext_resource type="PackedScene" uid="uid://bx2l7j40wo3b2" path="res://UserInterface/Popups/base_popup.tscn" id="1_jduit"]
+[ext_resource type="Script" path="res://Scenes/login_popup.gd" id="2_0ojpi"]
+[ext_resource type="Theme" uid="uid://cdkul5slbycdi" path="res://UserInterface/Themes/pixel_theme.tres" id="2_sya55"]
+[ext_resource type="Texture2D" uid="uid://duxmll11hl0fy" path="res://UserInterface/Assets/red_button.png" id="3_tt07f"]
+[ext_resource type="Script" path="res://Utils/limit_character_use.gd" id="4_ojae7"]
+[ext_resource type="Texture2D" uid="uid://cymfff6vv0qx1" path="res://UserInterface/Assets/red_button_hover.png" id="4_swa3d"]
+[ext_resource type="Texture2D" uid="uid://cr8knp0fj8m0w" path="res://UserInterface/Assets/red_button_press.png" id="5_pi8ar"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_krury"]
+content_margin_top = 4.0
+texture = ExtResource("3_tt07f")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bm68t"]
+content_margin_top = 4.0
+texture = ExtResource("4_swa3d")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lyw8p"]
+content_margin_bottom = 2.0
+texture = ExtResource("5_pi8ar")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="LoginPopup" instance=ExtResource("1_jduit")]
+offset_bottom = 102.0
+script = ExtResource("2_0ojpi")
+show_close_button = false
+header = "Login"
+ui_id = 1
+is_draggable = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 16.0
+offset_right = -5.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UsernameInput" type="LineEdit" parent="VBoxContainer" index="0"]
+layout_mode = 2
+theme = ExtResource("2_sya55")
+placeholder_text = "Username"
+max_length = 30
+caret_blink = true
+script = ExtResource("4_ojae7")
+allowed_characters = "[a-zA-Z0-9]"
+
+[node name="PasswordInput" type="LineEdit" parent="VBoxContainer" index="1"]
+layout_mode = 2
+theme = ExtResource("2_sya55")
+placeholder_text = "Password"
+max_length = 30
+secret = true
+secret_character = "*"
+caret_blink = true
+script = ExtResource("4_ojae7")
+allowed_characters = "[a-zA-Z0-9`~!@#$%^&*()\\-_=+\\[\\]{}\\\\|:;'\",.<>\\/?]"
+
+[node name="LoginButton" type="Button" parent="." index="3"]
+layout_mode = 2
+offset_left = 30.0
+offset_top = 57.0
+offset_right = 112.0
+offset_bottom = 75.0
+theme = ExtResource("2_sya55")
+disabled = true
+text = "LOGIN"
+
+[node name="ExitButton" type="Button" parent="." index="4"]
+layout_mode = 2
+offset_left = 30.0
+offset_top = 79.0
+offset_right = 112.0
+offset_bottom = 97.0
+theme = ExtResource("2_sya55")
+theme_override_styles/normal = SubResource("StyleBoxTexture_krury")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bm68t")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_lyw8p")
+text = "EXIT"
+
+[connection signal="text_changed" from="VBoxContainer/UsernameInput" to="VBoxContainer/UsernameInput" method="_on_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/PasswordInput" to="VBoxContainer/PasswordInput" method="_on_text_changed"]
+[connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

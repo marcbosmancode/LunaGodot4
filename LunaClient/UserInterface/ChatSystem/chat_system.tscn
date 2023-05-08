@@ -1,0 +1,282 @@
+[gd_scene load_steps=20 format=3 uid="uid://w3mrb5opvhme"]
+
+[ext_resource type="Script" path="res://UserInterface/ChatSystem/chat_system.gd" id="1_eie3y"]
+[ext_resource type="Texture2D" uid="uid://c4jaacrk77ukx" path="res://UserInterface/Assets/nineslice_background.png" id="2_mprj5"]
+[ext_resource type="Texture2D" uid="uid://ckjkvritpiam" path="res://UserInterface/Assets/nineslice_rounded.png" id="3_pwcjn"]
+[ext_resource type="Theme" uid="uid://cdkul5slbycdi" path="res://UserInterface/Themes/pixel_theme.tres" id="4_va47f"]
+[ext_resource type="FontFile" uid="uid://gaghg2pnqqys" path="res://UserInterface/Fonts/Luna Pixel Art.ttf" id="5_257m7"]
+[ext_resource type="Script" path="res://Utils/limit_character_use.gd" id="5_maiqq"]
+[ext_resource type="Texture2D" uid="uid://bh3312apax08r" path="res://UserInterface/ChatSystem/Assets/chat_select_default.png" id="6_8uwhw"]
+[ext_resource type="Texture2D" uid="uid://iijn0uyg73bt" path="res://UserInterface/ChatSystem/Assets/chat_select_world.png" id="7_f28xb"]
+[ext_resource type="Texture2D" uid="uid://bkolbxukv6crd" path="res://UserInterface/ChatSystem/Assets/chat_select_private.png" id="8_r2ilt"]
+[ext_resource type="Texture2D" uid="uid://do7njljsxujmk" path="res://UserInterface/ChatSystem/Assets/chat_select_party.png" id="9_o5067"]
+[ext_resource type="Texture2D" uid="uid://cucmxniol7w6l" path="res://UserInterface/ChatSystem/Assets/chat_select_guild.png" id="10_dqpyl"]
+[ext_resource type="Texture2D" uid="uid://dn4aomyuxmbfo" path="res://UserInterface/Assets/nineslice_tab_active.png" id="11_fhqjg"]
+[ext_resource type="Texture2D" uid="uid://ccoh3ahhtse3n" path="res://UserInterface/Assets/nineslice_tab_inactive.png" id="12_4wenq"]
+[ext_resource type="Script" path="res://UserInterface/ChatSystem/chat_tab.gd" id="13_5gc2u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_60leg"]
+content_margin_left = 5.0
+texture = ExtResource("11_fhqjg")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8h80x"]
+content_margin_left = 5.0
+texture = ExtResource("12_4wenq")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wva0g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ukima"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mj37l"]
+
+[node name="ChatSystem" type="NinePatchRect"]
+offset_right = 216.0
+offset_bottom = 78.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_mprj5")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("1_eie3y")
+
+[node name="ChatInputRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -22.0
+offset_right = -5.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_pwcjn")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="LineEdit" type="LineEdit" parent="ChatInputRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_va47f")
+max_length = 50
+context_menu_enabled = false
+flat = true
+caret_blink = true
+caret_blink_interval = 0.5
+script = ExtResource("5_maiqq")
+
+[node name="ChatSelectionButton" type="OptionButton" parent="ChatInputRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 26.0
+offset_bottom = 8.0
+grow_vertical = 2
+theme = ExtResource("4_va47f")
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("5_257m7")
+action_mode = 1
+flat = true
+clip_text = true
+item_count = 5
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "Nearby"
+popup/item_0/icon = ExtResource("6_8uwhw")
+popup/item_0/id = 1
+popup/item_1/text = "World"
+popup/item_1/icon = ExtResource("7_f28xb")
+popup/item_1/id = 2
+popup/item_2/text = "Private"
+popup/item_2/icon = ExtResource("8_r2ilt")
+popup/item_2/id = 3
+popup/item_3/text = "Party"
+popup/item_3/icon = ExtResource("9_o5067")
+popup/item_3/id = 4
+popup/item_4/text = "Guild"
+popup/item_4/icon = ExtResource("10_dqpyl")
+popup/item_4/id = 4
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_selected_color = Color(0.941176, 0.960784, 0.980392, 1)
+theme_override_colors/font_unselected_color = Color(0.443137, 0.45098, 0.478431, 1)
+theme_override_constants/side_margin = 4
+theme_override_fonts/font = ExtResource("5_257m7")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_60leg")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_8h80x")
+theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_wva0g")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ukima")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_mj37l")
+
+[node name="All" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("13_5gc2u")
+groups = Array[int]([0, 1, 2, 3, 4, 5])
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/All"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("4_va47f")
+theme_override_fonts/normal_font = ExtResource("5_257m7")
+theme_override_font_sizes/normal_font_size = 8
+scroll_following = true
+
+[node name="System" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("13_5gc2u")
+groups = Array[int]([0])
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/System"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("4_va47f")
+theme_override_fonts/normal_font = ExtResource("5_257m7")
+theme_override_font_sizes/normal_font_size = 8
+scroll_following = true
+
+[node name="Party" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("13_5gc2u")
+groups = Array[int]([4])
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Party"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("4_va47f")
+theme_override_fonts/normal_font = ExtResource("5_257m7")
+theme_override_font_sizes/normal_font_size = 8
+scroll_following = true
+
+[node name="Guild" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("13_5gc2u")
+groups = Array[int]([5])
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Guild"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("4_va47f")
+theme_override_fonts/normal_font = ExtResource("5_257m7")
+theme_override_font_sizes/normal_font_size = 8
+scroll_following = true
+
+[node name="Private" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("13_5gc2u")
+groups = Array[int]([3])
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Private"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("4_va47f")
+theme_override_fonts/normal_font = ExtResource("5_257m7")
+theme_override_font_sizes/normal_font_size = 8
+scroll_following = true
+
+[node name="World" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("13_5gc2u")
+groups = Array[int]([2])
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/World"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("4_va47f")
+theme_override_fonts/normal_font = ExtResource("5_257m7")
+theme_override_font_sizes/normal_font_size = 8
+scroll_following = true
+
+[connection signal="text_changed" from="ChatInputRect/LineEdit" to="ChatInputRect/LineEdit" method="_on_text_changed"]
+[connection signal="item_selected" from="ChatInputRect/ChatSelectionButton" to="." method="_on_chat_selection_button_item_selected"]

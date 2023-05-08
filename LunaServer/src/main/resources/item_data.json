@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "type": 2,
+    "name": "Health Potion",
+    "tooltip": "A potion that recovers 10 health",
+    "price": 100,
+    "maxquantity": 999,
+    "tradelocked": false,
+    "consumabledata": {
+      "healing": 10
+    }
+  },
+  {
+    "id": 2,
+    "type": 1,
+    "name": "Machine Parts",
+    "tooltip": "They look good enough to be reused",
+    "price": 10,
+    "maxquantity": 999,
+    "tradelocked": false
+  },
+  {
+    "id": 3,
+    "type": 2,
+    "name": "Weathered Compass",
+    "tooltip": "Compass pointing to a safe location nearby. Use to teleport",
+    "price": 1000,
+    "maxquantity": 999,
+    "tradelocked": false,
+    "consumabledata": {
+      "script": "town_teleport"
+    }
+  }
+]
