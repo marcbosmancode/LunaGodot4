@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7cddytyqvu5k"]
+
+[ext_resource type="Script" path="res://Player/Components/DashComponent.gd" id="1_nsajh"]
+
+[node name="DashComponent" type="Node"]
+script = ExtResource("1_nsajh")
+
+[node name="DurationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

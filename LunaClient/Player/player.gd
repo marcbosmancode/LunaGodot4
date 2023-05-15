@@ -14,8 +14,23 @@ const ANIMATION_OFFSET := {
 	10: Vector2(1, 0),
 	11: Vector2(1, 0)
 }
-const SPEED = 80.0
-const JUMP_VELOCITY = -200.0
+# Movement engine constants
+const SPEED: int = 90
+const JUMP_FORCE: int = 240
+const COYOTE_TIME: float = 0.1
+const JUMP_BUFFER_TIME: float = 0.1
+const DASH_SPEED: int = 220
+
+enum States {
+	FREE,
+	DASH
+}
+
+var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+var state := States.FREE
+var grounded: bool = false
+var jump_allowed: bool = false
+var last_direction: float = 1.0
 
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
 @onready var body = $CanvasGroup/Body
@@ -24,32 +39,79 @@ const JUMP_VELOCITY = -200.0
 @onready var eyes = $CanvasGroup/Eyes
 @onready var sprite_group = $CanvasGroup
 @onready var animation = $AnimationPlayer
-
-var gravity = 400.0
+@onready var coyote_timer = $CoyoteTimer
+@onready var jump_buffer = $JumpBuffer
+@onready var dash: DashComponent = $DashComponent
 
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
+	coyote_timer.timeout.connect(_on_coyote_timer_timeout)
 
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
+	grounded = is_on_floor()
+	if grounded:
+		jump_allowed = true
+		coyote_timer.start(COYOTE_TIME)
+	
+	match state:
+		States.FREE:
+			state_free(delta)
+		States.DASH:
+			state_dash(delta)
+
+
+func state_free(delta) -> void:
+	if not grounded:
 		velocity.y += gravity * delta
-
-	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+		
+		if Input.is_action_just_pressed("jump"):
+			jump_buffer.start(JUMP_BUFFER_TIME)
+	
+	if Input.is_action_just_pressed("jump") or not jump_buffer.is_stopped():
+		jump()
+	
+	# Handle directional movement
+	var direction: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	if direction:
 		velocity.x = direction * SPEED
-		animation.play("run")
+		last_direction = direction
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if is_on_floor():
+	# Handle dashing
+	if Input.is_action_pressed("dash") and dash.can_dash:
+		dash.start(last_direction)
+		velocity.x = last_direction * DASH_SPEED
+		state = States.DASH
+	
+	update_animation(direction)
+	move_and_slide()
+
+
+func state_dash(delta) -> void:
+	animation.play("dash")
+	
+	if not grounded:
+		velocity.y += gravity * delta
+	
+	if not dash.is_dashing():
+		state = States.FREE
+	
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer.start(JUMP_BUFFER_TIME)
+	
+	move_and_slide()
+
+
+func jump() -> void:
+	if jump_allowed:
+		velocity.y = -JUMP_FORCE
+		jump_allowed = false
+
+
+func update_animation(direction: float) -> void:
+	if grounded:
 		if direction:
 			animation.play("run")
 		else:
@@ -60,10 +122,8 @@ func _physics_process(delta):
 		else:
 			animation.play("fall")
 	
-	if direction != 0:
+	if direction:
 		sprite_group.scale.x = direction
-
-	move_and_slide()
 
 
 func sync_animations(new_frame: int) -> void:
@@ -76,6 +136,10 @@ func sync_animations(new_frame: int) -> void:
 	outfit.frame = new_frame
 
 
-func _on_body_frame_changed():
-	var new_frame = body.frame
+func _on_body_frame_changed() -> void:
+	var new_frame: int = body.frame
 	sync_animations(new_frame)
+
+
+func _on_coyote_timer_timeout() -> void:
+	jump_allowed = false

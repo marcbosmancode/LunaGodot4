@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtk7ovdyxs3tp"]
+[gd_scene load_steps=12 format=3 uid="uid://dtk7ovdyxs3tp"]
 
 [ext_resource type="PackedScene" uid="uid://bx2l7j40wo3b2" path="res://UserInterface/Popups/base_popup.tscn" id="1_jduit"]
 [ext_resource type="Script" path="res://Scenes/login_popup.gd" id="2_0ojpi"]
@@ -37,6 +37,8 @@ texture_margin_right = 5.0
 texture_margin_bottom = 5.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsnf5"]
 
 [node name="LoginPopup" instance=ExtResource("1_jduit")]
 offset_bottom = 102.0
@@ -84,6 +86,7 @@ offset_left = 30.0
 offset_top = 57.0
 offset_right = 112.0
 offset_bottom = 75.0
+focus_mode = 0
 theme = ExtResource("2_sya55")
 disabled = true
 text = "LOGIN"
@@ -94,10 +97,12 @@ offset_left = 30.0
 offset_top = 79.0
 offset_right = 112.0
 offset_bottom = 97.0
+focus_mode = 0
 theme = ExtResource("2_sya55")
 theme_override_styles/normal = SubResource("StyleBoxTexture_krury")
 theme_override_styles/hover = SubResource("StyleBoxTexture_bm68t")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_lyw8p")
+theme_override_styles/focus = SubResource("StyleBoxFlat_xsnf5")
 text = "EXIT"
 
 [connection signal="text_changed" from="VBoxContainer/UsernameInput" to="VBoxContainer/UsernameInput" method="_on_text_changed"]

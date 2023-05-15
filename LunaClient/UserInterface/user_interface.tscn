@@ -18,7 +18,7 @@ offset_bottom = -3.0
 grow_vertical = 0
 
 [node name="ConStatusUI" parent="." instance=ExtResource("1_c46wp")]
-offset_left = -2.0
-offset_top = 6.0
-offset_right = 45.0
-offset_bottom = 19.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 11.0
+offset_bottom = 11.0
