@@ -35,7 +35,7 @@ static func handle_packet(in_packet: InPacket) -> void:
 			# Accepted online acts as a bool with 1 = true
 			if accepted_online == 1:
 				var server_time := Time.get_time_string_from_unix_time(server_unix_time)
-				UserInterface.show_message(0, "Connected to the server! Server version = %s Server time = %s" % [server_version, server_time])
+				UserInterface.show_message(0, "Connected to the server! Server version %s Server time %s (UTC)" % [server_version, server_time])
 				HeartbeatSystem.start_heartbeat()
 			else:
 				print("Server refused the connection. Reached player capacity")

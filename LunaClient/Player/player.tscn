@@ -119,7 +119,6 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(1, 0)
 script = ExtResource("1_kmhxu")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
@@ -163,3 +162,4 @@ one_shot = true
 one_shot = true
 
 [node name="DashComponent" parent="." instance=ExtResource("7_2txql")]
+position = Vector2(0, -12)
