@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://luy1em0x78yc"]
+
+[ext_resource type="Texture2D" uid="uid://w2lwvqr5gg07" path="res://Particles/Assets/dash_ghost.png" id="1_nswtq"]
+[ext_resource type="Script" path="res://Particles/DashGhost.gd" id="2_tym41"]
+
+[node name="DashGhost" type="Sprite2D"]
+self_modulate = Color(1, 1, 1, 0.501961)
+top_level = true
+texture = ExtResource("1_nswtq")
+offset = Vector2(0, -16)
+script = ExtResource("2_tym41")

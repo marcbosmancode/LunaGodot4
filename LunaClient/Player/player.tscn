@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d24ywyas8b5yb"]
+[gd_scene load_steps=22 format=3 uid="uid://d24ywyas8b5yb"]
 
 [ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="1_3uf64"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kmhxu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://djye83mxn0id4" path="res://Player/Assets/Hairstyles/hairstyle_f_1.png" id="3_pr822"]
 [ext_resource type="Texture2D" uid="uid://dy1wm715vg3wj" path="res://Player/Assets/Outfits/outfit_1.png" id="4_dk740"]
 [ext_resource type="PackedScene" uid="uid://c7cddytyqvu5k" path="res://Player/Components/dash_component.tscn" id="7_2txql"]
+[ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="8_lkkcn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32pn5"]
 size = Vector2(12, 24)
@@ -108,6 +109,22 @@ tracks/0/keys = {
 "values": [6, 7, 8, 9, 10, 11]
 }
 
+[sub_resource type="Animation" id="Animation_4tx1n"]
+resource_name = "slash_1"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vtbe3"]
 _data = {
 "RESET": SubResource("Animation_pw4a7"),
@@ -115,10 +132,42 @@ _data = {
 "fall": SubResource("Animation_c508o"),
 "idle": SubResource("Animation_xj1e0"),
 "jump": SubResource("Animation_gdccc"),
-"run": SubResource("Animation_r6424")
+"run": SubResource("Animation_r6424"),
+"slash_1": SubResource("Animation_4tx1n")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f7fxu"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_2ui35"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lu4ao"]
+gradient = SubResource("Gradient_2ui35")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1l552"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 8.0
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 60.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -20.0
+angle_max = 20.0
+scale_max = 1.2
+color_ramp = SubResource("GradientTexture1D_lu4ao")
+anim_offset_max = 1.0
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 10
 script = ExtResource("1_kmhxu")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
@@ -162,4 +211,14 @@ one_shot = true
 one_shot = true
 
 [node name="DashComponent" parent="." instance=ExtResource("7_2txql")]
-position = Vector2(0, -12)
+
+[node name="DoubleJumpParticles" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_f7fxu")
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_1l552")
+texture = ExtResource("8_lkkcn")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0

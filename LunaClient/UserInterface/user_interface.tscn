@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://qklr1dka8vv1" path="res://UserInterface/ConnectionStatus/con_status_ui.tscn" id="1_c46wp"]
 [ext_resource type="Script" path="res://UserInterface/user_interface.gd" id="1_chnc7"]
-[ext_resource type="PackedScene" uid="uid://w3mrb5opvhme" path="res://UserInterface/ChatSystem/chat_system.tscn" id="2_ryrwm"]
+[ext_resource type="PackedScene" path="res://UserInterface/ChatSystem/chat_system.tscn" id="2_ryrwm"]
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_chnc7")

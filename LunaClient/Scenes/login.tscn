@@ -30,6 +30,7 @@ color = Color(0.486275, 0.870588, 0.92549, 1)
 [node name="LoginPopup" parent="." instance=ExtResource("1_ri0ax")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-22, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(639, 422.875)
@@ -53,7 +54,7 @@ position = Vector2(641, 422)
 shape = SubResource("RectangleShape2D_qw7g1")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(-774, -86)
+position = Vector2(-824, -46)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
 position = Vector2(640, 421)
@@ -65,4 +66,16 @@ position = Vector2(639, 422)
 shape = SubResource("RectangleShape2D_qw7g1")
 
 [node name="Player" parent="." instance=ExtResource("3_m7yry")]
-position = Vector2(660, 304)
+position = Vector2(335, 320)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(541, -111)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
+position = Vector2(640, 421)
+scale = Vector2(1302, 46.25)
+texture = SubResource("GradientTexture1D_qsdsc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(639, 422)
+shape = SubResource("RectangleShape2D_qw7g1")

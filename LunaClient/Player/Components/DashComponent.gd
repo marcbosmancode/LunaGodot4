@@ -5,7 +5,7 @@ class_name DashComponent
 @export var cooldown: float = 0.5
 
 var can_dash: bool = true
-var ghost = preload("res://Player/Components/DashGhost.tscn")
+var ghost: Resource = preload("res://Particles/DashGhost.tscn")
 var direction: float = 1.0
 
 @onready var duration_timer = $DurationTimer
@@ -19,9 +19,8 @@ func start(target_direction: float) -> void:
 	direction = target_direction
 	ghost_timer.start()
 	
-	var dash_direction: Vector2 = Vector2(target_direction, 0)
 	# Make the dust particles move opposite of the dash direction
-	dust_particles.rotation = (dash_direction * -1).angle()
+	dust_particles.rotation = Vector2(target_direction * -1, 0).angle()
 	dust_particles.restart()
 	dust_particles.emitting = true
 
@@ -32,7 +31,7 @@ func is_dashing() -> bool:
 
 func instantiate_ghost() -> void:
 	var ghost_instance: Sprite2D = ghost.instantiate()
-	get_tree().current_scene.add_child(ghost_instance)
+	get_parent().add_child(ghost_instance)
 	ghost_instance.position = get_parent().position
 	ghost_instance.scale.x = direction
 
