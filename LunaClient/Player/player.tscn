@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d24ywyas8b5yb"]
+[gd_scene load_steps=27 format=3 uid="uid://d24ywyas8b5yb"]
 
 [ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="1_3uf64"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kmhxu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dy1wm715vg3wj" path="res://Player/Assets/Outfits/outfit_1.png" id="4_dk740"]
 [ext_resource type="PackedScene" uid="uid://c7cddytyqvu5k" path="res://Player/Components/dash_component.tscn" id="7_2txql"]
 [ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="8_lkkcn"]
+[ext_resource type="Texture2D" uid="uid://b2mkv2s1baqdw" path="res://Particles/Assets/teleport_sparkles.png" id="9_5w3mn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32pn5"]
 size = Vector2(12, 24)
@@ -166,6 +167,34 @@ scale_max = 1.2
 color_ramp = SubResource("GradientTexture1D_lu4ao")
 anim_offset_max = 1.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eo2ss"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_jwgud"]
+colors = PackedColorArray(1, 1, 1, 0.74902, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_esn6t"]
+gradient = SubResource("Gradient_jwgud")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jo0x"]
+lifetime_randomness = 0.4
+emission_shape = 3
+emission_box_extents = Vector3(8, 12, 1)
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 5.0
+angular_velocity_max = 45.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -15.0
+angle_max = 15.0
+color_ramp = SubResource("GradientTexture1D_esn6t")
+anim_offset_max = 1.0
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
 script = ExtResource("1_kmhxu")
@@ -222,3 +251,14 @@ texture = ExtResource("8_lkkcn")
 lifetime = 0.8
 one_shot = true
 explosiveness = 1.0
+
+[node name="TeleportParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_eo2ss")
+position = Vector2(0, -12)
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_4jo0x")
+texture = ExtResource("9_5w3mn")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.7

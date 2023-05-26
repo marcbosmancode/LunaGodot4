@@ -24,6 +24,8 @@ const DOUBLE_JUMPS: int = 1
 const DASH_SPEED: int = 300
 const COYOTE_TIME: float = 0.1
 const JUMP_BUFFER_TIME: float = 0.1
+const TELEPORT_DISTANCE: int = 80
+const AIR_TELEPORTS: int = 1
 
 enum States {
 	FREE,
@@ -37,6 +39,7 @@ var grounded: bool = false
 var jump_allowed: bool = false
 var remaining_double_jumps: int = 1
 var last_direction: float = 1.0
+var remaining_teleports: int = 1
 
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
 @onready var body = $CanvasGroup/Body
@@ -49,6 +52,7 @@ var last_direction: float = 1.0
 @onready var jump_buffer = $JumpBuffer
 @onready var dash: DashComponent = $DashComponent
 @onready var double_jump_particles = $DoubleJumpParticles
+@onready var teleport_particles = $TeleportParticles
 
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
@@ -60,6 +64,7 @@ func _physics_process(delta):
 	if grounded:
 		jump_allowed = true
 		remaining_double_jumps = DOUBLE_JUMPS
+		remaining_teleports = AIR_TELEPORTS
 		coyote_timer.start(COYOTE_TIME)
 	
 	match state:
@@ -118,8 +123,35 @@ func state_free(delta) -> void:
 		state = States.DASH
 		dash.start(last_direction)
 	
+	# Handle teleporting
+	if Input.is_action_just_pressed("teleport"):
+		# Check for the intended direction
+		var target_direction: Vector2 = get_movement_direction()
+		if target_direction != Vector2.ZERO and remaining_teleports > 0:
+			if not test_move(transform, target_direction * TELEPORT_DISTANCE):
+				position += target_direction * TELEPORT_DISTANCE
+				remaining_teleports -= 1
+				velocity = Vector2.ZERO
+				
+				teleport_particles.restart()
+				teleport_particles.emitting = true
+	
 	update_animation(direction)
 	move_and_slide()
+
+
+func get_movement_direction() -> Vector2:
+	var movement_direction: Vector2 = Vector2.ZERO
+	
+	if Input.is_action_pressed("move_up"):
+		movement_direction = Vector2.UP
+	elif Input.is_action_pressed("move_down"):
+		movement_direction = Vector2.DOWN
+	else:
+		var direction: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		movement_direction = Vector2(sign(direction), 0)
+	
+	return movement_direction
 
 
 func state_dash(delta) -> void:

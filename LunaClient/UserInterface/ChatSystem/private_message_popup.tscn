@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://i5beirl7tqx" path="res://UserInterface/Popups/ok_popup.tscn" id="1_7yjwp"]
 [ext_resource type="Script" path="res://UserInterface/ChatSystem/private_message_popup.gd" id="2_6bv7r"]
-[ext_resource type="Theme" uid="uid://cdkul5slbycdi" path="res://UserInterface/Themes/pixel_theme.tres" id="3_03rhu"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="3_03rhu"]
 [ext_resource type="Script" path="res://Utils/limit_character_use.gd" id="4_unefn"]
 
 [node name="PrivateMessagePopup" instance=ExtResource("1_7yjwp")]
