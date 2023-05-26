@@ -25,6 +25,7 @@ const DASH_SPEED: int = 300
 const COYOTE_TIME: float = 0.1
 const JUMP_BUFFER_TIME: float = 0.1
 const TELEPORT_DISTANCE: int = 80
+const TELEPORT_COOLDOWN: float = 0.6
 const AIR_TELEPORTS: int = 1
 
 enum States {
@@ -39,6 +40,7 @@ var grounded: bool = false
 var jump_allowed: bool = false
 var remaining_double_jumps: int = 1
 var last_direction: float = 1.0
+var teleport_allowed: bool = true
 var remaining_teleports: int = 1
 
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
@@ -50,13 +52,15 @@ var remaining_teleports: int = 1
 @onready var animation_player = $AnimationPlayer
 @onready var coyote_timer = $CoyoteTimer
 @onready var jump_buffer = $JumpBuffer
-@onready var dash: DashComponent = $DashComponent
+@onready var teleport_timer = $TeleportTimer
+@onready var dash_component: DashComponent = $DashComponent
 @onready var double_jump_particles = $DoubleJumpParticles
 @onready var teleport_particles = $TeleportParticles
 
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
 	coyote_timer.timeout.connect(_on_coyote_timer_timeout)
+	teleport_timer.timeout.connect(_on_teleport_timer_timeout)
 
 
 func _physics_process(delta):
@@ -117,32 +121,56 @@ func state_free(delta) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, AIR_RESISTANCE * delta)
 	
-	# Handle dashing
-	if Input.is_action_pressed("dash") and dash.can_dash:
-		velocity.x = last_direction * DASH_SPEED
-		state = States.DASH
-		dash.start(last_direction)
-	
-	# Handle teleporting
-	if Input.is_action_just_pressed("teleport"):
-		# Check for the intended direction
-		var target_direction: Vector2 = get_movement_direction()
-		if target_direction != Vector2.ZERO and remaining_teleports > 0:
-			if not test_move(transform, target_direction * TELEPORT_DISTANCE):
-				position += target_direction * TELEPORT_DISTANCE
-				remaining_teleports -= 1
-				velocity = Vector2.ZERO
-				
-				teleport_particles.restart()
-				teleport_particles.emitting = true
+	# Special movement. Only allow one per physics frame
+	if Input.is_action_pressed("dash") and dash_component.can_dash:
+		dash()
+	elif Input.is_action_just_pressed("teleport"):
+		teleport()
 	
 	update_animation(direction)
 	move_and_slide()
 
 
+func dash() -> void:
+	velocity.x = last_direction * DASH_SPEED
+	state = States.DASH
+	dash_component.start(last_direction)
+
+
+func teleport() -> void:
+	if not teleport_allowed:
+		return
+	if remaining_teleports <= 0:
+		return
+	
+	# Check for the intended direction
+	var target_direction: Vector2 = get_movement_direction()
+	if target_direction == Vector2.ZERO:
+		return
+	
+	# Prevent clipping into the terrain
+	var distance_reduction: int = 0
+	while test_move(transform, target_direction * (TELEPORT_DISTANCE - distance_reduction)):
+		distance_reduction += 1
+		if distance_reduction >= TELEPORT_DISTANCE:
+			return
+	
+	position += target_direction * (TELEPORT_DISTANCE - distance_reduction)
+	velocity = Vector2.ZERO
+	remaining_teleports -= 1
+	teleport_allowed = false
+	# Prevent jumping on nothing far from the edge of a platform
+	jump_allowed = false
+	teleport_timer.start(TELEPORT_COOLDOWN)
+	
+	teleport_particles.restart()
+	teleport_particles.emitting = true
+
+
 func get_movement_direction() -> Vector2:
 	var movement_direction: Vector2 = Vector2.ZERO
 	
+	# Prioritize up and down movement
 	if Input.is_action_pressed("move_up"):
 		movement_direction = Vector2.UP
 	elif Input.is_action_pressed("move_down"):
@@ -162,7 +190,7 @@ func state_dash(delta) -> void:
 		jump_buffer.start(JUMP_BUFFER_TIME)
 	
 	# Check if dash has ended
-	if not dash.is_dashing():
+	if not dash_component.is_dashing():
 		state = States.FREE
 	
 	animation_player.play("dash")
@@ -211,3 +239,7 @@ func _on_body_frame_changed() -> void:
 
 func _on_coyote_timer_timeout() -> void:
 	jump_allowed = false
+
+
+func _on_teleport_timer_timeout() -> void:
+	teleport_allowed = true

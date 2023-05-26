@@ -239,6 +239,8 @@ one_shot = true
 [node name="JumpBuffer" type="Timer" parent="."]
 one_shot = true
 
+[node name="TeleportTimer" type="Timer" parent="."]
+
 [node name="DashComponent" parent="." instance=ExtResource("7_2txql")]
 
 [node name="DoubleJumpParticles" type="GPUParticles2D" parent="."]
