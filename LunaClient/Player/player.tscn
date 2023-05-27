@@ -163,7 +163,6 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 angle_min = -20.0
 angle_max = 20.0
-scale_max = 1.2
 color_ramp = SubResource("GradientTexture1D_lu4ao")
 anim_offset_max = 1.0
 
@@ -247,7 +246,7 @@ one_shot = true
 z_index = -1
 material = SubResource("CanvasItemMaterial_f7fxu")
 emitting = false
-amount = 6
+amount = 4
 process_material = SubResource("ParticleProcessMaterial_1l552")
 texture = ExtResource("8_lkkcn")
 lifetime = 0.8
