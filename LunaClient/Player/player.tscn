@@ -1,12 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://d24ywyas8b5yb"]
+[gd_scene load_steps=30 format=3 uid="uid://d24ywyas8b5yb"]
 
 [ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="1_3uf64"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kmhxu"]
+[ext_resource type="Texture2D" uid="uid://bkyfdrfjwvgsf" path="res://Skills/Assets/attack_effects.png" id="2_a2rdb"]
 [ext_resource type="Texture2D" uid="uid://dxbfc8a7l4n2i" path="res://Player/Assets/Body/body_1.png" id="3_bgfsk"]
 [ext_resource type="Texture2D" uid="uid://bom0e25xcskfu" path="res://Player/Assets/Eyes/eyes_1.png" id="3_htwjr"]
 [ext_resource type="Texture2D" uid="uid://djye83mxn0id4" path="res://Player/Assets/Hairstyles/hairstyle_f_1.png" id="3_pr822"]
 [ext_resource type="Texture2D" uid="uid://dy1wm715vg3wj" path="res://Player/Assets/Outfits/outfit_1.png" id="4_dk740"]
 [ext_resource type="PackedScene" uid="uid://c7cddytyqvu5k" path="res://Player/Components/dash_component.tscn" id="7_2txql"]
+[ext_resource type="Texture2D" uid="uid://dv6e42pow0lj1" path="res://Player/Assets/Body/head_1.png" id="7_48brl"]
+[ext_resource type="Texture2D" uid="uid://c83qyidr028ck" path="res://Player/Assets/Weapons/weapon_1.png" id="7_n7ylw"]
 [ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="8_lkkcn"]
 [ext_resource type="Texture2D" uid="uid://b2mkv2s1baqdw" path="res://Particles/Assets/teleport_sparkles.png" id="9_5w3mn"]
 
@@ -22,6 +25,18 @@ tracks/0/path = NodePath("CanvasGroup/Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -43,6 +58,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [7]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_c508o"]
 resource_name = "fall"
@@ -58,6 +85,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_xj1e0"]
@@ -76,6 +115,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_gdccc"]
 resource_name = "jump"
@@ -91,6 +142,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_r6424"]
@@ -109,10 +172,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [6, 7, 8, 9, 10, 11]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_4tx1n"]
-resource_name = "slash_1"
-length = 0.001
+resource_name = "slash"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -120,10 +195,22 @@ tracks/0/path = NodePath("CanvasGroup/Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [12, 13, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vtbe3"]
@@ -134,7 +221,7 @@ _data = {
 "idle": SubResource("Animation_xj1e0"),
 "jump": SubResource("Animation_gdccc"),
 "run": SubResource("Animation_r6424"),
-"slash_1": SubResource("Animation_4tx1n")
+"slash": SubResource("Animation_4tx1n")
 }
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f7fxu"]
@@ -207,12 +294,26 @@ texture = ExtResource("1_3uf64")
 [node name="Body" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(0, -16)
 texture = ExtResource("3_bgfsk")
-hframes = 12
+hframes = 15
 
 [node name="Outfit" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(0, -16)
 texture = ExtResource("4_dk740")
-hframes = 12
+hframes = 15
+
+[node name="AttackEffects" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("2_a2rdb")
+hframes = 3
+
+[node name="Weapon" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("7_n7ylw")
+hframes = 4
+
+[node name="Head" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -21)
+texture = ExtResource("7_48brl")
 
 [node name="HairstyleFront" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(0, -18)

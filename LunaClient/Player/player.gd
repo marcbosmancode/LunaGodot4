@@ -12,10 +12,16 @@ const ANIMATION_OFFSET := {
 	8: Vector2(1, 0),
 	9: Vector2(1, 1),
 	10: Vector2(1, 0),
-	11: Vector2(1, 0)
+	11: Vector2(1, 0),
+	12: Vector2(0, 0),
+	13: Vector2(0, 1),
+	14: Vector2(0, 1)
 }
+const WEAPON_FRAME_OFFSET: int = 11
+const WEAPON_FRAMES: int = 4
 # Movement engine constants
 const SPEED: int = 90
+const ACCELERATION: int = 400
 const FRICTION: int = 400
 const AIR_ACCELERATION: int = 90
 const AIR_RESISTANCE: int = 30
@@ -46,6 +52,9 @@ var remaining_teleports: int = 1
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
 @onready var body = $CanvasGroup/Body
 @onready var outfit = $CanvasGroup/Outfit
+@onready var attack_effects = $CanvasGroup/AttackEffects
+@onready var weapon = $CanvasGroup/Weapon
+@onready var head = $CanvasGroup/Head
 @onready var hairstyle_front = $CanvasGroup/HairstyleFront
 @onready var eyes = $CanvasGroup/Eyes
 @onready var sprite_group = $CanvasGroup
@@ -59,6 +68,7 @@ var remaining_teleports: int = 1
 
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
+	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 	coyote_timer.timeout.connect(_on_coyote_timer_timeout)
 	teleport_timer.timeout.connect(_on_teleport_timer_timeout)
 
@@ -81,9 +91,6 @@ func _physics_process(delta):
 
 
 func state_free(delta) -> void:
-	# Cap movement speed for this state
-	velocity.x = clamp(velocity.x, -SPEED, SPEED)
-	
 	if not grounded:
 		velocity.y += gravity * delta
 		
@@ -112,7 +119,7 @@ func state_free(delta) -> void:
 		last_direction = direction
 		
 		if grounded:
-			velocity.x = direction * SPEED
+			velocity.x += direction * ACCELERATION * delta
 		else:
 			velocity.x += direction * AIR_ACCELERATION * delta
 	else:
@@ -121,13 +128,20 @@ func state_free(delta) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, AIR_RESISTANCE * delta)
 	
+	# Cap movement speed for this state
+	velocity.x = clamp(velocity.x, -SPEED, SPEED)
+	
+	update_animation(direction)
+	
 	# Special movement. Only allow one per physics frame
 	if Input.is_action_pressed("dash") and dash_component.can_dash:
 		dash()
 	elif Input.is_action_just_pressed("teleport"):
 		teleport()
+	elif Input.is_action_pressed("basic_attack"):
+		animation_player.play("slash")
+		state = States.ATTACK
 	
-	update_animation(direction)
 	move_and_slide()
 
 
@@ -144,14 +158,15 @@ func teleport() -> void:
 		return
 	
 	# Check for the intended direction
-	var target_direction: Vector2 = get_movement_direction()
+	var target_direction: Vector2 = get_input_direction()
 	if target_direction == Vector2.ZERO:
 		return
 	
 	# Prevent clipping into the terrain
-	var distance_reduction: int = 0
+	var distance_reduction: float = 0.0
+	var reduction_step: float = TELEPORT_DISTANCE * 0.1
 	while test_move(transform, target_direction * (TELEPORT_DISTANCE - distance_reduction)):
-		distance_reduction += 1
+		distance_reduction += reduction_step
 		if distance_reduction >= TELEPORT_DISTANCE:
 			return
 	
@@ -159,7 +174,7 @@ func teleport() -> void:
 	velocity = Vector2.ZERO
 	remaining_teleports -= 1
 	teleport_allowed = false
-	# Prevent jumping on nothing far from the edge of a platform
+	# Prevent jumping on nothing far from a platform
 	jump_allowed = false
 	teleport_timer.start(TELEPORT_COOLDOWN)
 	
@@ -167,19 +182,19 @@ func teleport() -> void:
 	teleport_particles.emitting = true
 
 
-func get_movement_direction() -> Vector2:
-	var movement_direction: Vector2 = Vector2.ZERO
+func get_input_direction() -> Vector2:
+	var input_direction: Vector2 = Vector2.ZERO
 	
 	# Prioritize up and down movement
 	if Input.is_action_pressed("move_up"):
-		movement_direction = Vector2.UP
+		input_direction = Vector2.UP
 	elif Input.is_action_pressed("move_down"):
-		movement_direction = Vector2.DOWN
+		input_direction = Vector2.DOWN
 	else:
 		var direction: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-		movement_direction = Vector2(sign(direction), 0)
+		input_direction = Vector2(sign(direction), 0)
 	
-	return movement_direction
+	return input_direction
 
 
 func state_dash(delta) -> void:
@@ -200,8 +215,13 @@ func state_dash(delta) -> void:
 func state_attack(delta) -> void:
 	if not grounded:
 		velocity.y += gravity * delta
+	else:
+		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	
-	animation_player.play("slash_1")
+	# Special movement. Only allow one per physics frame
+	if Input.is_action_just_pressed("teleport"):
+		teleport()
+	
 	move_and_slide()
 
 
@@ -226,15 +246,22 @@ func sync_animations(new_frame: int) -> void:
 	var sprite_offset: Vector2 = ANIMATION_OFFSET[new_frame]
 	
 	hairstyle_back.offset = sprite_offset
+	head.offset = sprite_offset
 	eyes.offset = sprite_offset
 	hairstyle_front.offset = sprite_offset
 	
 	outfit.frame = new_frame
+	weapon.frame = clamp(new_frame - WEAPON_FRAME_OFFSET, 0, WEAPON_FRAMES-1)
 
 
 func _on_body_frame_changed() -> void:
 	var new_frame: int = body.frame
 	sync_animations(new_frame)
+
+
+func _on_animation_player_animation_finished(_anim_name: StringName):
+	if state == States.ATTACK:
+		state = States.FREE
 
 
 func _on_coyote_timer_timeout() -> void:

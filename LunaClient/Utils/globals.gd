@@ -13,5 +13,3 @@ var logged_in := false:
 	set(new_value):
 		logged_in = new_value
 		emit_signal("just_logged_in")
-
-# Gameplay
