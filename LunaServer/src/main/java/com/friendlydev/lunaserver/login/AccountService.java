@@ -2,7 +2,6 @@ package com.friendlydev.lunaserver.login;
 
 import com.friendlydev.lunaserver.database.DatabaseManager;
 import com.friendlydev.lunaserver.resources.models.Account;
-import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,6 +25,8 @@ public class AccountService {
         
         Account newAccount = new Account(usernameLowercase, encryptedPassword, salt);
         DatabaseManager.saveInDB(newAccount);
+        
+        logger.info("New account with username= " + username + " registered");
         
         return true;
     }

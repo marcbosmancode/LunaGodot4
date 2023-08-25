@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d24ywyas8b5yb"]
+[gd_scene load_steps=31 format=3 uid="uid://d24ywyas8b5yb"]
 
 [ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="1_3uf64"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kmhxu"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c83qyidr028ck" path="res://Player/Assets/Weapons/weapon_1.png" id="7_n7ylw"]
 [ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="8_lkkcn"]
 [ext_resource type="Texture2D" uid="uid://b2mkv2s1baqdw" path="res://Particles/Assets/teleport_sparkles.png" id="9_5w3mn"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="13_hs8w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32pn5"]
 size = Vector2(12, 24)
@@ -364,3 +365,13 @@ texture = ExtResource("9_5w3mn")
 lifetime = 0.8
 one_shot = true
 explosiveness = 0.7
+
+[node name="UsernameLabel" type="Label" parent="."]
+offset_left = -25.0
+offset_top = 2.0
+offset_right = 25.0
+offset_bottom = 18.0
+theme = ExtResource("13_hs8w5")
+theme_override_colors/font_color = Color(0.882, 0.9114, 0.98, 1)
+text = "<Username>"
+horizontal_alignment = 1

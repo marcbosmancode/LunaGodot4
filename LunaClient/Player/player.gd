@@ -65,12 +65,14 @@ var remaining_teleports: int = 1
 @onready var dash_component: DashComponent = $DashComponent
 @onready var double_jump_particles = $DoubleJumpParticles
 @onready var teleport_particles = $TeleportParticles
+@onready var username_label = $UsernameLabel
 
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
 	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 	coyote_timer.timeout.connect(_on_coyote_timer_timeout)
 	teleport_timer.timeout.connect(_on_teleport_timer_timeout)
+	username_label.text = PlayerStats.username
 
 
 func _physics_process(delta):

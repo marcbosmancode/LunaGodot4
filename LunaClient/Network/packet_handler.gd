@@ -55,6 +55,7 @@ static func handle_packet(in_packet: InPacket) -> void:
 				Globals.logged_in = true
 				PlayerStats.username = username
 				UserInterface.show_message(0, "Successfully logged in as %s!" % username)
+				SceneHandler.change_scene("100000")
 			else:
 				var reason := in_packet.get_byte()
 				var explanation: String = "Login failed: "

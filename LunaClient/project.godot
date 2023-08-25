@@ -12,7 +12,7 @@ config_version=5
 
 config/name="LunaClient"
 run/main_scene="res://Scenes/login.tscn"
-config/features=PackedStringArray("4.0", "Mobile")
+config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -21,6 +21,7 @@ Globals="*res://Utils/globals.gd"
 PlayerStats="*res://Utils/player_stats.gd"
 Client="*res://Network/client.gd"
 HeartbeatSystem="*res://Network/Heartbeat/heartbeat_system.gd"
+SceneHandler="*res://Utils/scene_handler.gd"
 UserInterface="*res://UserInterface/user_interface.tscn"
 
 [display]
@@ -88,5 +89,5 @@ move_down={
 
 [rendering]
 
-renderer/rendering_method="mobile"
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c61c76bftdpr4"]
+[gd_scene load_steps=21 format=3 uid="uid://c61c76bftdpr4"]
 
 [ext_resource type="Script" path="res://UserInterface/ChatSystem/chat_system.gd" id="1_eie3y"]
 [ext_resource type="Texture2D" uid="uid://c4jaacrk77ukx" path="res://UserInterface/Assets/nineslice_background.png" id="2_mprj5"]
@@ -16,6 +16,14 @@
 [ext_resource type="Script" path="res://UserInterface/ChatSystem/chat_tab.gd" id="13_5gc2u"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_60leg"]
+content_margin_left = 5.0
+texture = ExtResource("11_fhqjg")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4s6me"]
 content_margin_left = 5.0
 texture = ExtResource("11_fhqjg")
 texture_margin_left = 4.0
@@ -136,6 +144,7 @@ theme_override_constants/side_margin = 4
 theme_override_fonts/font = ExtResource("5_257m7")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/tab_selected = SubResource("StyleBoxTexture_60leg")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_4s6me")
 theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_8h80x")
 theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_wva0g")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ukima")
