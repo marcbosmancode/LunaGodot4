@@ -52,10 +52,13 @@ static func handle_packet(in_packet: InPacket) -> void:
 			
 			if result == true:
 				var username := in_packet.get_string()
+				var map_id := in_packet.get_int()
+				var respawn_point: Vector2 = Vector2(in_packet.get_int(), in_packet.get_int())
 				Globals.logged_in = true
 				PlayerStats.username = username
+				PlayerStats.respawn_point = respawn_point
 				UserInterface.show_message(0, "Successfully logged in as %s!" % username)
-				SceneHandler.change_scene("100000")
+				SceneHandler.change_scene(map_id)
 			else:
 				var reason := in_packet.get_byte()
 				var explanation: String = "Login failed: "

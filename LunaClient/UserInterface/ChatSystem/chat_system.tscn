@@ -25,7 +25,7 @@ texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4s6me"]
 content_margin_left = 5.0
-texture = ExtResource("11_fhqjg")
+texture = ExtResource("12_4wenq")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0

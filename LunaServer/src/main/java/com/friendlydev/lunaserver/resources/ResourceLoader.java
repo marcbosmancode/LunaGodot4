@@ -2,8 +2,11 @@ package com.friendlydev.lunaserver.resources;
 
 import com.friendlydev.lunaserver.constants.enums.ItemConstants.ItemType;
 import com.friendlydev.lunaserver.resources.models.ConsumableItem;
+import com.friendlydev.lunaserver.resources.models.Door;
 import com.friendlydev.lunaserver.resources.models.Item;
+import com.friendlydev.lunaserver.resources.models.NonPlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
+import java.awt.Point;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -90,9 +93,51 @@ public class ResourceLoader {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 
+                JSONObject spawnPointData = jsonObj.getJSONObject("spawnpoint");
+                Point spawnPoint = new Point(spawnPointData.getInt("x"), spawnPointData.getInt("y"));
+                
                 Scene scene = new Scene(
-                        jsonObj.getInt("id")
+                        jsonObj.getInt("id"),
+                        jsonObj.getString("name"),
+                        spawnPoint,
+                        jsonObj.getInt("returnscene")
                 );
+                
+                // Add additional data to the scene
+                JSONArray doorsData = jsonObj.getJSONArray("doors");
+                for (int j = 0; j < doorsData.length(); j++) {
+                    JSONObject doorJsonObj = doorsData.getJSONObject(j);
+                    
+                    JSONObject positionData = doorJsonObj.getJSONObject("position");
+                    Point position = new Point(positionData.getInt("x"), positionData.getInt("y"));
+                    
+                    JSONObject destinationData = doorJsonObj.getJSONObject("destinationpoint");
+                    Point destinationPoint = new Point(destinationData.getInt("x"), destinationData.getInt("y"));
+                    
+                    Door door = new Door(
+                            doorJsonObj.getInt("id"),
+                            position,
+                            doorJsonObj.getInt("destination"),
+                            destinationPoint
+                    );
+                    scene.addDoor(door);
+                }
+                
+                JSONArray npcData = jsonObj.getJSONArray("npcs");
+                for (int k = 0; k < npcData.length(); k++) {
+                    JSONObject npcJsonObj = npcData.getJSONObject(k);
+                    
+                    JSONObject positionData = npcJsonObj.getJSONObject("position");
+                    Point position = new Point(positionData.getInt("x"), positionData.getInt("y"));
+                    
+                    NonPlayerCharacter npc = new NonPlayerCharacter(
+                            npcJsonObj.getInt("id"),
+                            npcJsonObj.getString("name"),
+                            position
+                    );
+                    scene.addNPC(npc);
+                }
+                
                 sceneData.put(scene.getId(), scene);
             }
             logger.info("Loaded " + jsonArray.length() + " scenes from scene_data.json");

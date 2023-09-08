@@ -47,6 +47,9 @@ public class PacketWriter {
         
         packet.writeBoolean(true);
         packet.writeString(username);
+        packet.writeInt(2);
+        packet.writeInt(100);
+        packet.writeInt(100);
         
         return packet;
     }

@@ -1,7 +1,7 @@
 package com.friendlydev.lunaserver.database;
 
 import com.friendlydev.lunaserver.resources.models.Account;
-import com.friendlydev.lunaserver.resources.models.Player;
+import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -19,7 +19,7 @@ public class HibernateUtility {
             configuration.configure();
             
             configuration.addAnnotatedClass(Account.class);
-            configuration.addAnnotatedClass(Player.class);
+            configuration.addAnnotatedClass(PlayerCharacter.class);
             
             sessionFactory = configuration.buildSessionFactory();
         }

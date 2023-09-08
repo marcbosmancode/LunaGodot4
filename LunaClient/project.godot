@@ -28,7 +28,6 @@ UserInterface="*res://UserInterface/user_interface.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=3
 window/stretch/scale=2.0
 
 [filesystem]

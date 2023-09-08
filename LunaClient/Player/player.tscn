@@ -372,6 +372,6 @@ offset_top = 2.0
 offset_right = 25.0
 offset_bottom = 18.0
 theme = ExtResource("13_hs8w5")
-theme_override_colors/font_color = Color(0.882, 0.9114, 0.98, 1)
+theme_override_colors/font_color = Color(0.921569, 0.937255, 0.980392, 1)
 text = "<Username>"
 horizontal_alignment = 1

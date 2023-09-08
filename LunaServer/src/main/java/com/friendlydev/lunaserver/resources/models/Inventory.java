@@ -5,13 +5,13 @@ package com.friendlydev.lunaserver.resources.models;
  * @author Marc
  */
 public class Inventory {
-    private Player owner;
+    private PlayerCharacter owner;
 
-    public Inventory(Player owner) {
+    public Inventory(PlayerCharacter owner) {
         this.owner = owner;
     }
 
-    public Player getOwner() {
+    public PlayerCharacter getOwner() {
         return owner;
     }
     
