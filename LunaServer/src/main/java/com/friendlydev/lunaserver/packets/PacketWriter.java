@@ -2,6 +2,8 @@ package com.friendlydev.lunaserver.packets;
 
 import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.constants.enums.PacketCodes.OutCode;
+import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
+import com.friendlydev.lunaserver.resources.models.Scene;
 import java.time.Instant;
 
 /**
@@ -42,14 +44,16 @@ public class PacketWriter {
         return packet;
     }
     
-    public static OutPacket writeLoginSuccess(String username) {
+    public static OutPacket writeLoginSuccess(PlayerCharacter pc) {
         OutPacket packet = new OutPacket(OutCode.LOGIN_RESULT.value);
         
         packet.writeBoolean(true);
-        packet.writeString(username);
-        packet.writeInt(2);
-        packet.writeInt(100);
-        packet.writeInt(100);
+        packet.writeString(pc.getUsername());
+        
+        Scene sc = pc.getScene();
+        packet.writeInt(sc.getId());
+        packet.writeInt(sc.getSpawnPoint().x);
+        packet.writeInt(sc.getSpawnPoint().y);
         
         return packet;
     }

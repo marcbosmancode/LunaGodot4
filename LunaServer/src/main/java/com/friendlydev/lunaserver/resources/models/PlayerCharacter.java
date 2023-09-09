@@ -62,14 +62,13 @@ public class PlayerCharacter {
         inventory = new Inventory(this);
     }
 
-    public PlayerCharacter(int id, int accountId, String username) {
+    public PlayerCharacter(int accountId, String username) {
         // Set base values for a newly created player
-        this(id, accountId, username, 1, 1, 0, 100, 100, 1);
+        this(accountId, username, 1, 1, 0, 100, 100, 1);
     }
 
-    public PlayerCharacter(int id, int accountId, String username, int sceneId, int level, int exp, int maxHealth, int health, int attack) {
+    public PlayerCharacter(int accountId, String username, int sceneId, int level, int exp, int maxHealth, int health, int attack) {
         inventory = new Inventory(this);
-        this.id = id;
         this.accountId = accountId;
         this.username = username;
         this.sceneId = sceneId;
@@ -103,6 +102,10 @@ public class PlayerCharacter {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public int getSceneId() {
+        return sceneId;
     }
 
     public Scene getScene() {

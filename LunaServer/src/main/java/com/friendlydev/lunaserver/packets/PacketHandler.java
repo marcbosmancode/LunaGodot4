@@ -6,7 +6,9 @@ import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.constants.enums.PacketCodes.InCode;
 import com.friendlydev.lunaserver.login.AccountService;
 import com.friendlydev.lunaserver.resources.models.Account;
+import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import java.io.EOFException;
+import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -81,9 +83,16 @@ public class PacketHandler {
         Account acc = AccountService.getAccount(username);
         if (acc != null) {
             if (acc.authenticate(password)) {
-                ch.login(acc);
-                ch.sendPacket(PacketWriter.writeLoginSuccess(acc.getUsername()));
-                return;
+                
+                // Load player characters from the account and log in
+                ArrayList<PlayerCharacter> accPlayerCharacters = AccountService.getAccountPlayerCharacters(acc.getId());
+                if (accPlayerCharacters.size() >= 1) {
+                    PlayerCharacter pc = accPlayerCharacters.get(0);
+                    ch.login(acc);
+                    ch.sendPacket(PacketWriter.writeLoginSuccess(pc));
+                    
+                    return;
+                }
             }
         }
         
