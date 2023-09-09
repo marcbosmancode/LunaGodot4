@@ -70,7 +70,14 @@ public class PacketHandler {
                 case 3:
                     // Private message
                     String messageTarget = packet.readString().toLowerCase();
-                    ch.sendPacketToPlayer(PacketWriter.writeMessage(group, message, ch.getAccount().getUsername()), messageTarget);
+                    
+                    // Prevent sending to yourself and notify if the message couldn't be sent
+                    if (!messageTarget.equals(ch.getPlayerCharacter().getUsername().toLowerCase())) {
+                        boolean result = ch.sendPacketToPlayer(PacketWriter.writeMessage(group, message, ch.getAccount().getUsername()), messageTarget);
+                        if (result == false) {
+                            ch.sendPacket(PacketWriter.writeMessage((short) 0, "Could not message player", "Server"));
+                        }
+                    }
                     break;
             }
         }
@@ -88,7 +95,7 @@ public class PacketHandler {
                 ArrayList<PlayerCharacter> accPlayerCharacters = AccountService.getAccountPlayerCharacters(acc.getId());
                 if (accPlayerCharacters.size() >= 1) {
                     PlayerCharacter pc = accPlayerCharacters.get(0);
-                    ch.login(acc);
+                    ch.login(acc, pc);
                     ch.sendPacket(PacketWriter.writeLoginSuccess(pc));
                     
                     return;

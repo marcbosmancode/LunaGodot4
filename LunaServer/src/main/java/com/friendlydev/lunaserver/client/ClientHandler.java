@@ -6,6 +6,7 @@ import com.friendlydev.lunaserver.packets.PacketHandler;
 import com.friendlydev.lunaserver.packets.PacketWriter;
 import com.friendlydev.lunaserver.resources.ResourceManager;
 import com.friendlydev.lunaserver.resources.models.Account;
+import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -29,6 +30,7 @@ public class ClientHandler implements Runnable {
     
     private boolean loggedIn;
     private Account account;
+    private PlayerCharacter playerCharacter;
     
     private static final int CONNECTION_TIMEOUT_MS = 1000 * 30; // 30 seconds
     
@@ -108,14 +110,17 @@ public class ClientHandler implements Runnable {
         }
     }
     
-    public void sendPacketToPlayer(OutPacket packet, String username) {
+    public boolean sendPacketToPlayer(OutPacket packet, String username) {
         for (ClientHandler ch : rm.getAllClients()) {
             if (ch.isLoggedIn()) {
                 if (ch.getAccount().getUsername().equals(username)) {
                     ch.sendPacket(packet);
+                    return true;
                 }
             }
         }
+        
+        return false;
     }
     
     public boolean isLoggedIn() {
@@ -126,9 +131,14 @@ public class ClientHandler implements Runnable {
         return account;
     }
     
-    public void login(Account account) {
+    public PlayerCharacter getPlayerCharacter() {
+        return playerCharacter;
+    }
+    
+    public void login(Account account, PlayerCharacter playerCharacter) {
         loggedIn = true;
         this.account = account;
+        this.playerCharacter = playerCharacter;
     }
     
 }

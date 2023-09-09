@@ -57,7 +57,8 @@ func send_message_to_server(group: int, message: String, target: String = "") ->
 	if target == "":
 		Client.send_data(PacketWriter.write_message(group, message))
 	else:
-		Client.send_data(PacketWriter.write_private_message(group, message, target))
+		if target.to_lower() != PlayerStats.username.to_lower():
+			Client.send_data(PacketWriter.write_private_message(group, message, target))
 
 
 ## Handles a message. Check if it is a command, else send it to the server
