@@ -9,6 +9,7 @@ import com.friendlydev.lunaserver.resources.models.Account;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import java.io.EOFException;
 import java.util.ArrayList;
+import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,8 +19,6 @@ import org.apache.logging.log4j.Logger;
  */
 public class PacketHandler {
     private static final Logger logger = LogManager.getLogger(PacketHandler.class);
-    
-    short code = InCode.HEARTBEAT.value;
     
     public static void handlePacket(ClientHandler ch, InPacket packet) throws EOFException {
         InCode packetCode = InCode.get(packet.getPacketCode());
@@ -90,6 +89,23 @@ public class PacketHandler {
         Account acc = AccountService.getAccount(username);
         if (acc != null) {
             if (acc.authenticate(password)) {
+                // Check if the account is banned
+                if (acc.isBanned()) {
+                    String banComment = acc.getBanReason();
+                    Date unbanDate = acc.getUnbanDate();
+                    if (banComment == null) {
+                        ch.sendPacket(PacketWriter.writeLoginFailure(2));
+                    } else {
+                        ch.sendPacket(PacketWriter.writeLoginFailureBanned(banComment, unbanDate));
+                    }
+                    return;
+                }
+                
+                // Check if the account is logged in
+                if (acc.isLoggedIn()) {
+                    ch.sendPacket(PacketWriter.writeLoginFailure(1));
+                    return;
+                }
                 
                 // Load player characters from the account and log in
                 ArrayList<PlayerCharacter> accPlayerCharacters = AccountService.getAccountPlayerCharacters(acc.getId());

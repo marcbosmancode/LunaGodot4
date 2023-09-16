@@ -1,5 +1,6 @@
 package com.friendlydev.lunaserver.client;
 
+import com.friendlydev.lunaserver.database.DatabaseManager;
 import com.friendlydev.lunaserver.packets.InPacket;
 import com.friendlydev.lunaserver.packets.OutPacket;
 import com.friendlydev.lunaserver.packets.PacketHandler;
@@ -7,6 +8,7 @@ import com.friendlydev.lunaserver.packets.PacketWriter;
 import com.friendlydev.lunaserver.resources.ResourceManager;
 import com.friendlydev.lunaserver.resources.models.Account;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
+import com.friendlydev.lunaserver.resources.models.Scene;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -83,7 +85,11 @@ public class ClientHandler implements Runnable {
         } catch (IOException ex) {
             // Will be triggered when something goes wrong or the client closes the connection
             logger.info("Connection with client " + client.getInetAddress() + " got lost");
+            
             rm.removeClient(this);
+            if (loggedIn) {
+                logout();
+            }
         }
     }
     
@@ -138,7 +144,25 @@ public class ClientHandler implements Runnable {
     public void login(Account account, PlayerCharacter playerCharacter) {
         loggedIn = true;
         this.account = account;
+        
+        // Spawn the player inside their scene
+        Scene loginScene = playerCharacter.getScene();
+        playerCharacter.setPosition(loginScene.getSpawnPoint());
+        loginScene.addPlayer(playerCharacter);
         this.playerCharacter = playerCharacter;
+    }
+    
+    public void logout() {
+        loggedIn = false;
+        account = null;
+        
+        // Remove the player from their scene
+        Scene currentScene = playerCharacter.getScene();
+        if (currentScene != null) {
+            currentScene.removePlayer(playerCharacter);
+        }
+        DatabaseManager.saveOrUpdateInDB(playerCharacter);
+        playerCharacter = null;
     }
     
 }

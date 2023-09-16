@@ -4,7 +4,10 @@ import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.constants.enums.PacketCodes.OutCode;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 
 /**
  *
@@ -40,6 +43,28 @@ public class PacketWriter {
         
         packet.writeBoolean(false);
         packet.writeByte((byte) reason);
+        
+        return packet;
+    }
+    
+    public static OutPacket writeLoginFailureBanned(String comment, Date unbanDate) {
+        OutPacket packet = new OutPacket(OutCode.LOGIN_RESULT.value);
+        
+        String banComment = "";
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String dateString = dateFormat.format(unbanDate);
+        
+        if (comment != null) {
+            banComment += ". Ban reason: " + comment;
+        }
+        if (unbanDate != null) {
+            banComment += ". Unban date: " + dateString;
+        }
+        
+        packet.writeBoolean(false);
+        packet.writeByte((byte) 3);
+        packet.writeString(banComment);
         
         return packet;
     }

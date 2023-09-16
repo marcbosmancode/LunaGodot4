@@ -69,6 +69,10 @@ static func handle_packet(in_packet: InPacket) -> void:
 						explanation += "Account already logged in"
 					2:
 						explanation += "Account is banned"
+					3:
+						var comment := in_packet.get_string()
+						explanation += "Account is banned"
+						explanation += comment
 					_:
 						explanation += "Error"
 				UserInterface.show_ok_popup(explanation)

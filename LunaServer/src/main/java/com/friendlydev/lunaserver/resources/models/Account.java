@@ -1,7 +1,9 @@
 package com.friendlydev.lunaserver.resources.models;
 
+import com.friendlydev.lunaserver.client.ClientHandler;
 import com.friendlydev.lunaserver.database.DatabaseManager;
 import com.friendlydev.lunaserver.login.EncryptionService;
+import com.friendlydev.lunaserver.resources.ResourceManager;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
@@ -53,9 +55,8 @@ public class Account {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "unbandate")
     private Date unbanDate;
-    
     @Transient
-    private boolean loggedIn = false;
+    private ResourceManager rm = ResourceManager.getInstance();
     
     // Default constructor for hibernate
     public Account() {}
@@ -111,12 +112,15 @@ public class Account {
             // If no unban date is available the ban is permanent
             if (unbanDate == null) return true;
             
+            System.out.println();
             // Check for ban expiration
             Date currentTime = new Date();
             if (currentTime.after(unbanDate)) {
                 unban();
                 return false;
             }
+            
+            return true;
         }
         
         return false;
@@ -140,14 +144,6 @@ public class Account {
 
     public void setUnbanDate(Date unbanDate) {
         this.unbanDate = unbanDate;
-    }
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
     
     public boolean changePassword(String currentPassword, String newPassword) {
@@ -203,6 +199,16 @@ public class Account {
         unbanDate = null;
         
         DatabaseManager.updateInDB(this);
+    }
+    
+    public boolean isLoggedIn() {
+        for (ClientHandler ch : rm.getAllClients()) {
+            Account loggedInAcc = ch.getAccount();
+            if (loggedInAcc != null) {
+                if (loggedInAcc.getId() == id) return true;
+            }
+        }
+        return false;
     }
     
 }

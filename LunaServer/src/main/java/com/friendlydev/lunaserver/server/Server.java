@@ -3,7 +3,6 @@ package com.friendlydev.lunaserver.server;
 import com.friendlydev.lunaserver.client.ClientHandler;
 import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.database.DatabaseManager;
-import com.friendlydev.lunaserver.login.AccountService;
 import com.friendlydev.lunaserver.packets.OutPacket;
 import com.friendlydev.lunaserver.packets.PacketWriter;
 import com.friendlydev.lunaserver.resources.ResourceManager;
