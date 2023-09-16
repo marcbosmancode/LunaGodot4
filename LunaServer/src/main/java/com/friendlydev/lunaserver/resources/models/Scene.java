@@ -1,5 +1,7 @@
 package com.friendlydev.lunaserver.resources.models;
 
+import com.friendlydev.lunaserver.packets.OutPacket;
+import com.friendlydev.lunaserver.packets.PacketWriter;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ public class Scene {
     private String name;
     private Point spawnPoint;
     private int returnScene;
-    private ArrayList<Door> allDoors = new ArrayList<>();;
+    private ArrayList<Door> allDoors = new ArrayList<>();
     private ArrayList<NonPlayerCharacter> allNPCs = new ArrayList<>();
     private ArrayList<PlayerCharacter> allPlayers = new ArrayList<>();
 
@@ -74,17 +76,47 @@ public class Scene {
     public ArrayList<PlayerCharacter> getAllPlayers() {
         return allPlayers;
     }
-
-    public void setAllPlayers(ArrayList<PlayerCharacter> allPlayers) {
-        this.allPlayers = allPlayers;
-    }
     
+    /**
+     * Add a PlayerCharacter to the Scene and notify all others in the Scene
+     * 
+     * @param player PlayerCharacter to be added
+     */
     public void addPlayer(PlayerCharacter player) {
+        // Notify other players a player entered
+        OutPacket playerEnteredScenePacket = PacketWriter.getPlayerEnteredScenePacket(player);
+        sendPacketToAll(playerEnteredScenePacket);
+        
+        // Send all other players in the scene to the player
+        for (PlayerCharacter pc : allPlayers) {
+            OutPacket otherPlayerDataPacket = PacketWriter.getPlayerEnteredScenePacket(pc);
+            if (pc.getClientHandler() != null) {
+                pc.getClientHandler().sendPacket(otherPlayerDataPacket);
+            }
+        }
+        
         allPlayers.add(player);
     }
     
+    /**
+     * Remove a PlayerCharacter from the Scene and notify all others in the Scene
+     * 
+     * @param player PlayerCharacter to be removed
+     */
     public void removePlayer(PlayerCharacter player) {
         allPlayers.remove(player);
+        
+        // Notify other players a player leaves
+        OutPacket playerLeftScenePacket = PacketWriter.getPlayerLeftScenePacket(player);
+        sendPacketToAll(playerLeftScenePacket);
+    }
+    
+    public void sendPacketToAll(OutPacket packet) {
+        for (PlayerCharacter pc : allPlayers) {
+            if (pc.getClientHandler() != null) {
+                pc.getClientHandler().sendPacket(packet);
+            }
+        }
     }
     
 }

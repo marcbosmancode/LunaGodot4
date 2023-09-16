@@ -12,7 +12,9 @@ public class PacketCodes {
     public enum InCode {
         HEARTBEAT((short) 0),
         MESSAGE((short) 1),
-        LOGIN((short) 2);
+        LOGIN((short) 2),
+        PLAYER_POSITION_UPDATE((short) 3),
+        PORTAL_INTERACTION((short) 4);
         
         public final short value;
         
@@ -38,7 +40,11 @@ public class PacketCodes {
         HEARTBEAT((short) 0),
         HANDSHAKE((short) 1),
         MESSAGE((short) 2),
-        LOGIN_RESULT((short) 3);
+        LOGIN_RESULT((short) 3),
+        PLAYER_POSITION_UPDATE((short) 4),
+        CHANGE_SCENE((short) 5),
+        PLAYER_ENTERED_SCENE((short) 6),
+        PLAYER_LEFT_SCENE((short) 7);
         
         public final short value;
         

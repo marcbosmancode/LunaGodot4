@@ -149,6 +149,8 @@ public class ClientHandler implements Runnable {
         Scene loginScene = playerCharacter.getScene();
         playerCharacter.setPosition(loginScene.getSpawnPoint());
         loginScene.addPlayer(playerCharacter);
+        playerCharacter.setClientHandler(this);
+        
         this.playerCharacter = playerCharacter;
     }
     
@@ -161,6 +163,7 @@ public class ClientHandler implements Runnable {
         if (currentScene != null) {
             currentScene.removePlayer(playerCharacter);
         }
+        
         DatabaseManager.saveOrUpdateInDB(playerCharacter);
         playerCharacter = null;
     }

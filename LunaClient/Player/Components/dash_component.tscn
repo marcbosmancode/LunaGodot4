@@ -12,7 +12,7 @@ particles_anim_loop = false
 [sub_resource type="Gradient" id="Gradient_7jxei"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_5essl"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_atlph"]
 gradient = SubResource("Gradient_7jxei")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d6yxa"]
@@ -28,7 +28,7 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 angle_min = -20.0
 angle_max = 20.0
-color_ramp = SubResource("GradientTexture1D_5essl")
+color_ramp = SubResource("GradientTexture1D_atlph")
 anim_offset_max = 1.0
 
 [node name="DashComponent" type="Node2D"]

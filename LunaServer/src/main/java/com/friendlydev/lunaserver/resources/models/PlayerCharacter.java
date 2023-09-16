@@ -44,6 +44,8 @@ public class PlayerCharacter {
     private Point position = new Point();
     @Transient
     private Inventory inventory;
+    @Transient
+    private ClientHandler ch;
     
     // Combat stats
     @Column(name = "combatlevel")
@@ -136,6 +138,14 @@ public class PlayerCharacter {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+    
+    public ClientHandler getClientHandler() {
+        return ch;
+    }
+    
+    public void setClientHandler(ClientHandler ch) {
+        this.ch = ch;
     }
 
     public int getLevel() {

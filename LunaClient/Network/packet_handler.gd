@@ -6,6 +6,10 @@ enum InCodes {
 	HANDSHAKE = 1,
 	MESSAGE = 2,
 	LOGIN = 3,
+	PLAYER_POSITION_UPDATE = 4,
+	CHANGE_SCENE = 5,
+	PLAYER_ENTERED_SCENE = 6,
+	PLAYER_LEFT_SCENE = 7,
 }
 
 ## Reads a string with the length specified at the start from a StreamPeerBuffer
@@ -76,3 +80,27 @@ static func handle_packet(in_packet: InPacket) -> void:
 					_:
 						explanation += "Error"
 				UserInterface.show_ok_popup(explanation)
+		
+		InCodes.PLAYER_POSITION_UPDATE:
+			var player_id := in_packet.get_int()
+			var player_position: Vector2 = Vector2(in_packet.get_int(), in_packet.get_int())
+			
+			SceneHandler.update_other_player_position(player_id, player_position)
+		
+		InCodes.CHANGE_SCENE:
+			var new_scene_id := in_packet.get_int()
+			var new_position: Vector2 = Vector2(in_packet.get_int(), in_packet.get_int())
+			
+			SceneHandler.change_scene(new_scene_id, new_position)
+		
+		InCodes.PLAYER_ENTERED_SCENE:
+			var player_id := in_packet.get_int()
+			var player_username := in_packet.get_string()
+			var player_position: Vector2 = Vector2(in_packet.get_int(), in_packet.get_int())
+			
+			SceneHandler.add_other_player(player_id, player_username, player_position)
+		
+		InCodes.PLAYER_LEFT_SCENE:
+			var player_id := in_packet.get_int()
+			
+			SceneHandler.remove_other_player(player_id)

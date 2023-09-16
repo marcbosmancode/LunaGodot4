@@ -4,6 +4,7 @@ import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.constants.enums.PacketCodes.OutCode;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
+import java.awt.Point;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -42,6 +43,12 @@ public class PacketWriter {
         OutPacket packet = new OutPacket(OutCode.LOGIN_RESULT.value);
         
         packet.writeBoolean(false);
+        
+        /*
+        0: Invalid credentials
+        1: Already online
+        2: Banned
+        */
         packet.writeByte((byte) reason);
         
         return packet;
@@ -51,7 +58,6 @@ public class PacketWriter {
         OutPacket packet = new OutPacket(OutCode.LOGIN_RESULT.value);
         
         String banComment = "";
-        
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String dateString = dateFormat.format(unbanDate);
         
@@ -79,6 +85,42 @@ public class PacketWriter {
         packet.writeInt(sc.getId());
         packet.writeInt(sc.getSpawnPoint().x);
         packet.writeInt(sc.getSpawnPoint().y);
+        
+        return packet;
+    }
+    
+    public static OutPacket getPlayerPositionUpdate(PlayerCharacter pc) {
+        OutPacket packet = new OutPacket(OutCode.PLAYER_POSITION_UPDATE.value);
+        
+        packet.writeInt(pc.getId());
+        packet.writePoint(pc.getPosition());
+        
+        return packet;
+    }
+    
+    public static OutPacket getChangeScenePacket(Scene sc, Point targetPosition) {
+        OutPacket packet = new OutPacket(OutCode.CHANGE_SCENE.value);
+        
+        packet.writeInt(sc.getId());
+        packet.writePoint(targetPosition);
+        
+        return packet;
+    }
+    
+    public static OutPacket getPlayerEnteredScenePacket(PlayerCharacter pc) {
+        OutPacket packet = new OutPacket(OutCode.PLAYER_ENTERED_SCENE.value);
+        
+        packet.writeInt(pc.getId());
+        packet.writeString(pc.getUsername());
+        packet.writePoint(pc.getPosition());
+        
+        return packet;
+    }
+    
+    public static OutPacket getPlayerLeftScenePacket(PlayerCharacter pc) {
+        OutPacket packet = new OutPacket(OutCode.PLAYER_LEFT_SCENE.value);
+        
+        packet.writeInt(pc.getId());
         
         return packet;
     }

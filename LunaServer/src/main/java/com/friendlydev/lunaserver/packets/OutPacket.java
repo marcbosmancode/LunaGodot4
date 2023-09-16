@@ -1,5 +1,6 @@
 package com.friendlydev.lunaserver.packets;
 
+import java.awt.Point;
 import java.io.ByteArrayOutputStream;
 
 /**
@@ -60,6 +61,11 @@ public class OutPacket {
         
         writeInt(stringBytes.length);
         out.writeBytes(stringBytes);
+    }
+    
+    public void writePoint(Point p) {
+        writeInt(p.x);
+        writeInt(p.y);
     }
 
     public short getPacketCode() {

@@ -1,0 +1,399 @@
+[gd_scene load_steps=33 format=3 uid="uid://byv6wc7utts70"]
+
+[ext_resource type="Script" path="res://Player/net_player.gd" id="1_4gbpc"]
+[ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="2_4eyes"]
+[ext_resource type="Texture2D" uid="uid://dxbfc8a7l4n2i" path="res://Player/Assets/Body/body_1.png" id="3_pcbm2"]
+[ext_resource type="Texture2D" uid="uid://dy1wm715vg3wj" path="res://Player/Assets/Outfits/outfit_1.png" id="4_tq4mq"]
+[ext_resource type="Texture2D" uid="uid://bkyfdrfjwvgsf" path="res://Skills/Assets/attack_effects.png" id="5_jcme4"]
+[ext_resource type="Texture2D" uid="uid://c83qyidr028ck" path="res://Player/Assets/Weapons/weapon_1.png" id="6_nnrdl"]
+[ext_resource type="Texture2D" uid="uid://dv6e42pow0lj1" path="res://Player/Assets/Body/head_1.png" id="7_4pcgq"]
+[ext_resource type="Texture2D" uid="uid://djye83mxn0id4" path="res://Player/Assets/Hairstyles/hairstyle_f_1.png" id="8_b443d"]
+[ext_resource type="Texture2D" uid="uid://bom0e25xcskfu" path="res://Player/Assets/Eyes/eyes_1.png" id="9_k6vdf"]
+[ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="11_yn1kp"]
+[ext_resource type="Texture2D" uid="uid://b2mkv2s1baqdw" path="res://Particles/Assets/teleport_sparkles.png" id="12_e7rya"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="13_srkgk"]
+
+[sub_resource type="Animation" id="Animation_pw4a7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1naxq"]
+resource_name = "dash"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_c508o"]
+resource_name = "fall"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xj1e0"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 2.1, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gdccc"]
+resource_name = "jump"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r6424"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4tx1n"]
+resource_name = "slash"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/AttackEffects:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtbe3"]
+_data = {
+"RESET": SubResource("Animation_pw4a7"),
+"dash": SubResource("Animation_1naxq"),
+"fall": SubResource("Animation_c508o"),
+"idle": SubResource("Animation_xj1e0"),
+"jump": SubResource("Animation_gdccc"),
+"run": SubResource("Animation_r6424"),
+"slash": SubResource("Animation_4tx1n")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f7fxu"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_2ui35"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lu4ao"]
+gradient = SubResource("Gradient_2ui35")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1l552"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 8.0
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 60.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -20.0
+angle_max = 20.0
+color_ramp = SubResource("GradientTexture1D_lu4ao")
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eo2ss"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_jwgud"]
+colors = PackedColorArray(1, 1, 1, 0.74902, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_esn6t"]
+gradient = SubResource("Gradient_jwgud")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jo0x"]
+lifetime_randomness = 0.4
+emission_shape = 3
+emission_box_extents = Vector3(8, 12, 1)
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 5.0
+angular_velocity_max = 45.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -15.0
+angle_max = 15.0
+color_ramp = SubResource("GradientTexture1D_esn6t")
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jmsjn"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_mx2dp"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5essl"]
+gradient = SubResource("Gradient_mx2dp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xk4hp"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 6.0
+particle_flag_disable_z = true
+spread = 60.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -20.0
+angle_max = 20.0
+color_ramp = SubResource("GradientTexture1D_5essl")
+anim_offset_max = 1.0
+
+[node name="NetPlayer" type="Node2D"]
+z_index = 10
+script = ExtResource("1_4gbpc")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="HairstyleBack" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -18)
+texture = ExtResource("2_4eyes")
+
+[node name="Body" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("3_pcbm2")
+hframes = 15
+
+[node name="Outfit" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("4_tq4mq")
+hframes = 15
+
+[node name="AttackEffects" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("5_jcme4")
+hframes = 3
+
+[node name="Weapon" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -16)
+texture = ExtResource("6_nnrdl")
+hframes = 4
+
+[node name="Head" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -21)
+texture = ExtResource("7_4pcgq")
+
+[node name="HairstyleFront" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -18)
+texture = ExtResource("8_b443d")
+
+[node name="Eyes" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(1, -20)
+texture = ExtResource("9_k6vdf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_vtbe3")
+}
+
+[node name="DoubleJumpParticles" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_f7fxu")
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_1l552")
+texture = ExtResource("11_yn1kp")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+
+[node name="TeleportParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_eo2ss")
+position = Vector2(0, -12)
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_4jo0x")
+texture = ExtResource("12_e7rya")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.7
+
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_jmsjn")
+position = Vector2(0, -12)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_xk4hp")
+texture = ExtResource("11_yn1kp")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+
+[node name="UsernameLabel" type="Label" parent="."]
+offset_left = -25.0
+offset_top = 2.0
+offset_right = 25.0
+offset_bottom = 18.0
+theme = ExtResource("13_srkgk")
+theme_override_colors/font_color = Color(0.921569, 0.937255, 0.980392, 1)
+text = "<Username>"
+horizontal_alignment = 1

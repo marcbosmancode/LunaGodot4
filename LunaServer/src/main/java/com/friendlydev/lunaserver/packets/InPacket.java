@@ -1,5 +1,6 @@
 package com.friendlydev.lunaserver.packets;
 
+import java.awt.Point;
 import java.io.ByteArrayInputStream;
 import java.io.EOFException;
 
@@ -89,6 +90,12 @@ public class InPacket {
             stringBytes[i] = (byte) data;
         }
         return new String(stringBytes);
+    }
+    
+    public Point readPoint() throws EOFException {
+        int x = readInt();
+        int y = readInt();
+        return new Point(x, y);
     }
 
     public short getPacketCode() {
