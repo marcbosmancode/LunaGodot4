@@ -89,7 +89,7 @@ public class PacketWriter {
         return packet;
     }
     
-    public static OutPacket getPlayerPositionUpdate(PlayerCharacter pc) {
+    public static OutPacket writePlayerPositionUpdate(PlayerCharacter pc) {
         OutPacket packet = new OutPacket(OutCode.PLAYER_POSITION_UPDATE.value);
         
         packet.writeInt(pc.getId());
@@ -98,7 +98,7 @@ public class PacketWriter {
         return packet;
     }
     
-    public static OutPacket getChangeScenePacket(Scene sc, Point targetPosition) {
+    public static OutPacket writeChangeScenePacket(Scene sc, Point targetPosition) {
         OutPacket packet = new OutPacket(OutCode.CHANGE_SCENE.value);
         
         packet.writeInt(sc.getId());
@@ -107,7 +107,7 @@ public class PacketWriter {
         return packet;
     }
     
-    public static OutPacket getPlayerEnteredScenePacket(PlayerCharacter pc) {
+    public static OutPacket writePlayerEnteredScenePacket(PlayerCharacter pc) {
         OutPacket packet = new OutPacket(OutCode.PLAYER_ENTERED_SCENE.value);
         
         packet.writeInt(pc.getId());
@@ -117,7 +117,7 @@ public class PacketWriter {
         return packet;
     }
     
-    public static OutPacket getPlayerLeftScenePacket(PlayerCharacter pc) {
+    public static OutPacket writePlayerLeftScenePacket(PlayerCharacter pc) {
         OutPacket packet = new OutPacket(OutCode.PLAYER_LEFT_SCENE.value);
         
         packet.writeInt(pc.getId());

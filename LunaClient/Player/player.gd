@@ -33,6 +33,8 @@ const JUMP_BUFFER_TIME: float = 0.1
 const TELEPORT_DISTANCE: int = 80
 const TELEPORT_COOLDOWN: float = 0.6
 const AIR_TELEPORTS: int = 1
+# Multiplayer constants
+const NET_UPDATE_DELAY: float = 0.2
 
 enum States {
 	FREE,
@@ -40,6 +42,7 @@ enum States {
 	ATTACK,
 }
 
+# Movement variables
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var state: States = States.FREE
 var grounded: bool = false
@@ -48,6 +51,8 @@ var remaining_double_jumps: int = 1
 var last_direction: float = 1.0
 var teleport_allowed: bool = true
 var remaining_teleports: int = 1
+# Multiplayer Variables
+var previous_position: Vector2 = Vector2.ZERO
 
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
 @onready var body = $CanvasGroup/Body
@@ -59,6 +64,7 @@ var remaining_teleports: int = 1
 @onready var eyes = $CanvasGroup/Eyes
 @onready var sprite_group = $CanvasGroup
 @onready var animation_player = $AnimationPlayer
+@onready var net_update_timer = $NetUpdateTimer
 @onready var coyote_timer = $CoyoteTimer
 @onready var jump_buffer = $JumpBuffer
 @onready var teleport_timer = $TeleportTimer
@@ -70,6 +76,8 @@ var remaining_teleports: int = 1
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
 	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
+	net_update_timer.timeout.connect(_on_net_update_timer_timeout)
+	net_update_timer.start(NET_UPDATE_DELAY)
 	coyote_timer.timeout.connect(_on_coyote_timer_timeout)
 	teleport_timer.timeout.connect(_on_teleport_timer_timeout)
 	username_label.text = PlayerStats.username
@@ -272,3 +280,10 @@ func _on_coyote_timer_timeout() -> void:
 
 func _on_teleport_timer_timeout() -> void:
 	teleport_allowed = true
+
+
+func _on_net_update_timer_timeout() -> void:
+	if Globals.logged_in:
+		if global_position.floor() != previous_position:
+			previous_position = global_position.floor()
+			Client.send_data(PacketWriter.write_player_position_update(global_position))

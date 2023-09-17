@@ -334,6 +334,8 @@ libraries = {
 "": SubResource("AnimationLibrary_vtbe3")
 }
 
+[node name="NetUpdateTimer" type="Timer" parent="."]
+
 [node name="CoyoteTimer" type="Timer" parent="."]
 one_shot = true
 

@@ -33,3 +33,8 @@ func write_bool(value: bool) -> void:
 
 func write_string(value: String) -> void:
 	buffer.put_string(value)
+
+
+func write_vec2(value: Vector2) -> void:
+	buffer.put_32(int(value.x))
+	buffer.put_32(int(value.y))

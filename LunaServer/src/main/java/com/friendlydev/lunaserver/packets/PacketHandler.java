@@ -7,6 +7,7 @@ import com.friendlydev.lunaserver.constants.enums.PacketCodes.InCode;
 import com.friendlydev.lunaserver.login.AccountService;
 import com.friendlydev.lunaserver.resources.models.Account;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
+import java.awt.Point;
 import java.io.EOFException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +37,9 @@ public class PacketHandler {
                 break;
             case LOGIN:
                 handleLogin(ch, packet);
+                break;
+            case PLAYER_POSITION_UPDATE:
+                handlePlayerPositionUpdate(ch, packet);
                 break;
         }
     }
@@ -111,8 +115,8 @@ public class PacketHandler {
                 ArrayList<PlayerCharacter> accPlayerCharacters = AccountService.getAccountPlayerCharacters(acc.getId());
                 if (accPlayerCharacters.size() >= 1) {
                     PlayerCharacter pc = accPlayerCharacters.get(0);
-                    ch.login(acc, pc);
                     ch.sendPacket(PacketWriter.writeLoginSuccess(pc));
+                    ch.login(acc, pc);
                     
                     return;
                 }
@@ -120,6 +124,18 @@ public class PacketHandler {
         }
         
         ch.sendPacket(PacketWriter.writeLoginFailure(0));
+    }
+    
+    public static void handlePlayerPositionUpdate(ClientHandler ch, InPacket packet) throws EOFException {
+        // Make sure the account is logged in to send position update
+        if (ch.isLoggedIn() == false) return;
+        
+        Point new_position = packet.readPoint();
+        PlayerCharacter pc = ch.getPlayerCharacter();
+        
+        pc.setPosition(new_position);
+        
+        ch.getPlayerCharacter().getScene().sendPacketToAll(PacketWriter.writePlayerPositionUpdate(pc));
     }
     
 }

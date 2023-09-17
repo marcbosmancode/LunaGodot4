@@ -63,4 +63,5 @@ func _on_body_frame_changed() -> void:
 
 
 func update_position(new_position: Vector2) -> void:
-	position = new_position
+	# Vec2 was rounded while sending packet. To keep the character on the floor add 1
+	position = new_position + Vector2(1, 1)

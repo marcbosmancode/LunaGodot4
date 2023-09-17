@@ -84,14 +84,16 @@ public class Scene {
      */
     public void addPlayer(PlayerCharacter player) {
         // Notify other players a player entered
-        OutPacket playerEnteredScenePacket = PacketWriter.getPlayerEnteredScenePacket(player);
+        OutPacket playerEnteredScenePacket = PacketWriter.writePlayerEnteredScenePacket(player);
         sendPacketToAll(playerEnteredScenePacket);
         
         // Send all other players in the scene to the player
         for (PlayerCharacter pc : allPlayers) {
-            OutPacket otherPlayerDataPacket = PacketWriter.getPlayerEnteredScenePacket(pc);
-            if (pc.getClientHandler() != null) {
-                pc.getClientHandler().sendPacket(otherPlayerDataPacket);
+            System.out.println("Sending data from player: " + pc.getUsername());
+            OutPacket otherPlayerDataPacket = PacketWriter.writePlayerEnteredScenePacket(pc);
+            if (player.getClientHandler() != null) {
+                System.out.println("We arrive here?");
+                player.getClientHandler().sendPacket(otherPlayerDataPacket);
             }
         }
         
@@ -107,7 +109,7 @@ public class Scene {
         allPlayers.remove(player);
         
         // Notify other players a player leaves
-        OutPacket playerLeftScenePacket = PacketWriter.getPlayerLeftScenePacket(player);
+        OutPacket playerLeftScenePacket = PacketWriter.writePlayerLeftScenePacket(player);
         sendPacketToAll(playerLeftScenePacket);
     }
     

@@ -145,11 +145,12 @@ public class ClientHandler implements Runnable {
         loggedIn = true;
         this.account = account;
         
-        // Spawn the player inside their scene
+        playerCharacter.setClientHandler(this);
+        
+        // Add the player to their scene
         Scene loginScene = playerCharacter.getScene();
         playerCharacter.setPosition(loginScene.getSpawnPoint());
         loginScene.addPlayer(playerCharacter);
-        playerCharacter.setClientHandler(this);
         
         this.playerCharacter = playerCharacter;
     }

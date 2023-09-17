@@ -33,3 +33,9 @@ func get_bool() -> bool:
 func get_string() -> String:
 	var string_size := buffer.get_32()
 	return buffer.get_string(string_size)
+
+
+func get_vec2() -> Vector2:
+	var x = buffer.get_32()
+	var y = buffer.get_32()
+	return Vector2(x, y)
