@@ -89,11 +89,22 @@ public class PacketWriter {
         return packet;
     }
     
-    public static OutPacket writePlayerPositionUpdate(PlayerCharacter pc) {
+    public static OutPacket writePlayerPositionUpdate(PlayerCharacter pc, boolean usedTeleport) {
         OutPacket packet = new OutPacket(OutCode.PLAYER_POSITION_UPDATE.value);
         
         packet.writeInt(pc.getId());
         packet.writePoint(pc.getPosition());
+        packet.writeBoolean(usedTeleport);
+        
+        return packet;
+    }
+    
+    public static OutPacket writePlayerStateUpdate(PlayerCharacter pc, String newAnimation, int newDirection) {
+        OutPacket packet = new OutPacket(OutCode.PLAYER_STATE_UPDATE.value);
+        
+        packet.writeInt(pc.getId());
+        packet.writeString(newAnimation);
+        packet.writeInt(newDirection);
         
         return packet;
     }

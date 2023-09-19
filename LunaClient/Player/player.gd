@@ -53,11 +53,15 @@ var teleport_allowed: bool = true
 var remaining_teleports: int = 1
 # Multiplayer Variables
 var previous_position: Vector2 = Vector2.ZERO
+var used_teleport: bool = false
+
+var previous_direction: float = 1.0
+var current_animation: StringName = ""
+var previous_animation: StringName = ""
 
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
 @onready var body = $CanvasGroup/Body
 @onready var outfit = $CanvasGroup/Outfit
-@onready var attack_effects = $CanvasGroup/AttackEffects
 @onready var weapon = $CanvasGroup/Weapon
 @onready var head = $CanvasGroup/Head
 @onready var hairstyle_front = $CanvasGroup/HairstyleFront
@@ -76,6 +80,7 @@ var previous_position: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
 	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
+	animation_player.animation_started.connect(_on_animation_player_animation_started)
 	net_update_timer.timeout.connect(_on_net_update_timer_timeout)
 	net_update_timer.start(NET_UPDATE_DELAY)
 	coyote_timer.timeout.connect(_on_coyote_timer_timeout)
@@ -148,6 +153,7 @@ func state_free(delta) -> void:
 		dash()
 	elif Input.is_action_just_pressed("teleport"):
 		teleport()
+		used_teleport = true
 	elif Input.is_action_pressed("basic_attack"):
 		animation_player.play("slash")
 		state = States.ATTACK
@@ -269,9 +275,13 @@ func _on_body_frame_changed() -> void:
 	sync_animations(new_frame)
 
 
-func _on_animation_player_animation_finished(_anim_name: StringName):
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if state == States.ATTACK:
 		state = States.FREE
+
+
+func _on_animation_player_animation_started(anim_name: StringName) -> void:
+	current_animation = anim_name
 
 
 func _on_coyote_timer_timeout() -> void:
@@ -285,5 +295,19 @@ func _on_teleport_timer_timeout() -> void:
 func _on_net_update_timer_timeout() -> void:
 	if Globals.logged_in:
 		if global_position.floor() != previous_position:
-			previous_position = global_position.floor()
-			Client.send_data(PacketWriter.write_player_position_update(global_position))
+			net_update_position()
+		if current_animation != previous_animation or last_direction != previous_direction:
+			net_update_animation()
+
+
+func net_update_position() -> void:
+	previous_position = global_position.floor()
+	Client.send_data(PacketWriter.write_player_position_update(global_position, used_teleport))
+	# Reset teleport tracking variable again
+	used_teleport = false
+
+
+func net_update_animation() -> void:
+	previous_animation = current_animation
+	previous_direction = last_direction
+	Client.send_data(PacketWriter.write_player_state_update(previous_animation, last_direction))

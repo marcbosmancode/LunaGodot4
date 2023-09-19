@@ -18,11 +18,19 @@ func change_scene(scene_id: int, new_position: Vector2 = Vector2.ZERO) -> void:
 		UserInterface.show_message(0, "Target scene is invalid!")
 
 
-func update_other_player_position(player_id: int, new_position: Vector2) -> void:
+func update_other_player_position(player_id: int, new_position: Vector2, used_teleport: bool) -> void:
 	for net_player in current_players:
 		if net_player is NetPlayer:
 			if net_player.id == player_id:
-				net_player.update_position(new_position)
+				net_player.update_position(new_position, used_teleport)
+				break
+
+
+func update_other_player_state(player_id: int, new_animation: String, new_direction: int) -> void:
+	for net_player in current_players:
+		if net_player is NetPlayer:
+			if net_player.id == player_id:
+				net_player.update_state(new_animation, new_direction)
 				break
 
 

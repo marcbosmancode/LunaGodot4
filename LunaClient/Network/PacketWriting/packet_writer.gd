@@ -6,7 +6,8 @@ enum OutCodes {
 	CHAT_MESSAGE = 1,
 	LOGIN = 2,
 	PLAYER_POSITION_UPDATE = 3,
-	PORTAL_INTERACTION = 4,
+	PLAYER_STATE_UPDATE = 4,
+	PORTAL_INTERACTION = 5,
 }
 
 static func write_heartbeat() -> OutPacket:
@@ -19,6 +20,7 @@ static func write_message(group: int, message: String) -> OutPacket:
 	packet.write_short(group)
 	packet.write_string(message)
 	return packet
+
 
 static func write_private_message(group: int, message: String, target: String) -> OutPacket:
 	var packet := OutPacket.new(OutCodes.CHAT_MESSAGE)
@@ -35,9 +37,17 @@ static func write_login(username: String, password: String) -> OutPacket:
 	return packet
 
 
-static func write_player_position_update(new_position: Vector2) -> OutPacket:
+static func write_player_position_update(new_position: Vector2, teleport: bool) -> OutPacket:
 	var packet := OutPacket.new(OutCodes.PLAYER_POSITION_UPDATE)
 	packet.write_vec2(new_position)
+	packet.write_bool(teleport)
+	return packet
+
+
+static func write_player_state_update(new_animation: String, new_direction: float) -> OutPacket:
+	var packet := OutPacket.new(OutCodes.PLAYER_STATE_UPDATE)
+	packet.write_string(new_animation)
+	packet.write_int(int(new_direction))
 	return packet
 
 

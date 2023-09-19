@@ -7,9 +7,10 @@ enum InCodes {
 	MESSAGE = 2,
 	LOGIN = 3,
 	PLAYER_POSITION_UPDATE = 4,
-	CHANGE_SCENE = 5,
-	PLAYER_ENTERED_SCENE = 6,
-	PLAYER_LEFT_SCENE = 7,
+	PLAYER_STATE_UPDATE = 5,
+	CHANGE_SCENE = 6,
+	PLAYER_ENTERED_SCENE = 7,
+	PLAYER_LEFT_SCENE = 8,
 }
 
 ## Reads a string with the length specified at the start from a StreamPeerBuffer
@@ -84,8 +85,16 @@ static func handle_packet(in_packet: InPacket) -> void:
 		InCodes.PLAYER_POSITION_UPDATE:
 			var player_id := in_packet.get_int()
 			var player_position: Vector2 = Vector2(in_packet.get_int(), in_packet.get_int())
+			var player_teleported: bool = in_packet.get_bool()
 			
-			SceneHandler.update_other_player_position(player_id, player_position)
+			SceneHandler.update_other_player_position(player_id, player_position, player_teleported)
+		
+		InCodes.PLAYER_STATE_UPDATE:
+			var player_id := in_packet.get_int()
+			var player_animation := in_packet.get_string()
+			var player_direction := in_packet.get_int()
+			
+			SceneHandler.update_other_player_state(player_id, player_animation, player_direction)
 		
 		InCodes.CHANGE_SCENE:
 			var new_scene_id := in_packet.get_int()
@@ -97,6 +106,8 @@ static func handle_packet(in_packet: InPacket) -> void:
 			var player_id := in_packet.get_int()
 			var player_username := in_packet.get_string()
 			var player_position: Vector2 = Vector2(in_packet.get_int(), in_packet.get_int())
+			# Vec2 was rounded while sending packet. To keep the character on the floor add 1
+			player_position += Vector2(1, 1)
 			
 			SceneHandler.add_other_player(player_id, player_username, player_position)
 		

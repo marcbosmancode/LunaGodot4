@@ -41,6 +41,9 @@ public class PacketHandler {
             case PLAYER_POSITION_UPDATE:
                 handlePlayerPositionUpdate(ch, packet);
                 break;
+            case PLAYER_STATE_UPDATE:
+                handlePlayerStateUpdate(ch, packet);
+                break;
         }
     }
     
@@ -130,12 +133,25 @@ public class PacketHandler {
         // Make sure the account is logged in to send position update
         if (ch.isLoggedIn() == false) return;
         
-        Point new_position = packet.readPoint();
+        Point newPosition = packet.readPoint();
+        boolean usedTeleport = packet.readBoolean();
+        
         PlayerCharacter pc = ch.getPlayerCharacter();
+        pc.setPosition(newPosition);
         
-        pc.setPosition(new_position);
+        ch.getPlayerCharacter().getScene().sendPacketToAll(PacketWriter.writePlayerPositionUpdate(pc, usedTeleport));
+    }
+    
+    public static void handlePlayerStateUpdate(ClientHandler ch, InPacket packet) throws EOFException {
+        // Make sure the account is logged in to send state update
+        if (ch.isLoggedIn() == false) return;
         
-        ch.getPlayerCharacter().getScene().sendPacketToAll(PacketWriter.writePlayerPositionUpdate(pc));
+        String newAnimation = packet.readString();
+        int newDirection = packet.readInt();
+        
+        System.out.println("state update, animation=" + newAnimation + " direction=" + newDirection);
+        
+        ch.getPlayerCharacter().getScene().sendPacketToAll(PacketWriter.writePlayerStateUpdate(ch.getPlayerCharacter(), newAnimation, newDirection));
     }
     
 }

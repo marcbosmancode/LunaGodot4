@@ -14,7 +14,8 @@ public class PacketCodes {
         MESSAGE((short) 1),
         LOGIN((short) 2),
         PLAYER_POSITION_UPDATE((short) 3),
-        PORTAL_INTERACTION((short) 4);
+        PLAYER_STATE_UPDATE((short) 4),
+        PORTAL_INTERACTION((short) 5);
         
         public final short value;
         
@@ -42,9 +43,10 @@ public class PacketCodes {
         MESSAGE((short) 2),
         LOGIN_RESULT((short) 3),
         PLAYER_POSITION_UPDATE((short) 4),
-        CHANGE_SCENE((short) 5),
-        PLAYER_ENTERED_SCENE((short) 6),
-        PLAYER_LEFT_SCENE((short) 7);
+        PLAYER_STATE_UPDATE((short) 5),
+        CHANGE_SCENE((short) 6),
+        PLAYER_ENTERED_SCENE((short) 7),
+        PLAYER_LEFT_SCENE((short) 8);
         
         public final short value;
         
