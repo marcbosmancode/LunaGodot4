@@ -27,8 +27,8 @@ public class ChatCommandHandler {
         String message = "";
         switch(givenCommand) {
             case "roll":
-                message = ch.getAccount().getUsername() + " rolled a " + RandomGenerator.getNumber(1, 100);
-                ch.sendPacketToAll(PacketWriter.writeMessage((short) 0, message, "Server"));
+                message = ch.getPlayerCharacter().getUsername() + " rolled a " + RandomGenerator.getNumber(1, 100);
+                ch.getPlayerCharacter().getScene().sendPacketToAll(PacketWriter.writeMessage((short) 0, message, "Server"));
                 break;
         }
     }

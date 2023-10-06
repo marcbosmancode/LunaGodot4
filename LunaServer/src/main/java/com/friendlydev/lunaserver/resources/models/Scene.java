@@ -72,6 +72,13 @@ public class Scene {
     public void removeDoor(Door door) {
         allDoors.remove(door);
     }
+    
+    public Door getDoor(int id) {
+        for (Door door : allDoors) {
+            if (door.getId() == id) return door;
+        }
+        return null;
+    }
 
     public ArrayList<PlayerCharacter> getAllPlayers() {
         return allPlayers;
@@ -89,10 +96,8 @@ public class Scene {
         
         // Send all other players in the scene to the player
         for (PlayerCharacter pc : allPlayers) {
-            System.out.println("Sending data from player: " + pc.getUsername());
             OutPacket otherPlayerDataPacket = PacketWriter.writePlayerEnteredScenePacket(pc);
             if (player.getClientHandler() != null) {
-                System.out.println("We arrive here?");
                 player.getClientHandler().sendPacket(otherPlayerDataPacket);
             }
         }

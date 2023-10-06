@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d24ywyas8b5yb"]
+[gd_scene load_steps=32 format=3 uid="uid://d24ywyas8b5yb"]
 
 [ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="1_3uf64"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kmhxu"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="8_lkkcn"]
 [ext_resource type="Texture2D" uid="uid://b2mkv2s1baqdw" path="res://Particles/Assets/teleport_sparkles.png" id="9_5w3mn"]
 [ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="13_hs8w5"]
+[ext_resource type="PackedScene" uid="uid://bvqnms8n8am3v" path="res://Interactions/interaction_component.tscn" id="14_tubcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32pn5"]
 size = Vector2(12, 24)
@@ -263,7 +264,7 @@ particles_anim_loop = false
 [sub_resource type="Gradient" id="Gradient_jwgud"]
 colors = PackedColorArray(1, 1, 1, 0.74902, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_esn6t"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ygg1"]
 gradient = SubResource("Gradient_jwgud")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jo0x"]
@@ -279,11 +280,12 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 angle_min = -15.0
 angle_max = 15.0
-color_ramp = SubResource("GradientTexture1D_esn6t")
+color_ramp = SubResource("GradientTexture1D_6ygg1")
 anim_offset_max = 1.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
+collision_layer = 2
 script = ExtResource("1_kmhxu")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
@@ -385,3 +387,5 @@ theme = ExtResource("13_hs8w5")
 theme_override_colors/font_color = Color(0.921569, 0.937255, 0.980392, 1)
 text = "<Username>"
 horizontal_alignment = 1
+
+[node name="InteractionComponent" parent="." instance=ExtResource("14_tubcd")]

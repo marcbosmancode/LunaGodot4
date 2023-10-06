@@ -20,5 +20,6 @@ func _ready() -> void:
 	if show_close_button:
 		close_button.show()
 
+
 func _on_close_button_pressed() -> void:
 	queue_free()

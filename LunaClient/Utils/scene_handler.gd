@@ -10,6 +10,8 @@ func change_scene(scene_id: int, new_position: Vector2 = Vector2.ZERO) -> void:
 	if new_position != Vector2.ZERO:
 		PlayerStats.respawn_point = new_position
 	
+	current_players.clear()
+	
 	var target_path = SCENE_PATH % str(scene_id)
 	
 	if ResourceLoader.exists(target_path):

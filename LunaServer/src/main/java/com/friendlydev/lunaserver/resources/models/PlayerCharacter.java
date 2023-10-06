@@ -1,6 +1,7 @@
 package com.friendlydev.lunaserver.resources.models;
 
 import com.friendlydev.lunaserver.client.ClientHandler;
+import com.friendlydev.lunaserver.packets.PacketWriter;
 import com.friendlydev.lunaserver.resources.ResourceManager;
 import java.awt.Point;
 import javax.persistence.Column;
@@ -23,7 +24,7 @@ public class PlayerCharacter {
     @Transient
     private static final Logger logger = LogManager.getLogger(PlayerCharacter.class);
     @Transient
-    private ClientHandler handler;
+    private ClientHandler ch;
     @Transient
     ResourceManager rm = ResourceManager.getInstance();
     
@@ -44,8 +45,6 @@ public class PlayerCharacter {
     private Point position = new Point();
     @Transient
     private Inventory inventory;
-    @Transient
-    private ClientHandler ch;
     
     // Combat stats
     @Column(name = "combatlevel")
@@ -82,12 +81,12 @@ public class PlayerCharacter {
         this.attack = attack;
     }
 
-    public ClientHandler getHandler() {
-        return handler;
+    public ClientHandler getClientHandler() {
+        return ch;
     }
 
-    public void setHandler(ClientHandler handler) {
-        this.handler = handler;
+    public void setClientHandler(ClientHandler ch) {
+        this.ch = ch;
     }
 
     public int getId() {
@@ -139,14 +138,6 @@ public class PlayerCharacter {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
-    
-    public ClientHandler getClientHandler() {
-        return ch;
-    }
-    
-    public void setClientHandler(ClientHandler ch) {
-        this.ch = ch;
-    }
 
     public int getLevel() {
         return level;
@@ -186,6 +177,30 @@ public class PlayerCharacter {
 
     public void setAttack(int attack) {
         this.attack = attack;
+    }
+    
+    public void changeScene(Scene targetScene, Point destinationPoint) {
+        // Make sure the player is logged in
+        if (ch == null) return;
+        
+        scene.removePlayer(this);
+        
+        position.setLocation(destinationPoint);
+        setScene(targetScene);
+        
+        // Notify the player about the scene change
+        ch.sendPacket(PacketWriter.writeChangeScenePacket(targetScene, destinationPoint));
+        
+        targetScene.addPlayer(this);
+    }
+    
+    public void changeScene(int sceneId) {
+        Scene targetScene = ResourceManager.getInstance().getScene(id);
+        if (targetScene != null) {
+            changeScene(targetScene, targetScene.getSpawnPoint());
+        } else {
+            logger.warn("Scene with id " + sceneId + " does not exist");
+        }
     }
     
 }

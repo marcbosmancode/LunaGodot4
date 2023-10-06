@@ -7,6 +7,7 @@ var regex := RegEx.new()
 func _ready() -> void:
 	regex.compile(allowed_characters)
 
+
 func _on_text_changed(new_text: String) -> void:
 	var old_caret_position = caret_column - 1
 	var updated_text: String = ""

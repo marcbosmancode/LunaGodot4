@@ -51,7 +51,7 @@ static func write_player_state_update(new_animation: String, new_direction: floa
 	return packet
 
 
-static func write_portal_interaction(portal_id: int) -> OutPacket:
+static func write_portal_interact(id: int) -> OutPacket:
 	var packet := OutPacket.new(OutCodes.PORTAL_INTERACTION)
-	packet.write_int(portal_id)
+	packet.write_int(id)
 	return packet

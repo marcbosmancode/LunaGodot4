@@ -102,6 +102,17 @@ public class ClientHandler implements Runnable {
         }
     }
     
+    public void sendPacketToNearbyOthers(OutPacket packet) {
+        // Need to be logged into a scene
+        if (loggedIn == false) return;
+        
+        for (PlayerCharacter pc : playerCharacter.getScene().getAllPlayers()) {
+            if (pc != playerCharacter && pc.getClientHandler() != null) {
+                pc.getClientHandler().sendPacket(packet);
+            }
+        }
+    }
+    
     public void sendPacketToAllOthers(OutPacket packet) {
         for (ClientHandler ch : rm.getAllClients()) {
             if (ch != this) {

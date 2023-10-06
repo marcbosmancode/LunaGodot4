@@ -16,8 +16,8 @@
         },
         "destination": 2,
         "destinationpoint": {
-          "x": 100,
-          "y": 100
+          "x": 111,
+          "y": 335
         }
       }
     ],
@@ -49,8 +49,8 @@
         },
         "destination": 1,
         "destinationpoint": {
-          "x": 100,
-          "y": 100
+          "x": 600,
+          "y": 351
         }
       }
     ],

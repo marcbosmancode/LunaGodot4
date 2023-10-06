@@ -5,8 +5,11 @@ import com.friendlydev.lunaserver.client.ClientHandler;
 import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.constants.enums.PacketCodes.InCode;
 import com.friendlydev.lunaserver.login.AccountService;
+import com.friendlydev.lunaserver.resources.ResourceManager;
 import com.friendlydev.lunaserver.resources.models.Account;
+import com.friendlydev.lunaserver.resources.models.Door;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
+import com.friendlydev.lunaserver.resources.models.Scene;
 import java.awt.Point;
 import java.io.EOFException;
 import java.util.ArrayList;
@@ -44,6 +47,9 @@ public class PacketHandler {
             case PLAYER_STATE_UPDATE:
                 handlePlayerStateUpdate(ch, packet);
                 break;
+            case DOOR_INTERACTION:
+                handleDoorInteraction(ch, packet);
+                break;
         }
     }
     
@@ -64,10 +70,18 @@ public class PacketHandler {
         if (prefix == ServerConfig.COMMAND_CHAR) {
             ChatCommandHandler.handleChatCommand(message, ch);
         } else {
+            /*
+            0: System
+            1: Nearby
+            2: World
+            3: Private
+            4: Party
+            5: Guild
+            */
             switch(group) {
                 case 1:
                     // To nearby players
-                    ch.sendPacketToAllOthers(PacketWriter.writeMessage(group, message, ch.getAccount().getUsername()));
+                    ch.sendPacketToNearbyOthers(PacketWriter.writeMessage(group, message, ch.getAccount().getUsername()));
                     break;
                 case 2:
                     // To world
@@ -139,7 +153,7 @@ public class PacketHandler {
         PlayerCharacter pc = ch.getPlayerCharacter();
         pc.setPosition(newPosition);
         
-        ch.getPlayerCharacter().getScene().sendPacketToAll(PacketWriter.writePlayerPositionUpdate(pc, usedTeleport));
+        ch.sendPacketToNearbyOthers(PacketWriter.writePlayerPositionUpdate(pc, usedTeleport));
     }
     
     public static void handlePlayerStateUpdate(ClientHandler ch, InPacket packet) throws EOFException {
@@ -151,7 +165,26 @@ public class PacketHandler {
         
         System.out.println("state update, animation=" + newAnimation + " direction=" + newDirection);
         
-        ch.getPlayerCharacter().getScene().sendPacketToAll(PacketWriter.writePlayerStateUpdate(ch.getPlayerCharacter(), newAnimation, newDirection));
+        ch.sendPacketToNearbyOthers(PacketWriter.writePlayerStateUpdate(ch.getPlayerCharacter(), newAnimation, newDirection));
+    }
+    
+    public static void handleDoorInteraction(ClientHandler ch, InPacket packet) throws EOFException {
+        // Make sure the account is logged in to interact
+        if (ch.isLoggedIn() == false) return;
+        
+        int doorId = packet.readInt();
+        
+        Door door = ch.getPlayerCharacter().getScene().getDoor(doorId);
+        if (door == null) {
+            logger.warn("Invalid door triggered by player " + ch.getPlayerCharacter().getUsername());
+            return;
+        }
+        
+        // Change the scene the character is in
+        Scene targetScene = ResourceManager.getInstance().getScene(door.getDestination());
+        if (targetScene != null) {
+            ch.getPlayerCharacter().changeScene(targetScene, door.getDestinationPoint());
+        }
     }
     
 }

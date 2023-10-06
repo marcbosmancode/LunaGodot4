@@ -15,7 +15,7 @@ public class PacketCodes {
         LOGIN((short) 2),
         PLAYER_POSITION_UPDATE((short) 3),
         PLAYER_STATE_UPDATE((short) 4),
-        PORTAL_INTERACTION((short) 5);
+        DOOR_INTERACTION((short) 5);
         
         public final short value;
         

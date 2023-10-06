@@ -13,12 +13,6 @@ enum InCodes {
 	PLAYER_LEFT_SCENE = 8,
 }
 
-## Reads a string with the length specified at the start from a StreamPeerBuffer
-static func read_string(buffer: StreamPeerBuffer) -> String:
-	var string_length := buffer.get_32()
-	return buffer.get_string(string_length)
-
-
 static func handle_packet(in_packet: InPacket) -> void:
 	print("Received a packet from the server. code=%s" % in_packet.code)
 	# Handle a packet based on the packet code

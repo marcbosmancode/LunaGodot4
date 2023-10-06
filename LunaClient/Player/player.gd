@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 const ANIMATION_OFFSET := {
 	0: Vector2(0, 0),
