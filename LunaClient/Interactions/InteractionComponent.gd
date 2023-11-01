@@ -24,7 +24,7 @@ func _input(event) -> void:
 		
 		return
 	
-	# Change target interactable
+	# Change target interaction
 	var previous_target: int = target
 	if event.is_action_pressed("move_down"):
 		target += 1
@@ -33,11 +33,10 @@ func _input(event) -> void:
 	
 	if previous_target != target:
 		target = clamp(target, 0, max(0, interactables.size()-1))
-		selected_interactable_changed.emit(target)
+		MessageBus.selected_interactable_changed.emit(target)
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("interaction possible")
 	var has_interaction = false
 	
 	if body.has_method("can_interact"):
@@ -45,13 +44,12 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	if has_interaction:
 		interactables.append(body)
-		interactables_changed.emit(interactables, target)
+		MessageBus.interactables_changed.emit(interactables, target)
 
 
 func _on_body_exited(body: Node2D) -> void:
-	print("interaction poof")
 	if interactables.has(body):
 		interactables.erase(body)
 		
 		target = clamp(target, 0, max(0, interactables.size()-1))
-		interactables_changed.emit(interactables, target)
+		MessageBus.interactables_changed.emit(interactables, target)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsyc8s6jqdq1d"]
+[gd_scene load_steps=10 format=3 uid="uid://dsyc8s6jqdq1d"]
 
 [ext_resource type="Script" path="res://Interactions/Interactables/Portal.gd" id="1_7n5km"]
 [ext_resource type="Texture2D" uid="uid://dvkw7ypfjkpkq" path="res://Interactions/Assets/blue_portal.png" id="2_204ec"]
+[ext_resource type="Texture2D" uid="uid://v3plrulp2obp" path="res://Interactions/Assets/Icons/blue_portal_icon.png" id="2_kpsrj"]
 [ext_resource type="Texture2D" uid="uid://v4j6biyhyie7" path="res://Particles/Assets/portal_dust.png" id="3_oyemh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bnagq"]
@@ -43,6 +44,8 @@ anim_offset_max = 1.0
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_7n5km")
+text = "Move"
+image = ExtResource("2_kpsrj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_204ec")

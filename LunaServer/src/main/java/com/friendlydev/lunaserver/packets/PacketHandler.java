@@ -163,8 +163,6 @@ public class PacketHandler {
         String newAnimation = packet.readString();
         int newDirection = packet.readInt();
         
-        System.out.println("state update, animation=" + newAnimation + " direction=" + newDirection);
-        
         ch.sendPacketToNearbyOthers(PacketWriter.writePlayerStateUpdate(ch.getPlayerCharacter(), newAnimation, newDirection));
     }
     

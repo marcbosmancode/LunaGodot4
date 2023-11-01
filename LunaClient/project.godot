@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://Utils/globals.gd"
+MessageBus="*res://Utils/message_bus.gd"
 PlayerStats="*res://Utils/player_stats.gd"
 Client="*res://Network/client.gd"
 HeartbeatSystem="*res://Network/Heartbeat/heartbeat_system.gd"
