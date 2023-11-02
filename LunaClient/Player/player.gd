@@ -59,6 +59,9 @@ var used_teleport: bool = false
 var previous_direction: float = 1.0
 var current_animation: StringName = ""
 var previous_animation: StringName = ""
+# Visual variables
+var camera_bounds: Vector2 = Vector2(10000, 10000)
+var chat_bubble_resource = preload("res://UserInterface/ChatSystem/chat_bubble.tscn")
 
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
 @onready var body = $CanvasGroup/Body
@@ -76,6 +79,7 @@ var previous_animation: StringName = ""
 @onready var dash_component: DashComponent = $DashComponent
 @onready var double_jump_particles = $DoubleJumpParticles
 @onready var teleport_particles = $TeleportParticles
+@onready var camera_2d = $Camera2D
 @onready var username_label = $UsernameLabel
 
 func _ready() -> void:
@@ -86,6 +90,10 @@ func _ready() -> void:
 	net_update_timer.start(NET_UPDATE_DELAY)
 	coyote_timer.timeout.connect(_on_coyote_timer_timeout)
 	teleport_timer.timeout.connect(_on_teleport_timer_timeout)
+	MessageBus.show_chat_bubble.connect(_on_show_chat_bubble)
+	
+	camera_2d.limit_right = camera_bounds.x
+	camera_2d.limit_bottom = camera_bounds.y
 	username_label.text = PlayerStats.username
 
 
@@ -312,3 +320,17 @@ func net_update_animation() -> void:
 	previous_animation = current_animation
 	previous_direction = last_direction
 	Client.send_data(PacketWriter.write_player_state_update(previous_animation, last_direction))
+
+
+func _on_show_chat_bubble(message: String, _sender: String) -> void:
+	print("here?")
+	# Delete existing chat bubbles
+	var old_chat_bubble: Node = get_node_or_null("ChatBubble")
+	if old_chat_bubble != null:
+		old_chat_bubble.queue_free()
+	
+	var chat_bubble = chat_bubble_resource.instantiate()
+	chat_bubble.text = message
+	chat_bubble.owner_name = PlayerStats.username
+	
+	add_child(chat_bubble)

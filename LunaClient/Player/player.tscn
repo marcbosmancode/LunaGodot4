@@ -371,6 +371,8 @@ one_shot = true
 explosiveness = 0.7
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.3

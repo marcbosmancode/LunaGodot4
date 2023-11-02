@@ -5,7 +5,7 @@ class_name DashComponent
 @export var cooldown: float = 0.5
 
 var can_dash: bool = true
-var ghost: Resource = preload("res://Particles/DashGhost.tscn")
+var ghost = preload("res://Particles/DashGhost.tscn")
 var direction: float = 1.0
 
 @onready var duration_timer = $DurationTimer
