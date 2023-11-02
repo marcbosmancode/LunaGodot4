@@ -29,6 +29,8 @@ var previous_position: Vector2 = Vector2.ZERO
 var target_position: Vector2 = Vector2.ZERO
 var move_progress: float = 1.0
 
+var chat_bubble_resource = preload("res://UserInterface/ChatSystem/chat_bubble.tscn")
+
 @onready var hairstyle_back = $CanvasGroup/HairstyleBack
 @onready var body = $CanvasGroup/Body
 @onready var outfit = $CanvasGroup/Outfit
@@ -42,6 +44,7 @@ var move_progress: float = 1.0
 
 func _ready() -> void:
 	body.frame_changed.connect(_on_body_frame_changed)
+	MessageBus.show_chat_bubble.connect(_on_show_chat_bubble)
 	username_label.text = username
 	target_position = position
 
@@ -83,3 +86,20 @@ func update_position(new_position: Vector2, teleport: bool) -> void:
 func update_state(new_animation: String, new_direction: int) -> void:
 	animation_player.play(new_animation)
 	sprite_group.scale.x = sign(new_direction)
+
+
+func _on_show_chat_bubble(message: String, sender: String) -> void:
+	# Only create bubble if we are the sender
+	if sender != username:
+		return
+	
+	# Delete existing chat bubbles
+	var old_chat_bubble: Node = get_node_or_null("ChatBubble")
+	if old_chat_bubble != null:
+		old_chat_bubble.queue_free()
+	
+	var chat_bubble = chat_bubble_resource.instantiate()
+	chat_bubble.text = message
+	chat_bubble.owner_name = username
+	
+	add_child(chat_bubble)

@@ -45,6 +45,10 @@ static func handle_packet(in_packet: InPacket) -> void:
 			var sender := in_packet.get_string()
 			
 			UserInterface.show_message(group, message, sender)
+			
+			# Create chat bubble for nearby players
+			if group == 1:
+				MessageBus.show_chat_bubble.emit(message, sender)
 		
 		InCodes.LOGIN:
 			var result := in_packet.get_bool()

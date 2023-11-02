@@ -50,7 +50,8 @@ func show_message(group: int, message: String, sender: String = "") -> void:
 			tab.show_message(group, message, sender)
 	
 	# Create chat bubbles
-	MessageBus.show_chat_bubble.emit(message, sender)
+	if group == GROUPS.NEARBY:
+		MessageBus.show_chat_bubble.emit(message, sender)
 
 
 func send_message_to_server(group: int, message: String, target: String = "") -> void:

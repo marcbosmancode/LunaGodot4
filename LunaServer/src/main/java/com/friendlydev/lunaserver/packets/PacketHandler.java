@@ -78,14 +78,16 @@ public class PacketHandler {
             4: Party
             5: Guild
             */
+            
+            String username = ch.getPlayerCharacter().getUsername();
             switch(group) {
                 case 1:
                     // To nearby players
-                    ch.sendPacketToNearbyOthers(PacketWriter.writeMessage(group, message, ch.getAccount().getUsername()));
+                    ch.sendPacketToNearbyOthers(PacketWriter.writeMessage(group, message, username));
                     break;
                 case 2:
                     // To world
-                    ch.sendPacketToAllOthers(PacketWriter.writeMessage(group, message, ch.getAccount().getUsername()));
+                    ch.sendPacketToAllOthers(PacketWriter.writeMessage(group, message, username));
                     break;
                 case 3:
                     // Private message
@@ -93,7 +95,7 @@ public class PacketHandler {
                     
                     // Prevent sending to yourself and notify if the message couldn't be sent
                     if (!messageTarget.equals(ch.getPlayerCharacter().getUsername().toLowerCase())) {
-                        boolean result = ch.sendPacketToPlayer(PacketWriter.writeMessage(group, message, ch.getAccount().getUsername()), messageTarget);
+                        boolean result = ch.sendPacketToPlayer(PacketWriter.writeMessage(group, message, username), messageTarget);
                         if (result == false) {
                             ch.sendPacket(PacketWriter.writeMessage((short) 0, "Could not message player", "Server"));
                         }

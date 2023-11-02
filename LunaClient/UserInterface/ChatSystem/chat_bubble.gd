@@ -3,7 +3,7 @@ extends Node2D
 var text: String = ""
 var owner_name: String = ""
 
-@onready var message_label = $NinePatchRect/MarginContainer/MessageLabel
+@onready var message_label = $BubblePanel/MarginContainer/MessageLabel
 @onready var life_timer = $LifeTimer
 
 func _ready():

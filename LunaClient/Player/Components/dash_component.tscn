@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c7cddytyqvu5k"]
 
-[ext_resource type="Script" path="res://Player/Components/DashComponent.gd" id="1_nsajh"]
+[ext_resource type="Script" path="res://Player/Components/dash_component.gd" id="1_6jtpn"]
 [ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="2_g0ymg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_stfs4"]
@@ -32,7 +32,7 @@ color_ramp = SubResource("GradientTexture1D_atlph")
 anim_offset_max = 1.0
 
 [node name="DashComponent" type="Node2D"]
-script = ExtResource("1_nsajh")
+script = ExtResource("1_6jtpn")
 
 [node name="DurationTimer" type="Timer" parent="."]
 one_shot = true

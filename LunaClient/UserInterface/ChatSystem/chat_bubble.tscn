@@ -1,57 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci277bfn5y3wh"]
+[gd_scene load_steps=6 format=3 uid="uid://ci277bfn5y3wh"]
 
 [ext_resource type="Texture2D" uid="uid://bth72jm4lguec" path="res://UserInterface/ChatSystem/Assets/nineslice_chat_bubble.png" id="1_l88i2"]
 [ext_resource type="Script" path="res://UserInterface/ChatSystem/chat_bubble.gd" id="2_6832e"]
 [ext_resource type="Texture2D" uid="uid://b8nsf4gdb54c5" path="res://UserInterface/ChatSystem/Assets/chat_bubble_pointer.png" id="2_l0ann"]
 [ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="3_54mxr"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iu73n"]
+texture = ExtResource("1_l88i2")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
 [node name="ChatBubble" type="Node2D"]
 script = ExtResource("2_6832e")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_left = -12.0
-offset_top = -74.0
-offset_right = 88.0
-offset_bottom = -36.0
-texture = ExtResource("1_l88i2")
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 2
-
-[node name="PointerTexture" type="TextureRect" parent="NinePatchRect"]
-layout_mode = 1
+[node name="BubblePanel" type="PanelContainer" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -2.0
-offset_right = 16.0
-offset_bottom = 4.0
+offset_left = -8.0
+offset_top = -52.0
+offset_right = 56.0
+offset_bottom = -36.0
 grow_vertical = 0
-texture = ExtResource("2_l0ann")
-stretch_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_iu73n")
 
-[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+[node name="MarginContainer" type="MarginContainer" parent="BubblePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
 
-[node name="MessageLabel" type="Label" parent="NinePatchRect/MarginContainer"]
+[node name="MessageLabel" type="Label" parent="BubblePanel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("3_54mxr")
 theme_override_colors/font_color = Color(0.243137, 0.270588, 0.368627, 1)
 text = "<Message>"
+vertical_alignment = 1
 autowrap_mode = 1
-clip_text = true
+
+[node name="PointerTexture" type="TextureRect" parent="BubblePanel/MarginContainer/MessageLabel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 7.0
+offset_bottom = 6.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("2_l0ann")
+stretch_mode = 2
 
 [node name="LifeTimer" type="Timer" parent="."]
 wait_time = 4.0

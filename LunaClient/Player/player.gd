@@ -322,8 +322,11 @@ func net_update_animation() -> void:
 	Client.send_data(PacketWriter.write_player_state_update(previous_animation, last_direction))
 
 
-func _on_show_chat_bubble(message: String, _sender: String) -> void:
-	print("here?")
+func _on_show_chat_bubble(message: String, sender: String) -> void:
+	# Only create bubble if we are the sender
+	if sender != PlayerStats.username:
+		return
+	
 	# Delete existing chat bubbles
 	var old_chat_bubble: Node = get_node_or_null("ChatBubble")
 	if old_chat_bubble != null:
