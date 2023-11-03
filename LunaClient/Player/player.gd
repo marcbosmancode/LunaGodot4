@@ -119,11 +119,11 @@ func state_free(delta) -> void:
 		velocity.y += gravity * delta
 		
 		# Save jump input for a more responsive feel
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and Globals.can_move:
 			jump_buffer.start(JUMP_BUFFER_TIME)
 	
 	# Handle jumping
-	if Input.is_action_just_pressed("jump") or not jump_buffer.is_stopped():
+	if Input.is_action_just_pressed("jump") and Globals.can_move or not jump_buffer.is_stopped():
 		if jump_allowed:
 			velocity.y = -JUMP_FORCE
 			jump_allowed = false
@@ -138,7 +138,10 @@ func state_free(delta) -> void:
 			double_jump_particles.emitting = true
 	
 	# Handle directional movement
-	var direction: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var direction: float = 0.0
+	if Globals.can_move:
+		direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	
 	if direction:
 		last_direction = direction
 		
@@ -158,14 +161,15 @@ func state_free(delta) -> void:
 	update_animation(direction)
 	
 	# Special movement. Only allow one per physics frame
-	if Input.is_action_pressed("dash") and dash_component.can_dash:
-		dash()
-	elif Input.is_action_just_pressed("teleport"):
-		teleport()
-		used_teleport = true
-	elif Input.is_action_pressed("basic_attack"):
-		animation_player.play("slash")
-		state = States.ATTACK
+	if Globals.can_move:
+		if Input.is_action_pressed("dash") and dash_component.can_dash:
+			dash()
+		elif Input.is_action_just_pressed("teleport"):
+			teleport()
+			used_teleport = true
+		elif Input.is_action_pressed("basic_attack"):
+			animation_player.play("slash")
+			state = States.ATTACK
 	
 	move_and_slide()
 
@@ -226,7 +230,7 @@ func state_dash(delta) -> void:
 	if not grounded:
 		velocity.y += gravity * delta
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and Globals.can_move:
 		jump_buffer.start(JUMP_BUFFER_TIME)
 	
 	# Check if dash has ended
@@ -244,8 +248,9 @@ func state_attack(delta) -> void:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	
 	# Special movement. Only allow one per physics frame
-	if Input.is_action_just_pressed("teleport"):
-		teleport()
+	if Globals.can_move:
+		if Input.is_action_just_pressed("teleport"):
+			teleport()
 	
 	move_and_slide()
 

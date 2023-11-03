@@ -110,6 +110,13 @@ func _input(event):
 	
 	elif event.is_action_pressed("ui_cancel"):
 		line_edit.release_focus()
+		
+	elif event is InputEventMouseButton:
+		var line_edit_rect: Rect2 = line_edit.get_global_rect()
+		
+		if not line_edit_rect.has_point(event.position):
+			if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				line_edit.release_focus()
 
 
 func _on_chat_selection_button_item_selected(index):
@@ -118,3 +125,11 @@ func _on_chat_selection_button_item_selected(index):
 	
 	if current_group == GROUPS.PRIVATE:
 		UserInterface.select_message_target()
+
+
+func _on_line_edit_focus_entered():
+	Globals.can_move = false
+
+
+func _on_line_edit_focus_exited():
+	Globals.can_move = true

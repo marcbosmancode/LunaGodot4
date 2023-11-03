@@ -12,7 +12,7 @@ func _ready():
 
 
 func _input(event) -> void:
-	if event.is_action_pressed("interact"):
+	if event.is_action_pressed("interact") and Globals.can_move:
 		# Validate the target interaction
 		if target < 0 or target >= interactables.size():
 			return
