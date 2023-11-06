@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi2t4c5ki2pmo"]
+
+[ext_resource type="Texture2D" uid="uid://cnhpbqwsesbwc" path="res://UserInterface/Inventory/Assets/slot.png" id="1_klnth"]
+[ext_resource type="Script" path="res://UserInterface/Inventory/inventory_slot.gd" id="1_pnkcr"]
+[ext_resource type="Texture2D" uid="uid://binjos5vvsans" path="res://UserInterface/Assets/nineslice_background_highlighted.png" id="2_5adr7"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="4_m3meu"]
+
+[node name="InventorySlot" type="CenterContainer"]
+script = ExtResource("1_pnkcr")
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_klnth")
+
+[node name="Highlight" type="NinePatchRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_5adr7")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="ItemTexture" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="ItemTexture"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_right = 13.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_m3meu")
+text = "0"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

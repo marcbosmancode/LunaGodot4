@@ -8,6 +8,8 @@ enum OutCodes {
 	PLAYER_POSITION_UPDATE = 3,
 	PLAYER_STATE_UPDATE = 4,
 	PORTAL_INTERACTION = 5,
+	ALTER_INVENTORY = 6,
+	CONSUME_ITEM = 7,
 }
 
 static func write_heartbeat() -> OutPacket:
@@ -54,4 +56,17 @@ static func write_player_state_update(new_animation: String, new_direction: floa
 static func write_portal_interact(id: int) -> OutPacket:
 	var packet := OutPacket.new(OutCodes.PORTAL_INTERACTION)
 	packet.write_int(id)
+	return packet
+
+
+static func write_alter_inventory(slot_1: int, slot_2: int) -> OutPacket:
+	var packet := OutPacket.new(OutCodes.ALTER_INVENTORY)
+	packet.write_int(slot_1)
+	packet.write_int(slot_2)
+	return packet
+
+
+static func consume_item(slot: int) -> OutPacket:
+	var packet := OutPacket.new(OutCodes.CONSUME_ITEM)
+	packet.write_int(slot)
 	return packet

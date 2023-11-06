@@ -38,6 +38,7 @@ var current_group := 1:
 
 @onready var tabs = $TabContainer
 @onready var line_edit = $ChatInputRect/LineEdit
+@onready var chat_selection_button = $ChatInputRect/ChatSelectionButton
 
 func _ready() -> void:
 	line_edit.placeholder_text = "to %s" % CHAT_NAMES[current_group]
@@ -115,7 +116,7 @@ func _input(event):
 		var line_edit_rect: Rect2 = line_edit.get_global_rect()
 		
 		if not line_edit_rect.has_point(event.position):
-			if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 				line_edit.release_focus()
 
 

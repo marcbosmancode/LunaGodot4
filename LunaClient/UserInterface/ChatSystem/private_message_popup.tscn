@@ -30,6 +30,7 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_03rhu")
+max_length = 20
 caret_blink = true
 script = ExtResource("4_unefn")
 allowed_characters = "[a-zA-Z0-9]"

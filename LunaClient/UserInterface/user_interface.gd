@@ -5,6 +5,7 @@ var message_target_selection = preload("res://UserInterface/ChatSystem/private_m
 var mts_instance: Node = null
 
 @onready var chat_system: ChatSystem = $ChatSystem
+@onready var inventory_ui: Control = $InventoryUI
 
 func show_message(group: int, message: String, sender: String = "") -> void:
 	chat_system.show_message(group, message, sender)
@@ -24,3 +25,20 @@ func show_ok_popup(message: String) -> void:
 	var op_instance: OkPopup = ok_popup.instantiate()
 	op_instance.content = message
 	add_child(op_instance)
+
+
+func toggle_ui_visibility(toggleable_ui: Control) -> void:
+	if Globals.can_move == false:
+		return
+	if Globals.logged_in == false:
+		return
+	
+	if toggleable_ui.is_visible_in_tree():
+		toggleable_ui.hide()
+	else:
+		toggleable_ui.show()
+
+
+func _input(event):
+	if event.is_action_pressed("open_inventory"):
+		toggle_ui_visibility(inventory_ui)

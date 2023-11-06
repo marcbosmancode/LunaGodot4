@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bswv6jycw0dnv"]
+[gd_scene load_steps=6 format=3 uid="uid://bswv6jycw0dnv"]
 
 [ext_resource type="PackedScene" uid="uid://qklr1dka8vv1" path="res://UserInterface/ConnectionStatus/con_status_ui.tscn" id="1_c46wp"]
 [ext_resource type="Script" path="res://UserInterface/user_interface.gd" id="1_chnc7"]
 [ext_resource type="PackedScene" uid="uid://c61c76bftdpr4" path="res://UserInterface/ChatSystem/chat_system.tscn" id="2_ryrwm"]
 [ext_resource type="PackedScene" uid="uid://bngp834p64qxq" path="res://UserInterface/Interactions/interactions_ui.tscn" id="4_x4iov"]
+[ext_resource type="PackedScene" uid="uid://cja118fj0vupp" path="res://UserInterface/Inventory/inventory_ui.tscn" id="5_q0v2w"]
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_chnc7")
@@ -26,3 +27,6 @@ offset_right = 11.0
 offset_bottom = 11.0
 
 [node name="InteractionsUI" parent="." instance=ExtResource("4_x4iov")]
+
+[node name="InventoryUI" parent="." instance=ExtResource("5_q0v2w")]
+visible = false

@@ -100,6 +100,7 @@ offset_top = -8.0
 offset_right = 26.0
 offset_bottom = 8.0
 grow_vertical = 2
+focus_mode = 0
 theme = ExtResource("4_va47f")
 theme_override_colors/font_color = Color(0, 0, 0, 0)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)

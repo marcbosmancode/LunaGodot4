@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://crh7e7vk3xa4k"]
+
+[ext_resource type="Texture2D" uid="uid://d144psk2f3dte" path="res://UserInterface/Inventory/Assets/nineslice_inv.png" id="1_51pwo"]
+[ext_resource type="Texture2D" uid="uid://cnhpbqwsesbwc" path="res://UserInterface/Inventory/Assets/slot.png" id="2_76obi"]
+[ext_resource type="Script" path="res://UserInterface/Inventory/item_details_popup.gd" id="2_gobnj"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="4_adjrd"]
+[ext_resource type="Texture2D" uid="uid://duxmll11hl0fy" path="res://UserInterface/Assets/red_button.png" id="5_6cqoq"]
+[ext_resource type="Texture2D" uid="uid://cymfff6vv0qx1" path="res://UserInterface/Assets/red_button_hover.png" id="6_x7tde"]
+[ext_resource type="Texture2D" uid="uid://cr8knp0fj8m0w" path="res://UserInterface/Assets/red_button_press.png" id="7_lyw7m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_75rjd"]
+content_margin_top = 4.0
+texture = ExtResource("5_6cqoq")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o4eax"]
+content_margin_top = 4.0
+texture = ExtResource("6_x7tde")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aiafh"]
+content_margin_bottom = 2.0
+texture = ExtResource("7_lyw7m")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ItemDetailsPopup" type="NinePatchRect"]
+offset_right = 160.0
+offset_bottom = 224.0
+texture = ExtResource("1_51pwo")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+script = ExtResource("2_gobnj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MainInfo" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ItemPreview" type="CenterContainer" parent="MarginContainer/VBoxContainer/MainInfo"]
+layout_mode = 2
+
+[node name="BackgroundTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/MainInfo/ItemPreview"]
+layout_mode = 2
+texture = ExtResource("2_76obi")
+
+[node name="ItemTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/MainInfo/ItemPreview"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer/MainInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_adjrd")
+theme_override_colors/font_color = Color(0.909804, 0.92549, 0.980392, 1)
+text = "<ItemName>"
+clip_text = true
+
+[node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_adjrd")
+theme_override_colors/font_color = Color(0.870588, 0.898039, 0.980392, 1)
+text = "<ItemDescription>"
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="UseButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(33, 0)
+layout_mode = 2
+theme = ExtResource("4_adjrd")
+text = "Use"
+
+[node name="DropButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(37, 0)
+layout_mode = 2
+theme = ExtResource("4_adjrd")
+theme_override_styles/normal = SubResource("StyleBoxTexture_75rjd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_o4eax")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_aiafh")
+text = "Drop"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/UseButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/DropButton" to="." method="_on_drop_button_pressed"]

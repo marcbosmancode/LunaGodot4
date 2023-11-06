@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c1gd3qxq0q2vg"]
+
+[ext_resource type="Script" path="res://ItemSystem/item.gd" id="1_6pkbm"]
+[ext_resource type="Texture2D" uid="uid://cbm06s4u0r42n" path="res://ItemSystem/Assets/mana_potion.png" id="2_5mupr"]
+
+[resource]
+script = ExtResource("1_6pkbm")
+id = 2
+name = "Mana Potion"
+description = "A simple potion that recovers 10 mana points"
+texture = ExtResource("2_5mupr")
+type = 1
+max_quantity = 99
+trade_locked = false

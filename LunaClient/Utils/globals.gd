@@ -12,7 +12,7 @@ var ui_positions: Dictionary = {
 var logged_in := false:
 	set(new_value):
 		logged_in = new_value
-		emit_signal("just_logged_in")
+		just_logged_in.emit()
 
 # Gameplay
 var can_move: bool = true
