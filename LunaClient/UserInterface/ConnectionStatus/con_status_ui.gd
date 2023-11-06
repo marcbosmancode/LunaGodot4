@@ -3,8 +3,8 @@ extends Control
 @export var texture_connected: Texture
 @export var texture_disconnected: Texture
 
-@onready var status_texturerect = $StatusTextureRect
-@onready var latency_label = $LatencyLabel
+@onready var status_texturerect = $HBoxContainer/StatusTextureRect
+@onready var latency_label = $HBoxContainer/LatencyLabel
 
 func _ready():
 	Client.host_connected.connect(_on_host_connected)

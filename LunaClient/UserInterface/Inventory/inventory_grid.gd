@@ -19,16 +19,9 @@ func update_grid() -> void:
 		update_slot(slot)
 
 
-func _on_items_changed(slots: Array[int]) -> void:
+func _on_items_changed(slots: Array) -> void:
 	for slot in slots:
 		update_slot(slot)
-
-
-func remove_tooltip() -> void:
-	for slot in Inventory.SIZE:
-		var slot_node: Node = get_child(slot)
-		if slot_node.has_method("remove_tooltip"):
-			slot_node.remove_tooltip()
 
 
 func _input(event):
