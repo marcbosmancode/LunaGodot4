@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bhdfdjics2ttw"]
 
 [ext_resource type="Script" path="res://ItemSystem/item.gd" id="1_0ygjl"]
-[ext_resource type="Texture2D" uid="uid://ynrl41irb1vw" path="res://ItemSystem/Assets/health_potion.png" id="2_1lbwu"]
+[ext_resource type="Texture2D" uid="uid://dqomk8r88pujq" path="res://ItemSystem/Assets/small_health_potion.png" id="2_2flfj"]
 
 [resource]
 script = ExtResource("1_0ygjl")
 id = 1
-name = "Health Potion"
-description = "A simple potion that recovers 10 health points"
-texture = ExtResource("2_1lbwu")
+name = "Small Health Potion"
+description = "A small potion that recovers 10 health points"
+texture = ExtResource("2_2flfj")
 type = 1
 max_quantity = 99
 trade_locked = false

@@ -2,8 +2,8 @@
   {
     "id": 1,
     "type": 1,
-    "name": "Health Potion",
-    "tooltip": "A simple potion that recovers 10 health",
+    "name": "Small Health Potion",
+    "tooltip": "A small potion that recovers 10 health points",
     "price": 100,
     "maxquantity": 99,
     "tradelocked": false,
@@ -14,13 +14,13 @@
   {
     "id": 2,
     "type": 1,
-    "name": "Mana Potion",
-    "tooltip": "A simple potion that recovers 10 mana",
-    "price": 100,
+    "name": "Health Potion",
+    "tooltip": "A potion that recovers 30 health points",
+    "price": 500,
     "maxquantity": 99,
     "tradelocked": false,
     "consumabledata": {
-      "healing": 10
+      "healing": 30
     }
   },
   {
