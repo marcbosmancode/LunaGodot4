@@ -136,4 +136,14 @@ public class PacketWriter {
         return packet;
     }
     
+    public static OutPacket writeAlterInventory(int slot, int itemId, int quantity) {
+        OutPacket packet = new OutPacket(OutCode.ALTER_INVENTORY.value);
+        
+        packet.writeInt(slot);
+        packet.writeInt(itemId);
+        packet.writeInt(quantity);        
+        
+        return packet;
+    }
+    
 }

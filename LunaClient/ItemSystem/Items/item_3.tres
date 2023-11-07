@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c6ygddjn8g2qa"]
 
 [ext_resource type="Script" path="res://ItemSystem/item.gd" id="1_gp6nr"]
-[ext_resource type="Texture2D" uid="uid://c06ch4k1g2rwh" path="res://ItemSystem/Assets/slime_goo.png" id="2_d4shp"]
+[ext_resource type="Texture2D" uid="uid://dbk3rnksrqij6" path="res://ItemSystem/Assets/machine_part.png" id="2_jga45"]
 
 [resource]
 script = ExtResource("1_gp6nr")
 id = 3
-name = "Slime Goo"
-description = "Ew gross!"
-texture = ExtResource("2_d4shp")
+name = "Machine Part"
+description = "It looks good enough to be reused"
+texture = ExtResource("2_jga45")
 type = 0
-max_quantity = 99
+max_quantity = 999
 trade_locked = false

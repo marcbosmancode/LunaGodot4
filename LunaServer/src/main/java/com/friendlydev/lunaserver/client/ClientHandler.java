@@ -7,6 +7,8 @@ import com.friendlydev.lunaserver.packets.PacketHandler;
 import com.friendlydev.lunaserver.packets.PacketWriter;
 import com.friendlydev.lunaserver.resources.ResourceManager;
 import com.friendlydev.lunaserver.resources.models.Account;
+import com.friendlydev.lunaserver.resources.models.Inventory;
+import com.friendlydev.lunaserver.resources.models.InventoryItem;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
 import java.io.DataInputStream;
@@ -14,6 +16,7 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -158,6 +161,19 @@ public class ClientHandler implements Runnable {
         
         playerCharacter.setClientHandler(this);
         
+        // Load and send over inventory data for the player
+        Inventory inventory = playerCharacter.getInventory();
+        
+        List result = DatabaseManager.getListFromDB(InventoryItem.class, "characterid", playerCharacter.getId());
+        int loadedItems = result.size();
+        
+        if (loadedItems != 0) {
+            for (Object o : result) {
+                InventoryItem inventoryItem = (InventoryItem) o;
+                inventory.setSlot(inventoryItem, inventoryItem.getPosition());
+            }
+        }
+        
         // Add the player to their scene
         Scene loginScene = playerCharacter.getScene();
         playerCharacter.setPosition(loginScene.getSpawnPoint());
@@ -177,6 +193,7 @@ public class ClientHandler implements Runnable {
         }
         
         DatabaseManager.saveOrUpdateInDB(playerCharacter);
+        playerCharacter.getInventory().save();
         playerCharacter = null;
     }
     

@@ -1,10 +1,16 @@
 package com.friendlydev.lunaserver.resources.models;
 
+import com.friendlydev.lunaserver.client.ClientHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author Marc
  */
 public class ConsumableItem extends Item {
+    private static final Logger logger = LogManager.getLogger(ConsumableItem.class);
+    
     private int healing;
     private String script;
 
@@ -14,8 +20,15 @@ public class ConsumableItem extends Item {
         this.script = script;
     }
     
-    public void consume() {
-        // TODO
+    /**
+     * Consume the item and run the respective script
+     * @param ch the client that consumes this item
+     * @return if the item is consumed
+     */
+    public boolean consume(ClientHandler ch) {
+        logger.info("Item consumed healing=" + healing + " script=" + script);
+        
+        return true;
     }
     
 }

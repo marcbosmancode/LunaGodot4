@@ -72,11 +72,14 @@ func _drop_data(_at_position, data):
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			var slot = get_index()
 			var item = Inventory.get_item(slot)
 			
 			MessageBus.show_item_details.emit(item, slot)
+		
+		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
+			Inventory.consume_item(get_index())
 
 
 func _on_show_item_details(_item: Item, slot: int) -> void:

@@ -9,7 +9,7 @@ class_name Item
 @export var max_quantity: int = 1
 @export var trade_locked: bool = false
 
-const TYPE_NAMES: Array[String] = ["Etc", "Consumable", "Weapon", "Armor", "Accessory"]
+const TYPE_NAMES: Array[String] = ["Etc", "Consumable", "Currency", "Weapon", "Armor", "Accessory"]
 
 var quantity: int = 1
 

@@ -98,13 +98,13 @@ layout_mode = 2
 theme_override_constants/separation = 6
 
 [node name="UseButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
-custom_minimum_size = Vector2(33, 0)
+custom_minimum_size = Vector2(33, 18)
 layout_mode = 2
 theme = ExtResource("4_adjrd")
 text = "Use"
 
 [node name="DropButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
-custom_minimum_size = Vector2(37, 0)
+custom_minimum_size = Vector2(37, 18)
 layout_mode = 2
 theme = ExtResource("4_adjrd")
 theme_override_styles/normal = SubResource("StyleBoxTexture_75rjd")

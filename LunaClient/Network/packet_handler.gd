@@ -11,6 +11,7 @@ enum InCodes {
 	CHANGE_SCENE = 6,
 	PLAYER_ENTERED_SCENE = 7,
 	PLAYER_LEFT_SCENE = 8,
+	ALTER_INVENTORY = 9,
 }
 
 static func handle_packet(in_packet: InPacket) -> void:
@@ -113,3 +114,10 @@ static func handle_packet(in_packet: InPacket) -> void:
 			var player_id := in_packet.get_int()
 			
 			SceneHandler.remove_other_player(player_id)
+		
+		InCodes.ALTER_INVENTORY:
+			var item_slot := in_packet.get_int()
+			var item_id := in_packet.get_int()
+			var item_quantity := in_packet.get_int()
+			
+			Inventory.set_item_with_id(item_slot, item_id, item_quantity)

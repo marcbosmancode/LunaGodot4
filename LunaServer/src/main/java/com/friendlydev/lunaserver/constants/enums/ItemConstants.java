@@ -10,12 +10,12 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ItemConstants {
     public enum ItemType {
-        ETC(1),
-        CONSUMABLE(2),
-        CURRENCY(3),
-        WEAPON(4),
-        ARMOR(5),
-        ACCESSORY(6);
+        ETC(0),
+        CONSUMABLE(1),
+        CURRENCY(2),
+        WEAPON(3),
+        ARMOR(4),
+        ACCESSORY(5);
         
         public final int value;
         

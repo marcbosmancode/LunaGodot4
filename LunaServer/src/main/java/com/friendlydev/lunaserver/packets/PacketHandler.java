@@ -50,6 +50,12 @@ public class PacketHandler {
             case DOOR_INTERACTION:
                 handleDoorInteraction(ch, packet);
                 break;
+            case ALTER_INVENTORY:
+                handleAlterInventory(ch, packet);
+                break;
+            case CONSUME_ITEM:
+                handleConsumeItem(ch, packet);
+                break;
         }
     }
     
@@ -185,6 +191,25 @@ public class PacketHandler {
         if (targetScene != null) {
             ch.getPlayerCharacter().changeScene(targetScene, door.getDestinationPoint());
         }
+    }
+    
+    public static void handleAlterInventory(ClientHandler ch, InPacket packet) throws EOFException {
+        // Make sure the account is logged in
+        if (ch.isLoggedIn() == false) return;
+        
+        int slot1 = packet.readInt();
+        int slot2 = packet.readInt();
+        
+        ch.getPlayerCharacter().getInventory().swapSlots(slot1, slot2);
+    }
+    
+    public static void handleConsumeItem(ClientHandler ch, InPacket packet) throws EOFException {
+        // Make sure the account is logged in
+        if (ch.isLoggedIn() == false) return;
+        
+        int slot = packet.readInt();
+        
+        ch.getPlayerCharacter().getInventory().consumeItem(slot);
     }
     
 }

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://y75aso3oc601"]
+
+[ext_resource type="Script" path="res://ItemSystem/item.gd" id="1_xc7a5"]
+[ext_resource type="Texture2D" uid="uid://c80xgji5g8mjv" path="res://ItemSystem/Assets/weathered_compass.png" id="2_qlura"]
+
+[resource]
+script = ExtResource("1_xc7a5")
+id = 4
+name = "Weathered Compass"
+description = "It points to a safe location. Use to teleport to a nearby town"
+texture = ExtResource("2_qlura")
+type = 1
+max_quantity = 99
+trade_locked = false

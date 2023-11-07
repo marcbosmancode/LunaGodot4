@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "type": 2,
+    "type": 1,
     "name": "Health Potion",
-    "tooltip": "A potion that recovers 10 health",
+    "tooltip": "A simple potion that recovers 10 health",
     "price": 100,
-    "maxquantity": 999,
+    "maxquantity": 99,
     "tradelocked": false,
     "consumabledata": {
       "healing": 10
@@ -14,19 +14,31 @@
   {
     "id": 2,
     "type": 1,
-    "name": "Machine Parts",
-    "tooltip": "They look good enough to be reused",
+    "name": "Mana Potion",
+    "tooltip": "A simple potion that recovers 10 mana",
+    "price": 100,
+    "maxquantity": 99,
+    "tradelocked": false,
+    "consumabledata": {
+      "healing": 10
+    }
+  },
+  {
+    "id": 3,
+    "type": 0,
+    "name": "Machine Part",
+    "tooltip": "It looks good enough to be reused",
     "price": 10,
     "maxquantity": 999,
     "tradelocked": false
   },
   {
-    "id": 3,
-    "type": 2,
+    "id": 4,
+    "type": 1,
     "name": "Weathered Compass",
-    "tooltip": "Compass pointing to a safe location nearby. Use to teleport",
+    "tooltip": "It points to a safe location. Use to teleport to a nearby town",
     "price": 1000,
-    "maxquantity": 999,
+    "maxquantity": 99,
     "tradelocked": false,
     "consumabledata": {
       "script": "town_teleport"
