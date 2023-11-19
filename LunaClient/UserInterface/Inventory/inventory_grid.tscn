@@ -188,3 +188,63 @@ layout_mode = 2
 
 [node name="InventorySlot60" parent="." instance=ExtResource("1_oge52")]
 layout_mode = 2
+
+[node name="InventorySlot61" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot62" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot63" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot64" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot65" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot66" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot67" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot68" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot69" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot70" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot71" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot72" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot73" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot74" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot75" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot76" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot77" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot78" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot79" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2
+
+[node name="InventorySlot80" parent="." instance=ExtResource("1_oge52")]
+layout_mode = 2

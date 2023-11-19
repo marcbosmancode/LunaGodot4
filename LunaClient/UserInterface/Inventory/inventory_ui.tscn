@@ -118,7 +118,11 @@ theme_override_constants/margin_bottom = 14
 layout_mode = 2
 theme = ExtResource("3_hwj20")
 
-[node name="InventoryGrid" parent="InventoryBox/MarginContainer/ScrollContainer" instance=ExtResource("5_ytd7q")]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryBox/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 8
+
+[node name="InventoryGrid" parent="InventoryBox/MarginContainer/ScrollContainer/MarginContainer" instance=ExtResource("5_ytd7q")]
 layout_mode = 2
 
 [node name="ItemDetailsPopup" parent="." instance=ExtResource("6_tgf3y")]
@@ -139,6 +143,7 @@ offset_top = 10.0
 offset_right = -10.0
 offset_bottom = 28.0
 grow_horizontal = 0
+focus_mode = 0
 theme = ExtResource("3_hwj20")
 theme_override_styles/normal = SubResource("StyleBoxTexture_xtomi")
 theme_override_styles/hover = SubResource("StyleBoxTexture_diaa8")

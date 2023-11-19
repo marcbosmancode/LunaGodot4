@@ -11,6 +11,7 @@ import com.friendlydev.lunaserver.resources.models.Inventory;
 import com.friendlydev.lunaserver.resources.models.InventoryItem;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
+import com.friendlydev.lunaserver.scripts.PythonScriptHandler;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -32,6 +33,7 @@ public class ClientHandler implements Runnable {
     private DataInputStream in;
     private DataOutputStream out;
     private ResourceManager rm;
+    private PythonScriptHandler psh;
     
     private boolean loggedIn;
     private Account account;
@@ -44,6 +46,7 @@ public class ClientHandler implements Runnable {
         in = new DataInputStream(client.getInputStream());
         out = new DataOutputStream(client.getOutputStream());
         rm = ResourceManager.getInstance();
+        psh = new PythonScriptHandler(this);
     }
     
     @Override
@@ -195,6 +198,10 @@ public class ClientHandler implements Runnable {
         DatabaseManager.saveOrUpdateInDB(playerCharacter);
         playerCharacter.getInventory().save();
         playerCharacter = null;
+    }
+    
+    public PythonScriptHandler getScriptHandler() {
+        return psh;
     }
     
 }

@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 public class Inventory {
     private static final Logger logger = LogManager.getLogger(Inventory.class);
     
-    public static final int SIZE = 60;
+    public static final int SIZE = 80;
     
     ResourceManager rm;
     private final PlayerCharacter owner;
@@ -225,15 +225,17 @@ public class Inventory {
     
     public boolean takeItemQuantity(int itemId, int quantity) {
         for (InventoryItem inventoryItem : itemSlots) {
-            if (inventoryItem.getId() == itemId) {
+            if (inventoryItem == null) continue;
+            
+            if (inventoryItem.getItemId() == itemId) {
                 int slot = inventoryItem.getPosition();
-                
+
                 if (inventoryItem.getQuantity() >= quantity) {
                     int leftOverQuantity = inventoryItem.take(quantity);
                     if (leftOverQuantity <= 0) {
                         removeItem(slot);
                     }
-                    
+
                     sendInventoryUpdate(slot);
                     return true;
                 }

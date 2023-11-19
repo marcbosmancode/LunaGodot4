@@ -195,7 +195,7 @@ public class PlayerCharacter {
     }
     
     public void changeScene(int sceneId) {
-        Scene targetScene = ResourceManager.getInstance().getScene(id);
+        Scene targetScene = ResourceManager.getInstance().getScene(sceneId);
         if (targetScene != null) {
             changeScene(targetScene, targetScene.getSpawnPoint());
         } else {

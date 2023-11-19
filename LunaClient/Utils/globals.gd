@@ -4,8 +4,8 @@ signal just_logged_in
 
 # User Interface
 var ui_positions: Dictionary = {
-	0: Vector2(250, 152),
-	1: Vector2(250, 140),
+	0: Vector2(275, 152),
+	1: Vector2(275, 140),
 }
 
 # Networking

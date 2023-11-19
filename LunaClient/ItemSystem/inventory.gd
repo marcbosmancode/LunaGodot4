@@ -2,7 +2,7 @@ extends Node
 
 signal items_changed(slots)
 
-const SIZE: int = 60
+const SIZE: int = 80
 const ITEM_PATH: String = "res://ItemSystem/Items/item_%s.tres"
 
 var item_slots: Array[Item] = []

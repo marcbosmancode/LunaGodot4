@@ -1,4 +1,3 @@
-class_name ChatSystem
 extends Control
 
 enum GROUPS {
@@ -41,6 +40,9 @@ var current_group := 1:
 @onready var chat_selection_button = $ChatInputRect/ChatSelectionButton
 
 func _ready() -> void:
+	MessageBus.show_message.connect(_on_show_message)
+	MessageBus.private_message_target_changed.connect(_on_private_message_target_changed)
+	
 	line_edit.placeholder_text = "to %s" % CHAT_NAMES[current_group]
 	show_message(0, "Welcome! For commands type /help")
 
@@ -134,3 +136,12 @@ func _on_line_edit_focus_entered():
 
 func _on_line_edit_focus_exited():
 	Globals.can_move = true
+
+
+func _on_show_message(group: int, message: String, sender: String):
+	# Can add a check here later if the message is intended for the chat box
+	show_message(group, message, sender)
+
+
+func _on_private_message_target_changed(new_target: String):
+	chat_target = new_target

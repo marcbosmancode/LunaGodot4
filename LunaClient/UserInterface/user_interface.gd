@@ -4,15 +4,10 @@ var ok_popup = preload("res://UserInterface/Popups/ok_popup.tscn")
 var message_target_selection = preload("res://UserInterface/ChatSystem/private_message_popup.tscn")
 var mts_instance: Node = null
 
-@onready var chat_system: ChatSystem = $ChatSystem
 @onready var inventory_ui: Control = $InventoryUI
 
 func show_message(group: int, message: String, sender: String = "") -> void:
-	chat_system.show_message(group, message, sender)
-
-
-func set_private_message_target(value: String) -> void:
-	chat_system.chat_target = value
+	MessageBus.show_message.emit(group, message, sender)
 
 
 func select_message_target() -> void:

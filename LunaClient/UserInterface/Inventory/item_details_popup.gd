@@ -18,7 +18,7 @@ func _on_show_item_details(item: Item, slot: int) -> void:
 		item_slot = slot
 		
 		item_texture.texture = item.texture
-		item_name_label.text = item.name
+		item_name_label.text = "%s (%s)" % [item.name, item.quantity]
 		item_desc_label.text = item.description
 		
 		# If the item is a consumable add use and keybind buttons

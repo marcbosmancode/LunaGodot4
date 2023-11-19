@@ -44,11 +44,11 @@ public class ResourceLoader {
                     JSONObject consumableData = jsonObj.getJSONObject("consumabledata");
                     int healing = 0;
                     if (consumableData.has("healing")) {
-                        consumableData.getInt("healing");
+                        healing = consumableData.getInt("healing");
                     }
-                    String script = "";
+                    String script = null;
                     if (consumableData.has("script")) {
-                        consumableData.getString("script");
+                        script = consumableData.getString("script");
                     }
                     
                     item = new ConsumableItem(

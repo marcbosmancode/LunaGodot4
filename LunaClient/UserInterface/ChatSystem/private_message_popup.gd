@@ -19,7 +19,7 @@ func _on_ok_button_pressed():
 			queue_free()
 			return
 		
-		UserInterface.set_private_message_target(message_target)
+		MessageBus.private_message_target_changed.emit(message_target)
 		UserInterface.show_message(0, "Private messages will be sent to " + message_target, "System")
 	
 	queue_free()
