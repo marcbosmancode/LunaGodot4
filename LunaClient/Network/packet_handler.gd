@@ -58,10 +58,28 @@ static func handle_packet(in_packet: InPacket) -> void:
 				var username := in_packet.get_string()
 				var map_id := in_packet.get_int()
 				var respawn_point: Vector2 = Vector2(in_packet.get_int(), in_packet.get_int())
+				
+				var level := in_packet.get_int()
+				var experience := in_packet.get_int()
+				
+				var max_health := in_packet.get_int()
+				var health := in_packet.get_int()
+				var max_mana := in_packet.get_int()
+				var mana := in_packet.get_int()
+				
 				Globals.logged_in = true
 				PlayerStats.username = username
 				PlayerStats.respawn_point = respawn_point
-				UserInterface.show_message(0, "Successfully logged in as %s!" % username)
+				
+				PlayerStats.level = level
+				PlayerStats.experience = experience
+				
+				PlayerStats.max_health = max_health
+				PlayerStats.health = health
+				PlayerStats.max_mana = max_mana
+				PlayerStats.mana = mana
+				
+				MessageBus.player_logged_in.emit(username)
 				SceneHandler.change_scene(map_id)
 			else:
 				var reason := in_packet.get_byte()

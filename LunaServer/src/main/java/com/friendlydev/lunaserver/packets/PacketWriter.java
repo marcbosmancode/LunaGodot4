@@ -86,6 +86,14 @@ public class PacketWriter {
         packet.writeInt(sc.getSpawnPoint().x);
         packet.writeInt(sc.getSpawnPoint().y);
         
+        packet.writeInt(pc.getLevel());
+        packet.writeInt(pc.getExp());
+        
+        packet.writeInt(pc.getMaxHealth());
+        packet.writeInt(pc.getHealth());
+        packet.writeInt(pc.getMaxMana());
+        packet.writeInt(pc.getMana());
+        
         return packet;
     }
     

@@ -55,6 +55,10 @@ public class PlayerCharacter {
     private int maxHealth;
     @Column(name = "health")
     private int health;
+    @Column(name = "maxmana")
+    private int maxMana;
+    @Column(name = "mana")
+    private int mana;
     @Column(name = "attack")
     private int attack;
     
@@ -65,10 +69,10 @@ public class PlayerCharacter {
 
     public PlayerCharacter(int accountId, String username) {
         // Set base values for a newly created player
-        this(accountId, username, 1, 1, 0, 100, 100, 1);
+        this(accountId, username, 1, 1, 0, 100, 100, 10, 10, 1);
     }
 
-    public PlayerCharacter(int accountId, String username, int sceneId, int level, int exp, int maxHealth, int health, int attack) {
+    public PlayerCharacter(int accountId, String username, int sceneId, int level, int exp, int maxHealth, int health, int maxMana, int mana, int attack) {
         inventory = new Inventory(this);
         this.accountId = accountId;
         this.username = username;
@@ -78,6 +82,8 @@ public class PlayerCharacter {
         this.exp = exp;
         this.maxHealth = maxHealth;
         this.health = health;
+        this.maxMana = maxMana;
+        this.mana = mana;
         this.attack = attack;
     }
 
@@ -169,6 +175,22 @@ public class PlayerCharacter {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+    
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 
     public int getAttack() {

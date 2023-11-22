@@ -30,6 +30,7 @@ HeartbeatSystem="*res://Network/Heartbeat/heartbeat_system.gd"
 
 window/size/viewport_width=1366
 window/size/viewport_height=768
+window/stretch/mode="canvas_items"
 window/stretch/scale=2.0
 
 [filesystem]

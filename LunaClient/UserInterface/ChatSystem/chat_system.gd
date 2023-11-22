@@ -42,6 +42,7 @@ var current_group := 1:
 func _ready() -> void:
 	MessageBus.show_message.connect(_on_show_message)
 	MessageBus.private_message_target_changed.connect(_on_private_message_target_changed)
+	MessageBus.player_logged_in.connect(_on_player_logged_in)
 	
 	line_edit.placeholder_text = "to %s" % CHAT_NAMES[current_group]
 	show_message(0, "Welcome! For commands type /help")
@@ -145,3 +146,10 @@ func _on_show_message(group: int, message: String, sender: String):
 
 func _on_private_message_target_changed(new_target: String):
 	chat_target = new_target
+
+
+func _on_player_logged_in(username: String) -> void:
+	show()
+	
+	# Show the character the player has logged in with in chat
+	show_message(0, "Successfully logged in as %s!" % username)

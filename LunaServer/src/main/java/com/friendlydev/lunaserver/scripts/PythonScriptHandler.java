@@ -48,7 +48,7 @@ public class PythonScriptHandler {
             
             scriptEngine.eval(scriptContent, bindings);
         } catch (Exception ex) {
-            logger.warn("Failed running script: " + filePathString);
+            logger.warn("Failed running script at " + filePathString);
             ex.printStackTrace();
         }
     }

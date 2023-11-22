@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bswv6jycw0dnv"]
+[gd_scene load_steps=7 format=3 uid="uid://bswv6jycw0dnv"]
 
 [ext_resource type="PackedScene" uid="uid://qklr1dka8vv1" path="res://UserInterface/ConnectionStatus/con_status_ui.tscn" id="1_c46wp"]
 [ext_resource type="Script" path="res://UserInterface/user_interface.gd" id="1_chnc7"]
 [ext_resource type="PackedScene" uid="uid://c61c76bftdpr4" path="res://UserInterface/ChatSystem/chat_system.tscn" id="2_ryrwm"]
+[ext_resource type="PackedScene" uid="uid://b5nci8ahtfu53" path="res://UserInterface/Vitals/vitals_ui.tscn" id="3_k5mpo"]
 [ext_resource type="PackedScene" uid="uid://bngp834p64qxq" path="res://UserInterface/Interactions/interactions_ui.tscn" id="4_x4iov"]
 [ext_resource type="PackedScene" uid="uid://cja118fj0vupp" path="res://UserInterface/Inventory/inventory_ui.tscn" id="5_q0v2w"]
 
@@ -10,6 +11,7 @@
 script = ExtResource("1_chnc7")
 
 [node name="ChatSystem" parent="." instance=ExtResource("2_ryrwm")]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -19,12 +21,15 @@ offset_right = 219.0
 offset_bottom = -3.0
 grow_vertical = 0
 
+[node name="VitalsUI" parent="." instance=ExtResource("3_k5mpo")]
+visible = false
+
 [node name="ConStatusUI" parent="." instance=ExtResource("1_c46wp")]
 visible = false
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 11.0
-offset_bottom = 11.0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 16.0
+offset_bottom = 48.0
 
 [node name="InteractionsUI" parent="." instance=ExtResource("4_x4iov")]
 

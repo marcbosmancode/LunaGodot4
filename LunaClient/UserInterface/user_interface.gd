@@ -23,9 +23,7 @@ func show_ok_popup(message: String) -> void:
 
 
 func toggle_ui_visibility(toggleable_ui: Control) -> void:
-	if Globals.can_move == false:
-		return
-	if Globals.logged_in == false:
+	if Globals.can_move == false or Globals.logged_in == false:
 		return
 	
 	if toggleable_ui.is_visible_in_tree():
