@@ -13,7 +13,7 @@
             root
         </property>
         <property name = "hibernate.connection.password">
-            1qaz2wsX!
+            1qaz2wsx
         </property>
         <property name = "hibernate.show_sql">
             false
