@@ -4,7 +4,10 @@ com\friendlydev\lunaserver\packets\InPacket.class
 com\friendlydev\lunaserver\constants\enums\ItemConstants$ItemType.class
 com\friendlydev\lunaserver\resources\models\Item.class
 com\friendlydev\lunaserver\resources\models\NonPlayerCharacter.class
+com\friendlydev\lunaserver\resources\models\InventoryItem.class
 com\friendlydev\lunaserver\database\HibernateUtility.class
+com\friendlydev\lunaserver\constants\enums\ScriptTypes$ScriptType.class
+com\friendlydev\lunaserver\scripts\PythonScriptHandler.class
 com\friendlydev\lunaserver\resources\models\Scene.class
 com\friendlydev\lunaserver\packets\OutPacket.class
 com\friendlydev\lunaserver\constants\enums\ItemConstants.class
@@ -29,3 +32,4 @@ com\friendlydev\lunaserver\resources\models\Inventory.class
 com\friendlydev\lunaserver\constants\enums\PacketCodes$InCode.class
 com\friendlydev\lunaserver\database\DatabaseManager.class
 com\friendlydev\lunaserver\resources\models\ConsumableItem.class
+com\friendlydev\lunaserver\constants\enums\ScriptTypes.class
