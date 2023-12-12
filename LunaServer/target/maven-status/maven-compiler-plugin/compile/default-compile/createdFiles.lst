@@ -21,6 +21,7 @@ com\friendlydev\lunaserver\resources\models\Account.class
 com\friendlydev\lunaserver\resources\ResourceManager.class
 com\friendlydev\lunaserver\chat\ChatCommandHandler.class
 com\friendlydev\lunaserver\client\ClientHandler.class
+com\friendlydev\lunaserver\constants\enums\StatConstants$VitalType.class
 com\friendlydev\lunaserver\resources\models\PlayerCharacter.class
 com\friendlydev\lunaserver\login\AccountService.class
 com\friendlydev\lunaserver\server\Server.class
@@ -29,7 +30,9 @@ com\friendlydev\lunaserver\login\EncryptionService.class
 com\friendlydev\lunaserver\resources\ResourceLoader.class
 com\friendlydev\lunaserver\packets\PacketWriter.class
 com\friendlydev\lunaserver\resources\models\Inventory.class
+com\friendlydev\lunaserver\constants\enums\StatConstants$StatType.class
 com\friendlydev\lunaserver\constants\enums\PacketCodes$InCode.class
 com\friendlydev\lunaserver\database\DatabaseManager.class
 com\friendlydev\lunaserver\resources\models\ConsumableItem.class
 com\friendlydev\lunaserver\constants\enums\ScriptTypes.class
+com\friendlydev\lunaserver\constants\enums\StatConstants.class

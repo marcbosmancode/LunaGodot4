@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://caslhtukal0g1"]
+
+[ext_resource type="Script" path="res://UserInterface/Hotbar/hotbar.gd" id="1_erme7"]
+[ext_resource type="PackedScene" uid="uid://dibeq3r2f5gfb" path="res://UserInterface/Hotbar/hotkey.tscn" id="1_ia7tm"]
+
+[node name="Hotbar" type="HBoxContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.0
+offset_right = 115.0
+offset_bottom = 22.0
+grow_horizontal = 2
+mouse_filter = 0
+script = ExtResource("1_erme7")
+
+[node name="Hotkey" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey2" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey3" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey4" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey5" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey6" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey7" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey8" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2
+
+[node name="Hotkey9" parent="." instance=ExtResource("1_ia7tm")]
+layout_mode = 2

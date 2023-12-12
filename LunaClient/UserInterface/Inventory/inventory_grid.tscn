@@ -248,3 +248,5 @@ layout_mode = 2
 
 [node name="InventorySlot80" parent="." instance=ExtResource("1_oge52")]
 layout_mode = 2
+
+[connection signal="hidden" from="InventorySlot" to="InventorySlot" method="_on_hidden"]

@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5nci8ahtfu53"]
+[gd_scene load_steps=11 format=3 uid="uid://b5nci8ahtfu53"]
 
 [ext_resource type="Script" path="res://UserInterface/Vitals/vitals_ui.gd" id="1_3kmv0"]
-[ext_resource type="Texture2D" uid="uid://bkrohi1kboqmp" path="res://UserInterface/Vitals/Assets/health_text.png" id="1_5i73m"]
 [ext_resource type="Texture2D" uid="uid://dkvbs46dokbsf" path="res://UserInterface/Vitals/Assets/empty_bar.png" id="1_jg00j"]
+[ext_resource type="Texture2D" uid="uid://c7asn1paau621" path="res://UserInterface/Vitals/Assets/health_header.png" id="2_atn2n"]
 [ext_resource type="Texture2D" uid="uid://1wwih0lrxvgx" path="res://UserInterface/Vitals/Assets/health_bar.png" id="2_vmphy"]
 [ext_resource type="Texture2D" uid="uid://dd4sa6utodjdr" path="res://UserInterface/Vitals/Assets/mana_bar.png" id="3_06lje"]
-[ext_resource type="Texture2D" uid="uid://dj5gfj0pip8u0" path="res://UserInterface/Vitals/Assets/mana_text.png" id="4_wqc8m"]
 [ext_resource type="FontFile" uid="uid://dkkrwjf566x3c" path="res://UserInterface/Fonts/Luna Tiny Font.ttf" id="5_2hr6t"]
-[ext_resource type="Texture2D" uid="uid://dpbuag38nw6p3" path="res://UserInterface/Vitals/Assets/exp_text.png" id="8_a46vo"]
+[ext_resource type="Texture2D" uid="uid://y1b6skwkapwb" path="res://UserInterface/Vitals/Assets/mana_header.png" id="6_kgdhy"]
+[ext_resource type="Texture2D" uid="uid://dkluxlqatiifw" path="res://UserInterface/Vitals/Assets/exp_header.png" id="8_tyjyj"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="9_ffd22"]
 [ext_resource type="Texture2D" uid="uid://fjuxpp0jn6xb" path="res://UserInterface/Vitals/Assets/exp_bar.png" id="9_q3v6h"]
 
 [node name="VitalsUI" type="Control"]
@@ -25,25 +26,27 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -97.0
-offset_top = 8.0
+offset_left = -105.0
+offset_top = 4.0
 offset_right = -8.0
-offset_bottom = 48.0
+offset_bottom = 44.0
 grow_horizontal = 0
-theme_override_constants/separation = 4
+theme_override_constants/separation = 0
 
 [node name="HealthPreview" type="HBoxContainer" parent="Vitals"]
 layout_mode = 2
-theme_override_constants/separation = -3
+theme_override_constants/separation = -2
 
-[node name="StatTexture" type="TextureRect" parent="Vitals/HealthPreview"]
+[node name="HeaderTexture" type="TextureRect" parent="Vitals/HealthPreview"]
 layout_mode = 2
-texture = ExtResource("1_5i73m")
+texture = ExtResource("2_atn2n")
+stretch_mode = 3
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Vitals/HealthPreview"]
 show_behind_parent = true
 custom_minimum_size = Vector2(80, 11)
 layout_mode = 2
+size_flags_vertical = 4
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 2
@@ -63,20 +66,21 @@ theme_override_fonts/font = ExtResource("5_2hr6t")
 theme_override_font_sizes/font_size = 8
 text = "0/0"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
 [node name="ManaPreview" type="HBoxContainer" parent="Vitals"]
 layout_mode = 2
-theme_override_constants/separation = -3
+theme_override_constants/separation = -2
 
-[node name="StatTexture" type="TextureRect" parent="Vitals/ManaPreview"]
+[node name="HeaderTexture" type="TextureRect" parent="Vitals/ManaPreview"]
 layout_mode = 2
-texture = ExtResource("4_wqc8m")
+texture = ExtResource("6_kgdhy")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Vitals/ManaPreview"]
 show_behind_parent = true
 custom_minimum_size = Vector2(80, 11)
 layout_mode = 2
+size_flags_vertical = 4
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 2
@@ -96,28 +100,48 @@ theme_override_fonts/font = ExtResource("5_2hr6t")
 theme_override_font_sizes/font_size = 8
 text = "0/0"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
 [node name="StatPreview" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
+offset_left = 4.0
+offset_top = 4.0
 offset_right = 181.0
-offset_bottom = 48.0
+offset_bottom = 44.0
 theme_override_constants/separation = -2
 
 [node name="ExperiencePreview" type="HBoxContainer" parent="StatPreview"]
 layout_mode = 2
-theme_override_constants/separation = -3
+theme_override_constants/separation = -2
 
-[node name="StatTexture" type="TextureRect" parent="StatPreview/ExperiencePreview"]
+[node name="HeaderTexture" type="TextureRect" parent="StatPreview/ExperiencePreview"]
 layout_mode = 2
-texture = ExtResource("8_a46vo")
+texture = ExtResource("8_tyjyj")
+
+[node name="MarginContainer" type="MarginContainer" parent="StatPreview/ExperiencePreview/HeaderTexture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_bottom = 1
+
+[node name="LevelLabel" type="Label" parent="StatPreview/ExperiencePreview/HeaderTexture/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("9_ffd22")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="StatPreview/ExperiencePreview"]
 show_behind_parent = true
 custom_minimum_size = Vector2(160, 11)
 layout_mode = 2
+size_flags_vertical = 4
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 2
@@ -126,31 +150,15 @@ stretch_margin_bottom = 2
 texture_under = ExtResource("1_jg00j")
 texture_progress = ExtResource("9_q3v6h")
 
-[node name="MarginContainer" type="MarginContainer" parent="StatPreview/ExperiencePreview/TextureProgressBar"]
+[node name="ExpLabel" type="Label" parent="StatPreview/ExperiencePreview/TextureProgressBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_right = 6
-
-[node name="TextPreview" type="HBoxContainer" parent="StatPreview/ExperiencePreview/TextureProgressBar/MarginContainer"]
-layout_mode = 2
-
-[node name="LevelLabel" type="Label" parent="StatPreview/ExperiencePreview/TextureProgressBar/MarginContainer/TextPreview"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_2hr6t")
-theme_override_font_sizes/font_size = 8
-text = "LV: 0"
-vertical_alignment = 2
-
-[node name="ExpDetailsLabel" type="Label" parent="StatPreview/ExperiencePreview/TextureProgressBar/MarginContainer/TextPreview"]
-layout_mode = 2
 theme_override_fonts/font = ExtResource("5_2hr6t")
 theme_override_font_sizes/font_size = 8
 text = "0.00%"
-horizontal_alignment = 2
-vertical_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1

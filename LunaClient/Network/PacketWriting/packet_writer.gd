@@ -10,6 +10,7 @@ enum OutCodes {
 	PORTAL_INTERACTION = 5,
 	ALTER_INVENTORY = 6,
 	CONSUME_ITEM = 7,
+	UPDATE_KEYBIND = 8,
 }
 
 static func write_heartbeat() -> OutPacket:
@@ -69,4 +70,12 @@ static func write_alter_inventory(slot_1: int, slot_2: int) -> OutPacket:
 static func consume_item(slot: int) -> OutPacket:
 	var packet := OutPacket.new(OutCodes.CONSUME_ITEM)
 	packet.write_int(slot)
+	return packet
+
+
+static func update_keybind(hotkey_id: int, action_type: int, action_id: int) -> OutPacket:
+	var packet := OutPacket.new(OutCodes.UPDATE_KEYBIND)
+	packet.write_int(hotkey_id)
+	packet.write_int(action_type)
+	packet.write_int(action_id)
 	return packet

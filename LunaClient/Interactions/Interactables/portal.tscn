@@ -44,7 +44,7 @@ anim_offset_max = 1.0
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_7n5km")
-text = "Move"
+text = "Enter"
 image = ExtResource("2_kpsrj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -2,6 +2,8 @@ package com.friendlydev.lunaserver.packets;
 
 import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.constants.enums.PacketCodes.OutCode;
+import com.friendlydev.lunaserver.constants.enums.StatConstants.StatType;
+import com.friendlydev.lunaserver.constants.enums.StatConstants.VitalType;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
 import java.awt.Point;
@@ -150,6 +152,24 @@ public class PacketWriter {
         packet.writeInt(slot);
         packet.writeInt(itemId);
         packet.writeInt(quantity);        
+        
+        return packet;
+    }
+    
+    public static OutPacket writeUpdateVital(VitalType vitalType, int newValue) {
+        OutPacket packet = new OutPacket(OutCode.UPDATE_VITAL.value);
+        
+        packet.writeInt(vitalType.value);
+        packet.writeInt(newValue);
+        
+        return packet;
+    }
+    
+    public static OutPacket writeUpdateStat(StatType statType, int newValue) {
+        OutPacket packet = new OutPacket(OutCode.UPDATE_VITAL.value);
+        
+        packet.writeInt(statType.value);
+        packet.writeInt(newValue);
         
         return packet;
     }

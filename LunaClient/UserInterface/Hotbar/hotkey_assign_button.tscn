@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://cyjty7sx0sw7k"]
+
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="1_kpgcj"]
+[ext_resource type="Texture2D" uid="uid://5cco26sou23s" path="res://UserInterface/Hotbar/Assets/nineslice_hotkey.png" id="2_m2syn"]
+[ext_resource type="Texture2D" uid="uid://duxc6v62o8q12" path="res://UserInterface/Hotbar/Assets/nineslice_hotkey_outlined.png" id="3_kw8ec"]
+[ext_resource type="FontFile" uid="uid://82807qw6xuv3" path="res://UserInterface/Fonts/luna_outline_font.png" id="4_08flf"]
+[ext_resource type="Script" path="res://UserInterface/Hotbar/hotkey_assign_button.gd" id="4_dalvd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wwpt"]
+texture = ExtResource("2_m2syn")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hldvr"]
+texture = ExtResource("3_kw8ec")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0jfco"]
+texture = ExtResource("3_kw8ec")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[node name="HotkeyAssignButton" type="Button"]
+custom_minimum_size = Vector2(22, 22)
+theme = ExtResource("1_kpgcj")
+theme_override_styles/normal = SubResource("StyleBoxTexture_6wwpt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hldvr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_0jfco")
+script = ExtResource("4_dalvd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="ActionTexture" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="KeyLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 38.0
+offset_bottom = 9.0
+theme_override_fonts/font = ExtResource("4_08flf")
+text = "Key"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

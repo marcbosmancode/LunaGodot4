@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://buuwg2u2ws02q"]
+
+[ext_resource type="PackedScene" uid="uid://bx2l7j40wo3b2" path="res://UserInterface/Popups/base_popup.tscn" id="1_hmpfw"]
+[ext_resource type="Script" path="res://UserInterface/Hotbar/assign_hotkey_popup.gd" id="2_2gale"]
+[ext_resource type="PackedScene" uid="uid://cyjty7sx0sw7k" path="res://UserInterface/Hotbar/hotkey_assign_button.tscn" id="3_rh0d2"]
+
+[node name="AssignHotkeyPopup" instance=ExtResource("1_hmpfw")]
+offset_right = 242.0
+offset_bottom = 52.0
+script = ExtResource("2_2gale")
+header = "Assign Hotkey"
+ui_id = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="2"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="HotkeyAssignButton" parent="HBoxContainer" index="0" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton2" parent="HBoxContainer" index="1" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton3" parent="HBoxContainer" index="2" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton4" parent="HBoxContainer" index="3" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton5" parent="HBoxContainer" index="4" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton6" parent="HBoxContainer" index="5" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton7" parent="HBoxContainer" index="6" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton8" parent="HBoxContainer" index="7" instance=ExtResource("3_rh0d2")]
+layout_mode = 2
+
+[node name="HotkeyAssignButton9" parent="HBoxContainer" index="8" instance=ExtResource("3_rh0d2")]
+layout_mode = 2

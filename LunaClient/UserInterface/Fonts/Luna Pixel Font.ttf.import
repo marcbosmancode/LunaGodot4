@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://gaghg2pnqqys"
-path="res://.godot/imported/Luna Pixel Art.ttf-2a13208911e2437f14d25f52cdc4f069.fontdata"
+path="res://.godot/imported/Luna Pixel Font.ttf-6aa7521ea3df21d572009c44d5aeeaaf.fontdata"
 
 [deps]
 
-source_file="res://UserInterface/Fonts/Luna Pixel Art.ttf"
-dest_files=["res://.godot/imported/Luna Pixel Art.ttf-2a13208911e2437f14d25f52cdc4f069.fontdata"]
+source_file="res://UserInterface/Fonts/Luna Pixel Font.ttf"
+dest_files=["res://.godot/imported/Luna Pixel Font.ttf-6aa7521ea3df21d572009c44d5aeeaaf.fontdata"]
 
 [params]
 
@@ -21,13 +21,18 @@ msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
 hinting=1
-subpixel_positioning=1
+subpixel_positioning=0
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}

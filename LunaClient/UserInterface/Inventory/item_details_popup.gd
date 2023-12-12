@@ -1,11 +1,18 @@
 extends NinePatchRect
 
+enum HotkeyTypes {
+	ITEM = 0,
+	SKILL = 1,
+}
+
 var item_slot: int = -1
 
 @onready var item_texture = $MarginContainer/VBoxContainer/MainInfo/ItemPreview/ItemTexture
 @onready var item_name_label = $MarginContainer/VBoxContainer/MainInfo/ItemName
+@onready var trade_lock_label = $MarginContainer/VBoxContainer/TradeLockLabel
 @onready var item_desc_label = $MarginContainer/VBoxContainer/ItemDescription
 @onready var use_button = $MarginContainer/VBoxContainer/Buttons/UseButton
+@onready var hotkey_button = $MarginContainer/VBoxContainer/Buttons/HotkeyButton
 
 func _ready():
 	MessageBus.show_item_details.connect(_on_show_item_details)
@@ -21,11 +28,19 @@ func _on_show_item_details(item: Item, slot: int) -> void:
 		item_name_label.text = "%s (%s)" % [item.name, item.quantity]
 		item_desc_label.text = item.description
 		
-		# If the item is a consumable add use and keybind buttons
+		# If the item is a consumable add use and hotkey buttons
 		if item.type == 1:
 			use_button.show()
+			hotkey_button.show()
 		else:
 			use_button.hide()
+			hotkey_button.hide()
+		
+		# Show item tradeability
+		if item.trade_locked:
+			trade_lock_label.show()
+		else:
+			trade_lock_label.hide()
 		
 		show()
 	else:
@@ -43,6 +58,10 @@ func _on_items_changed(slots: Array) -> void:
 func _on_use_button_pressed():
 	if not item_slot == -1:
 		Inventory.consume_item(item_slot)
+
+
+func _on_hotkey_button_pressed():
+	UserInterface.assign_hotkey(HotkeyTypes.ITEM, Inventory.get_item_id(item_slot))
 
 
 func _on_drop_button_pressed():

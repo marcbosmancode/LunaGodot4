@@ -6,7 +6,6 @@ const SIZE: int = 80
 const ITEM_PATH: String = "res://ItemSystem/Items/item_%s.tres"
 
 var item_slots: Array[Item] = []
-var drag_data = null
 
 func _ready():
 	item_slots.resize(SIZE)
@@ -50,6 +49,14 @@ func get_item(slot: int) -> Item:
 	return item_slots[slot]
 
 
+func get_item_id(slot: int) -> int:
+	var item = item_slots[slot]
+	if item is Item:
+		return item.id
+	else:
+		return -1
+
+
 func drop_item(slot: int) -> void:
 	Client.send_data(PacketWriter.write_alter_inventory(slot, -1))
 
@@ -66,3 +73,26 @@ func consume_item(slot: int) -> void:
 		# Item type 1 is consumable
 		if item.type == 1:
 			Client.send_data(PacketWriter.consume_item(slot))
+
+
+func consume_item_id(item_id: int) -> void:
+	var current_slot = 0
+	
+	for slot in item_slots:
+		if slot is Item:
+			if slot.id == item_id:
+				consume_item(current_slot)
+				return
+		
+		current_slot += 1
+
+
+func get_item_quantity(item_id: int) -> int:
+	var quantity: int = 0
+	
+	for slot in item_slots:
+		if slot is Item:
+			if slot.id == item_id:
+				quantity += slot.quantity
+	
+	return quantity

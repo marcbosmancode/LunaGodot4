@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cobjo2558rjid"]
+
+[ext_resource type="Script" path="res://ItemSystem/item.gd" id="1_eqj0d"]
+[ext_resource type="Texture2D" uid="uid://0q3t5wkjqm10" path="res://ItemSystem/Assets/special_potion.png" id="2_tx2se"]
+
+[resource]
+script = ExtResource("1_eqj0d")
+id = 5
+name = "Special Potion"
+description = "A special potion that recovers health by 50 percent"
+texture = ExtResource("2_tx2se")
+type = 1
+max_quantity = 99
+trade_locked = true

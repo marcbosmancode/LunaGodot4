@@ -12,6 +12,9 @@ enum InCodes {
 	PLAYER_ENTERED_SCENE = 7,
 	PLAYER_LEFT_SCENE = 8,
 	ALTER_INVENTORY = 9,
+	UPDATE_VITAL = 10,
+	UPDATE_STAT = 11,
+	UPDATE_KEYBIND = 12,
 }
 
 static func handle_packet(in_packet: InPacket) -> void:
@@ -139,3 +142,34 @@ static func handle_packet(in_packet: InPacket) -> void:
 			var item_quantity := in_packet.get_int()
 			
 			Inventory.set_item_with_id(item_slot, item_id, item_quantity)
+		
+		InCodes.UPDATE_VITAL:
+			var vital_id := in_packet.get_int()
+			var new_value := in_packet.get_int()
+			
+			if vital_id == Enums.VitalCode.HEALTH:
+				PlayerStats.health = new_value
+			if vital_id == Enums.VitalCode.MANA:
+				PlayerStats.mana = new_value
+			if vital_id == Enums.VitalCode.EXPERIENCE:
+				PlayerStats.experience = new_value
+		
+		InCodes.UPDATE_STAT:
+			var stat_id := in_packet.get_int()
+			var new_value := in_packet.get_int()
+			
+			if stat_id == Enums.StatCode.MAX_HEALTH:
+				PlayerStats.max_health = new_value
+			if stat_id == Enums.StatCode.MAX_MANA:
+				PlayerStats.max_mana = new_value
+			if stat_id == Enums.StatCode.LEVEL:
+				PlayerStats.level = new_value
+			if stat_id == Enums.StatCode.ATTACK:
+				PlayerStats.attack = new_value
+		
+		InCodes.UPDATE_KEYBIND:
+			var hotkey_id := in_packet.get_int()
+			var action_type := in_packet.get_int()
+			var action_id := in_packet.get_int()
+			
+			Globals.change_hotkey_action(hotkey_id, HotkeyAction.new(action_type, action_id), false)

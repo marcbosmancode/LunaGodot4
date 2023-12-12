@@ -6,6 +6,7 @@ signal max_health_changed(value)
 signal health_changed(value)
 signal max_mana_changed(value)
 signal mana_changed(value)
+signal attack_changed(value)
 
 var username: String = ""
 var respawn_point: Vector2 = Vector2.ZERO
@@ -34,3 +35,7 @@ var mana: int = 1:
 	set(new_value):
 		mana = new_value
 		mana_changed.emit(new_value)
+var attack: int = 1:
+	set(new_value):
+		attack = new_value
+		attack_changed.emit(new_value)

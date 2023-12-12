@@ -46,6 +46,10 @@ public class ResourceLoader {
                     if (consumableData.has("healing")) {
                         healing = consumableData.getInt("healing");
                     }
+                    boolean proportionalHealing = false;
+                    if (consumableData.has("proportionalhealing")) {
+                        proportionalHealing = consumableData.getBoolean("proportionalhealing");
+                    }
                     String script = null;
                     if (consumableData.has("script")) {
                         script = consumableData.getString("script");
@@ -53,6 +57,7 @@ public class ResourceLoader {
                     
                     item = new ConsumableItem(
                             healing,
+                            proportionalHealing,
                             script,
                             jsonObj.getInt("id"),
                             jsonObj.getInt("type"),

@@ -13,11 +13,13 @@ public class ConsumableItem extends Item {
     private static final Logger logger = LogManager.getLogger(ConsumableItem.class);
     
     private int healing;
+    private boolean proportionalHealing;
     private String script;
     
-    public ConsumableItem(int healing, String script, int id, int type, String name, String tooltip, int price, int maxQuantity, boolean tradeLocked) {
+    public ConsumableItem(int healing, boolean proportionalHealing, String script, int id, int type, String name, String tooltip, int price, int maxQuantity, boolean tradeLocked) {
         super(id, type, name, tooltip, price, maxQuantity, tradeLocked);
         this.healing = healing;
+        this.proportionalHealing = proportionalHealing;
         this.script = script;
     }
     
@@ -27,7 +29,9 @@ public class ConsumableItem extends Item {
      * @return if the item is consumed
      */
     public boolean consume(ClientHandler ch) {
-        // TODO add healing
+        if (healing != 0) {
+            ch.getPlayerCharacter().heal(healing, proportionalHealing);
+        }
         
         if (script != null) {
             ch.getScriptHandler().runScript(script, ScriptTypes.ScriptType.ITEM);

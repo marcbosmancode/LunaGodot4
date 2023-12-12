@@ -43,5 +43,18 @@
     "consumabledata": {
       "script": "town_teleport"
     }
+  },
+  {
+    "id": 5,
+    "type": 1,
+    "name": "Special Potion",
+    "tooltip": "A special potion that recovers health by 50 percent",
+    "price": 1000,
+    "maxquantity": 99,
+    "tradelocked": true,
+    "consumabledata": {
+      "healing": 50,
+      "proportionalhealing": true
+    }
   }
 ]

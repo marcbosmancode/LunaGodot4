@@ -41,6 +41,7 @@ axis_stretch_vertical = 1
 [node name="ItemDetailsPopup" type="NinePatchRect"]
 offset_right = 160.0
 offset_bottom = 224.0
+mouse_filter = 0
 texture = ExtResource("1_51pwo")
 patch_margin_left = 2
 patch_margin_top = 2
@@ -86,6 +87,12 @@ theme_override_colors/font_color = Color(0.909804, 0.92549, 0.980392, 1)
 text = "<ItemName>"
 clip_text = true
 
+[node name="TradeLockLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_adjrd")
+theme_override_colors/font_color = Color(0.960784, 0.556863, 0.305882, 1)
+text = "Trade locked"
+
 [node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_adjrd")
@@ -103,6 +110,12 @@ layout_mode = 2
 theme = ExtResource("4_adjrd")
 text = "Use"
 
+[node name="HotkeyButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(45, 18)
+layout_mode = 2
+theme = ExtResource("4_adjrd")
+text = "Hotkey"
+
 [node name="DropButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 custom_minimum_size = Vector2(37, 18)
 layout_mode = 2
@@ -113,4 +126,5 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_aiafh")
 text = "Drop"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/UseButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HotkeyButton" to="." method="_on_hotkey_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/DropButton" to="." method="_on_drop_button_pressed"]

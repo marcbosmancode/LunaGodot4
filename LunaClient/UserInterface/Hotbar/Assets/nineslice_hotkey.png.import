@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj5gfj0pip8u0"
-path="res://.godot/imported/mana_text.png-8745c9e8c88588c264517b3ccb7a4f59.ctex"
+uid="uid://5cco26sou23s"
+path="res://.godot/imported/nineslice_hotkey.png-437f2602330fc8a8311d1e44c0abce06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UserInterface/Vitals/Assets/mana_text.png"
-dest_files=["res://.godot/imported/mana_text.png-8745c9e8c88588c264517b3ccb7a4f59.ctex"]
+source_file="res://UserInterface/Hotbar/Assets/nineslice_hotkey.png"
+dest_files=["res://.godot/imported/nineslice_hotkey.png-437f2602330fc8a8311d1e44c0abce06.ctex"]
 
 [params]
 

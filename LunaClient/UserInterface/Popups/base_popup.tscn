@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ch3gpfyquudwb" path="res://UserInterface/Assets/nineslice_background_opaque.png" id="1_ymkxs"]
 [ext_resource type="Script" path="res://UserInterface/Popups/base_popup.gd" id="2_wm1lj"]
-[ext_resource type="FontFile" uid="uid://gaghg2pnqqys" path="res://UserInterface/Fonts/Luna Pixel Art.ttf" id="3_squm3"]
+[ext_resource type="FontFile" uid="uid://gaghg2pnqqys" path="res://UserInterface/Fonts/Luna Pixel Font.ttf" id="3_squm3"]
 [ext_resource type="Texture2D" uid="uid://xinwcji0hiaw" path="res://UserInterface/Assets/close_button.png" id="4_ak54q"]
 [ext_resource type="Texture2D" uid="uid://blixi4xhqjeqx" path="res://UserInterface/Assets/close_button_hover.png" id="5_j4av1"]
 [ext_resource type="Texture2D" uid="uid://frt4on5ga35e" path="res://UserInterface/Assets/close_button_press.png" id="6_xb8rl"]

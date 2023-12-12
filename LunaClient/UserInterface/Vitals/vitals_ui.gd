@@ -1,12 +1,12 @@
 extends Control
 
-@onready var level_label = $StatPreview/ExperiencePreview/TextureProgressBar/MarginContainer/TextPreview/LevelLabel
+@onready var level_label = $StatPreview/ExperiencePreview/HeaderTexture/MarginContainer/LevelLabel
 @onready var health_bar = $Vitals/HealthPreview/TextureProgressBar
 @onready var health_details_label = $Vitals/HealthPreview/TextureProgressBar/DetailsLabel
 @onready var mana_bar = $Vitals/ManaPreview/TextureProgressBar
 @onready var mana_details_label = $Vitals/ManaPreview/TextureProgressBar/DetailsLabel
 @onready var exp_bar = $StatPreview/ExperiencePreview/TextureProgressBar
-@onready var exp_details_label = $StatPreview/ExperiencePreview/TextureProgressBar/MarginContainer/TextPreview/ExpDetailsLabel
+@onready var exp_details_label = $StatPreview/ExperiencePreview/TextureProgressBar/ExpLabel
 
 func _ready():
 	MessageBus.player_logged_in.connect(_on_player_logged_in)
@@ -27,7 +27,7 @@ func get_required_exp(level: int) -> int:
 
 
 func _on_level_changed(new_value: int) -> void:
-	level_label.text = "LV: %s" % new_value
+	level_label.text = str(new_value)
 	exp_bar.max_value = get_required_exp(new_value)
 
 

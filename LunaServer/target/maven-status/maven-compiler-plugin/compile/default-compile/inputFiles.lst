@@ -1,5 +1,6 @@
 C:\Users\Marc\Documents\GitHub\LunaGodot4\LunaServer\src\main\java\com\friendlydev\lunaserver\resources\models\InventoryItem.java
 C:\Users\Marc\Documents\GitHub\LunaGodot4\LunaServer\src\main\java\com\friendlydev\lunaserver\constants\enums\PacketCodes.java
+C:\Users\Marc\Documents\GitHub\LunaGodot4\LunaServer\src\main\java\com\friendlydev\lunaserver\constants\enums\StatConstants.java
 C:\Users\Marc\Documents\GitHub\LunaGodot4\LunaServer\src\main\java\com\friendlydev\lunaserver\random\RandomGenerator.java
 C:\Users\Marc\Documents\GitHub\LunaGodot4\LunaServer\src\main\java\com\friendlydev\lunaserver\constants\ServerConfig.java
 C:\Users\Marc\Documents\GitHub\LunaGodot4\LunaServer\src\main\java\com\friendlydev\lunaserver\packets\OutPacket.java

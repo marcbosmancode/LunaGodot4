@@ -36,7 +36,6 @@ func _get_drag_data(_at_position):
 		data.item = item
 		data.slot = slot
 		
-		Inventory.drag_data = data
 		create_drag_preview(item)
 		return data
 
@@ -60,8 +59,6 @@ func _can_drop_data(_at_position, data):
 
 
 func _drop_data(_at_position, data):
-	Inventory.drag_data = null
-	
 	var target_slot: int = get_index()
 	# Make sure the item isn't moved to the slot it's already in
 	if data.slot == target_slot:
@@ -88,3 +85,7 @@ func _on_show_item_details(_item: Item, slot: int) -> void:
 		selected = true
 	else:
 		selected = false
+
+
+func _on_hidden():
+	pass

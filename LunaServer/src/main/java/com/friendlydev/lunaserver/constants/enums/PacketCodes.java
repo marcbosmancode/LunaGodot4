@@ -17,7 +17,8 @@ public class PacketCodes {
         PLAYER_STATE_UPDATE((short) 4),
         DOOR_INTERACTION((short) 5),
         ALTER_INVENTORY((short) 6),
-	CONSUME_ITEM((short) 7);
+	CONSUME_ITEM((short) 7),
+        UPDATE_KEYBIND((short) 8);
         
         public final short value;
         
@@ -49,7 +50,10 @@ public class PacketCodes {
         CHANGE_SCENE((short) 6),
         PLAYER_ENTERED_SCENE((short) 7),
         PLAYER_LEFT_SCENE((short) 8),
-        ALTER_INVENTORY((short) 9);
+        ALTER_INVENTORY((short) 9),
+        UPDATE_VITAL((short) 10),
+        UPDATE_STAT((short) 11),
+        UPDATE_KEYBIND((short) 12);
         
         public final short value;
         

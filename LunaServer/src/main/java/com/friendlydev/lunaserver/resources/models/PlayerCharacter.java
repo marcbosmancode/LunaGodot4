@@ -1,6 +1,7 @@
 package com.friendlydev.lunaserver.resources.models;
 
 import com.friendlydev.lunaserver.client.ClientHandler;
+import com.friendlydev.lunaserver.constants.enums.StatConstants.VitalType;
 import com.friendlydev.lunaserver.packets.PacketWriter;
 import com.friendlydev.lunaserver.resources.ResourceManager;
 import java.awt.Point;
@@ -223,6 +224,21 @@ public class PlayerCharacter {
         } else {
             logger.warn("Scene with id " + sceneId + " does not exist");
         }
+    }
+    
+    public void heal(int amount, boolean isProportional) {
+        if (isProportional) {
+            int healing = (int) (amount * 0.01 * maxHealth);
+            health += healing;
+        } else {
+            health += amount;
+        }
+        
+        // Clamp the health value between 0 and maximum health
+        health = Math.max(0, Math.min(maxHealth, health));
+        
+        // Notify the player about their new health
+        ch.sendPacket(PacketWriter.writeUpdateVital(VitalType.HEALTH, health));
     }
     
 }

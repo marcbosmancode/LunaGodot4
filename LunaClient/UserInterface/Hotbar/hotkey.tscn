@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://dibeq3r2f5gfb"]
+
+[ext_resource type="Texture2D" uid="uid://duxc6v62o8q12" path="res://UserInterface/Hotbar/Assets/nineslice_hotkey_outlined.png" id="1_lnqc1"]
+[ext_resource type="Script" path="res://UserInterface/Hotbar/hotkey.gd" id="2_k8an1"]
+[ext_resource type="FontFile" uid="uid://82807qw6xuv3" path="res://UserInterface/Fonts/luna_outline_font.png" id="3_bdjye"]
+
+[node name="Hotkey" type="NinePatchRect"]
+custom_minimum_size = Vector2(22, 22)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+texture = ExtResource("1_lnqc1")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+script = ExtResource("2_k8an1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="ActionTexture" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="KeyLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 19.0
+offset_bottom = 6.0
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_bdjye")
+theme_override_font_sizes/font_size = 8
+text = "Key"
+vertical_alignment = 2
+
+[node name="QuantityLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -5.0
+offset_right = 4.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_bdjye")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2
+clip_text = true
