@@ -18,6 +18,7 @@ func _ready():
 
 func update_action(hotkey_id: int) -> void:
 	key_action = Globals.hotkey_actions.get(hotkey_id)
+	
 	if key_action is HotkeyAction:
 		if key_action.action_type == Enums.HotkeyType.ITEM:
 			# Load the item and show it in the hotkey
@@ -27,7 +28,7 @@ func update_action(hotkey_id: int) -> void:
 				quantity_label.text = str(Inventory.get_item_quantity(item.id))
 				quantity_label.show()
 		
-		if key_action.action_type == Enums.HotkeyType.SKILL:
+		elif key_action.action_type == Enums.HotkeyType.SKILL:
 			# TODO load the skill texture
 			action_texture.texture = null
 			quantity_label.hide()

@@ -2,6 +2,7 @@ extends Node
 
 # Controls
 enum HotkeyType {
+	EMPTY = -1,
 	ITEM = 0,
 	SKILL = 1,
 }

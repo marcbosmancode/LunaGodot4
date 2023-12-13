@@ -8,6 +8,7 @@ import com.friendlydev.lunaserver.login.AccountService;
 import com.friendlydev.lunaserver.resources.ResourceManager;
 import com.friendlydev.lunaserver.resources.models.Account;
 import com.friendlydev.lunaserver.resources.models.Door;
+import com.friendlydev.lunaserver.resources.models.Keybind;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
 import java.awt.Point;
@@ -55,6 +56,9 @@ public class PacketHandler {
                 break;
             case CONSUME_ITEM:
                 handleConsumeItem(ch, packet);
+                break;
+            case UPDATE_KEYBIND:
+                handleUpdateKeybind(ch, packet);
                 break;
         }
     }
@@ -210,6 +214,19 @@ public class PacketHandler {
         int slot = packet.readInt();
         
         ch.getPlayerCharacter().getInventory().consumeItem(slot);
+    }
+    
+    public static void handleUpdateKeybind(ClientHandler ch, InPacket packet) throws EOFException {
+        // Make sure the account is logged in
+        if (ch.isLoggedIn() == false) return;
+        
+        int hotkeyId = packet.readInt();
+        int actionType = packet.readInt();
+        int actionId = packet.readInt();
+        
+        Keybind keybind = new Keybind(ch.getPlayerCharacter().getId(), hotkeyId, actionType, actionId);
+        
+        ch.getPlayerCharacter().getPlayerSettings().setKeybind(keybind, false);
     }
     
 }

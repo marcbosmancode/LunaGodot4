@@ -172,4 +172,8 @@ static func handle_packet(in_packet: InPacket) -> void:
 			var action_type := in_packet.get_int()
 			var action_id := in_packet.get_int()
 			
-			Globals.change_hotkey_action(hotkey_id, HotkeyAction.new(action_type, action_id), false)
+			var hotkey_action: HotkeyAction = null
+			if action_type != Enums.HotkeyType.EMPTY:
+				hotkey_action = HotkeyAction.new(action_type, action_id)
+			
+			Globals.change_hotkey_action(hotkey_id, hotkey_action, false)

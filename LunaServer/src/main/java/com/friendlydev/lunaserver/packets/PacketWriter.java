@@ -4,6 +4,7 @@ import com.friendlydev.lunaserver.constants.ServerConfig;
 import com.friendlydev.lunaserver.constants.enums.PacketCodes.OutCode;
 import com.friendlydev.lunaserver.constants.enums.StatConstants.StatType;
 import com.friendlydev.lunaserver.constants.enums.StatConstants.VitalType;
+import com.friendlydev.lunaserver.resources.models.Keybind;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
 import com.friendlydev.lunaserver.resources.models.Scene;
 import java.awt.Point;
@@ -170,6 +171,16 @@ public class PacketWriter {
         
         packet.writeInt(statType.value);
         packet.writeInt(newValue);
+        
+        return packet;
+    }
+    
+    public static OutPacket writeUpdateKeybind(Keybind keybind) {
+        OutPacket packet = new OutPacket(OutCode.UPDATE_KEYBIND.value);
+        
+        packet.writeInt(keybind.getHotkeyId());
+        packet.writeInt(keybind.getActionType());
+        packet.writeInt(keybind.getActionId());
         
         return packet;
     }

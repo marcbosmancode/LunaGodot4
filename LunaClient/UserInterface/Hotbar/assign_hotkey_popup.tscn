@@ -1,17 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://buuwg2u2ws02q"]
+[gd_scene load_steps=5 format=3 uid="uid://buuwg2u2ws02q"]
 
 [ext_resource type="PackedScene" uid="uid://bx2l7j40wo3b2" path="res://UserInterface/Popups/base_popup.tscn" id="1_hmpfw"]
 [ext_resource type="Script" path="res://UserInterface/Hotbar/assign_hotkey_popup.gd" id="2_2gale"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="3_mck6k"]
 [ext_resource type="PackedScene" uid="uid://cyjty7sx0sw7k" path="res://UserInterface/Hotbar/hotkey_assign_button.tscn" id="3_rh0d2"]
 
 [node name="AssignHotkeyPopup" instance=ExtResource("1_hmpfw")]
 offset_right = 242.0
-offset_bottom = 52.0
+offset_bottom = 60.0
 script = ExtResource("2_2gale")
 header = "Assign Hotkey"
 ui_id = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." index="2"]
+[node name="AssignLabel" type="Label" parent="." index="2"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 17.0
+offset_right = 82.0
+offset_bottom = 40.0
+theme = ExtResource("3_mck6k")
+text = "<Action to assign>"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="3"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

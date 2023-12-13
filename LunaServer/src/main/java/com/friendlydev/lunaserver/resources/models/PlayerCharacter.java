@@ -46,6 +46,8 @@ public class PlayerCharacter {
     private Point position = new Point();
     @Transient
     private Inventory inventory;
+    @Transient
+    private PlayerSettings playerSettings;
     
     // Combat stats
     @Column(name = "combatlevel")
@@ -66,6 +68,7 @@ public class PlayerCharacter {
     // Default constructor for hibernate
     public PlayerCharacter() {
         inventory = new Inventory(this);
+        playerSettings = new PlayerSettings(this);
     }
 
     public PlayerCharacter(int accountId, String username) {
@@ -75,6 +78,7 @@ public class PlayerCharacter {
 
     public PlayerCharacter(int accountId, String username, int sceneId, int level, int exp, int maxHealth, int health, int maxMana, int mana, int attack) {
         inventory = new Inventory(this);
+        playerSettings = new PlayerSettings(this);
         this.accountId = accountId;
         this.username = username;
         this.sceneId = sceneId;
@@ -144,6 +148,14 @@ public class PlayerCharacter {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public PlayerSettings getPlayerSettings() {
+        return playerSettings;
+    }
+
+    public void setPlayerSettings(PlayerSettings playerSettings) {
+        this.playerSettings = playerSettings;
     }
 
     public int getLevel() {

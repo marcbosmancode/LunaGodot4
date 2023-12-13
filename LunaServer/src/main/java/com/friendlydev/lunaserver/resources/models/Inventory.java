@@ -25,7 +25,7 @@ public class Inventory {
         this.owner = owner;
         
         itemSlots = new ArrayList<>();
-        // Give the array list ab entry for each inventory slot
+        // Give the array list an entry for each inventory slot
         for (int i=0; i<SIZE; i++) {
             itemSlots.add(null);
         }

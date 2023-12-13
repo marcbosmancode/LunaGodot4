@@ -36,7 +36,9 @@ public class InventoryItem {
     @Transient
     private ResourceManager rm = ResourceManager.getInstance();
     
+    // Empty constructor for hibernate
     public InventoryItem() {
+        
     }
     
     public InventoryItem(int characterId, int position, Item item, int quantity) {

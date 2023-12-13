@@ -29,6 +29,7 @@ texture_margin_bottom = 2.0
 
 [node name="HotkeyAssignButton" type="Button"]
 custom_minimum_size = Vector2(22, 22)
+focus_mode = 0
 theme = ExtResource("1_kpgcj")
 theme_override_styles/normal = SubResource("StyleBoxTexture_6wwpt")
 theme_override_styles/hover = SubResource("StyleBoxTexture_hldvr")

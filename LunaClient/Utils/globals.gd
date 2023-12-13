@@ -46,17 +46,17 @@ var hotbar_keys: Dictionary = {
 func change_hotkey_action(hotkey_id: int, new_action: HotkeyAction, update_server: bool = true) -> void:
 	# Check if hotkey is the same and do nothing if true
 	var existing_action = hotkey_actions[hotkey_id]
-	if existing_action is HotkeyAction:
+	if existing_action is HotkeyAction and new_action is HotkeyAction:
 		if existing_action.action_type == new_action.action_type and existing_action.action_id == new_action.action_id:
 			return
 	
-	# Remove the action if it already exists on another hotkey
+	# Remove the action from other hotkeys
 	for hotkey in hotkey_actions:
 		var action = hotkey_actions[hotkey]
 		if action is HotkeyAction and new_action is HotkeyAction:
 			if action.action_type == new_action.action_type and action.action_id == new_action.action_id:
 				if update_server:
-					Client.send_data(PacketWriter.update_keybind(hotkey, -1, -1))
+					Client.send_data(PacketWriter.update_keybind(hotkey, Enums.HotkeyType.EMPTY, 0))
 				
 				hotkey_actions[hotkey] = null
 				hotkey_action_changed.emit(hotkey, null)
@@ -65,7 +65,7 @@ func change_hotkey_action(hotkey_id: int, new_action: HotkeyAction, update_serve
 		if new_action is HotkeyAction:
 			Client.send_data(PacketWriter.update_keybind(hotkey_id, new_action.action_type, new_action.action_id))
 		else:
-			Client.send_data(PacketWriter.update_keybind(hotkey_id, -1, -1))
+			Client.send_data(PacketWriter.update_keybind(hotkey_id, Enums.HotkeyType.EMPTY, 0))
 	
 	hotkey_actions[hotkey_id] = new_action
 	hotkey_action_changed.emit(hotkey_id, new_action)

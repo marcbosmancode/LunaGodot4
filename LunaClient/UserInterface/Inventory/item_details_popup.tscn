@@ -90,7 +90,7 @@ clip_text = true
 [node name="TradeLockLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_adjrd")
-theme_override_colors/font_color = Color(0.960784, 0.556863, 0.305882, 1)
+theme_override_colors/font_color = Color(0.94902, 0.333333, 0.403922, 1)
 text = "Trade locked"
 
 [node name="ItemDescription" type="Label" parent="MarginContainer/VBoxContainer"]

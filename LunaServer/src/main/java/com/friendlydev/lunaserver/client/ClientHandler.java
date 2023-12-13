@@ -1,5 +1,6 @@
 package com.friendlydev.lunaserver.client;
 
+import com.friendlydev.lunaserver.constants.enums.KeybindTypes.KeybindType;
 import com.friendlydev.lunaserver.database.DatabaseManager;
 import com.friendlydev.lunaserver.packets.InPacket;
 import com.friendlydev.lunaserver.packets.OutPacket;
@@ -9,7 +10,9 @@ import com.friendlydev.lunaserver.resources.ResourceManager;
 import com.friendlydev.lunaserver.resources.models.Account;
 import com.friendlydev.lunaserver.resources.models.Inventory;
 import com.friendlydev.lunaserver.resources.models.InventoryItem;
+import com.friendlydev.lunaserver.resources.models.Keybind;
 import com.friendlydev.lunaserver.resources.models.PlayerCharacter;
+import com.friendlydev.lunaserver.resources.models.PlayerSettings;
 import com.friendlydev.lunaserver.resources.models.Scene;
 import com.friendlydev.lunaserver.scripts.PythonScriptHandler;
 import java.io.DataInputStream;
@@ -177,6 +180,22 @@ public class ClientHandler implements Runnable {
             }
         }
         
+        // Also load and send over settings data for the player
+        PlayerSettings playerSettings = playerCharacter.getPlayerSettings();
+        
+        result = DatabaseManager.getListFromDB(Keybind.class, "characterid", playerCharacter.getId());
+        int loadedKeybinds = result.size();
+        
+        if (loadedKeybinds != 0) {
+            for (Object o : result) {
+                Keybind keybind = (Keybind) o;
+                // Ignore empty keybinds
+                if (keybind.getActionType() != KeybindType.EMPTY.value) {
+                    playerSettings.setKeybind(keybind, true);
+                }
+            }
+        }
+        
         // Add the player to their scene
         Scene loginScene = playerCharacter.getScene();
         playerCharacter.setPosition(loginScene.getSpawnPoint());
@@ -197,6 +216,7 @@ public class ClientHandler implements Runnable {
         
         DatabaseManager.saveOrUpdateInDB(playerCharacter);
         playerCharacter.getInventory().save();
+        playerCharacter.getPlayerSettings().save();
         playerCharacter = null;
     }
     
