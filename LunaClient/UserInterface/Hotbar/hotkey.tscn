@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dibeq3r2f5gfb"]
+[gd_scene load_steps=5 format=3 uid="uid://dibeq3r2f5gfb"]
 
 [ext_resource type="Texture2D" uid="uid://duxc6v62o8q12" path="res://UserInterface/Hotbar/Assets/nineslice_hotkey_outlined.png" id="1_lnqc1"]
 [ext_resource type="Script" path="res://UserInterface/Hotbar/hotkey.gd" id="2_k8an1"]
-[ext_resource type="FontFile" uid="uid://82807qw6xuv3" path="res://UserInterface/Fonts/luna_outline_font.png" id="3_bdjye"]
+[ext_resource type="FontFile" uid="uid://b1vhjdpx6tgnt" path="res://UserInterface/Fonts/luna_outline_font_full.png" id="3_w8e1m"]
+[ext_resource type="FontFile" uid="uid://dl8g4uc5k1l3t" path="res://UserInterface/Fonts/luna_outline_font_0_9.png" id="4_kjtlr"]
 
 [node name="Hotkey" type="NinePatchRect"]
 custom_minimum_size = Vector2(22, 22)
@@ -39,7 +40,7 @@ offset_top = -6.0
 offset_right = 19.0
 offset_bottom = 6.0
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("3_bdjye")
+theme_override_fonts/font = ExtResource("3_w8e1m")
 theme_override_font_sizes/font_size = 8
 text = "Key"
 vertical_alignment = 2
@@ -59,7 +60,7 @@ offset_bottom = 7.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("3_bdjye")
+theme_override_fonts/font = ExtResource("4_kjtlr")
 theme_override_font_sizes/font_size = 8
 text = "0"
 horizontal_alignment = 2

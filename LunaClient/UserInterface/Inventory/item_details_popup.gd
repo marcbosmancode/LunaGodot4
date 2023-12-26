@@ -1,10 +1,5 @@
 extends NinePatchRect
 
-enum HotkeyTypes {
-	ITEM = 0,
-	SKILL = 1,
-}
-
 var item_slot: int = -1
 
 @onready var item_texture = $MarginContainer/VBoxContainer/MainInfo/ItemPreview/ItemTexture
@@ -61,7 +56,7 @@ func _on_use_button_pressed():
 
 
 func _on_hotkey_button_pressed():
-	UserInterface.assign_hotkey(HotkeyTypes.ITEM, Inventory.get_item_id(item_slot))
+	UserInterface.assign_hotkey(Enums.HotkeyType.ITEM, Inventory.get_item_id(item_slot))
 
 
 func _on_drop_button_pressed():

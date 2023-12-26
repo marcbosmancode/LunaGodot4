@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cja118fj0vupp"]
+[gd_scene load_steps=8 format=3 uid="uid://cja118fj0vupp"]
 
 [ext_resource type="Shader" path="res://Shaders/blur_screen.gdshader" id="1_jplbb"]
 [ext_resource type="Script" path="res://UserInterface/Inventory/inventory_ui.gd" id="2_8hur0"]
@@ -6,47 +6,10 @@
 [ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="3_hwj20"]
 [ext_resource type="PackedScene" uid="uid://cld2smyrcisda" path="res://UserInterface/Inventory/inventory_grid.tscn" id="5_ytd7q"]
 [ext_resource type="PackedScene" uid="uid://crh7e7vk3xa4k" path="res://UserInterface/Inventory/item_details_popup.tscn" id="6_tgf3y"]
-[ext_resource type="Texture2D" uid="uid://duxmll11hl0fy" path="res://UserInterface/Assets/red_button.png" id="9_7kvpg"]
-[ext_resource type="Texture2D" uid="uid://cymfff6vv0qx1" path="res://UserInterface/Assets/red_button_hover.png" id="10_3uaay"]
-[ext_resource type="Texture2D" uid="uid://cr8knp0fj8m0w" path="res://UserInterface/Assets/red_button_press.png" id="11_xcv7r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q0r0m"]
 shader = ExtResource("1_jplbb")
 shader_parameter/intensity = 1.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iiav4"]
-shader = ExtResource("1_jplbb")
-shader_parameter/intensity = 1.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xtomi"]
-content_margin_top = 4.0
-texture = ExtResource("9_7kvpg")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_diaa8"]
-content_margin_top = 4.0
-texture = ExtResource("10_3uaay")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_os6wv"]
-content_margin_bottom = 2.0
-texture = ExtResource("11_xcv7r")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
 [node name="InventoryUI" type="Control"]
 material = SubResource("ShaderMaterial_q0r0m")
@@ -57,26 +20,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_8hur0")
-
-[node name="ScreenBlur" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_iiav4")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="ColorOverlay" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-color = Color(0.113725, 0.117647, 0.141176, 0.478431)
 
 [node name="InventoryBox" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -134,22 +77,3 @@ offset_left = 274.0
 offset_top = 36.0
 offset_right = 439.0
 offset_bottom = 266.0
-
-[node name="CloseButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -57.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 28.0
-grow_horizontal = 0
-focus_mode = 0
-theme = ExtResource("3_hwj20")
-theme_override_styles/normal = SubResource("StyleBoxTexture_xtomi")
-theme_override_styles/hover = SubResource("StyleBoxTexture_diaa8")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_os6wv")
-text = "Close"
-
-[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

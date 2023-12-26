@@ -1,0 +1,21 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://dl8g4uc5k1l3t"
+path="res://.godot/imported/luna_outline_font_0_9.png-3a2435f5b9195266a843cb5c1ec88b02.fontdata"
+
+[deps]
+
+source_file="res://UserInterface/Fonts/luna_outline_font_0_9.png"
+dest_files=["res://.godot/imported/luna_outline_font_0_9.png-3a2435f5b9195266a843cb5c1ec88b02.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("48-57")
+columns=10
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+fallbacks=[]
+compress=true

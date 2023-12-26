@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bswv6jycw0dnv"]
+[gd_scene load_steps=9 format=3 uid="uid://bswv6jycw0dnv"]
 
 [ext_resource type="PackedScene" uid="uid://qklr1dka8vv1" path="res://UserInterface/ConnectionStatus/con_status_ui.tscn" id="1_c46wp"]
 [ext_resource type="Script" path="res://UserInterface/user_interface.gd" id="1_chnc7"]
 [ext_resource type="PackedScene" uid="uid://c61c76bftdpr4" path="res://UserInterface/ChatSystem/chat_system.tscn" id="2_ryrwm"]
 [ext_resource type="PackedScene" uid="uid://b5nci8ahtfu53" path="res://UserInterface/Vitals/vitals_ui.tscn" id="3_k5mpo"]
 [ext_resource type="PackedScene" uid="uid://bngp834p64qxq" path="res://UserInterface/Interactions/interactions_ui.tscn" id="4_x4iov"]
-[ext_resource type="PackedScene" uid="uid://cja118fj0vupp" path="res://UserInterface/Inventory/inventory_ui.tscn" id="5_q0v2w"]
+[ext_resource type="PackedScene" uid="uid://dqmaatmrg142p" path="res://UserInterface/full_screen_ui.tscn" id="7_lr6l0"]
 [ext_resource type="PackedScene" uid="uid://caslhtukal0g1" path="res://UserInterface/Hotbar/hotbar.tscn" id="7_ooc36"]
+[ext_resource type="Texture2D" uid="uid://chqidlsh5g887" path="res://UserInterface/Assets/cursor.png" id="8_7wtc4"]
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_chnc7")
@@ -32,12 +33,19 @@ offset_bottom = 28.0
 
 [node name="InteractionsUI" parent="." instance=ExtResource("4_x4iov")]
 
-[node name="InventoryUI" parent="." instance=ExtResource("5_q0v2w")]
-visible = false
-
 [node name="ConStatusUI" parent="." instance=ExtResource("1_c46wp")]
 visible = false
 offset_left = 8.0
 offset_top = 40.0
 offset_right = 16.0
 offset_bottom = 48.0
+
+[node name="FullScreenUI" parent="." instance=ExtResource("7_lr6l0")]
+visible = false
+
+[node name="MouseTexture" type="TextureRect" parent="."]
+offset_right = 9.0
+offset_bottom = 9.0
+mouse_filter = 2
+texture = ExtResource("8_7wtc4")
+stretch_mode = 3

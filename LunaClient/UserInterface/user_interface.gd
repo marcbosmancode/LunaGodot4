@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@onready var mouse_texture = $MouseTexture
+
 var ok_popup = preload("res://UserInterface/Popups/ok_popup.tscn")
 
 var message_target_selection = preload("res://UserInterface/ChatSystem/private_message_popup.tscn")
@@ -7,6 +9,10 @@ var mts_instance: Node = null
 
 var assign_hotkey_popup = preload("res://UserInterface/Hotbar/assign_hotkey_popup.tscn")
 var ahp_instance: Node = null
+
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
 
 func show_message(group: int, message: String, sender: String = "") -> void:
 	MessageBus.show_message.emit(group, message, sender)
@@ -30,3 +36,7 @@ func assign_hotkey(action_type: int, action_id: int) -> void:
 		ahp_instance.action_type = action_type
 		ahp_instance.action_id = action_id
 		add_child(ahp_instance)
+
+
+func _process(_delta):
+	mouse_texture.position = mouse_texture.get_global_mouse_position()

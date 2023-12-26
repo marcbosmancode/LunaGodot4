@@ -10,5 +10,7 @@ signal show_chat_bubble(message, sender)
 signal show_message(group, message, sender)
 signal private_message_target_changed(new_target)
 
+signal input_key_changed(action, event)
+
 # Networking signals
 signal player_logged_in(username)

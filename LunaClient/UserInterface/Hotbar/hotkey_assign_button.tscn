@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="1_kpgcj"]
 [ext_resource type="Texture2D" uid="uid://5cco26sou23s" path="res://UserInterface/Hotbar/Assets/nineslice_hotkey.png" id="2_m2syn"]
 [ext_resource type="Texture2D" uid="uid://duxc6v62o8q12" path="res://UserInterface/Hotbar/Assets/nineslice_hotkey_outlined.png" id="3_kw8ec"]
-[ext_resource type="FontFile" uid="uid://82807qw6xuv3" path="res://UserInterface/Fonts/luna_outline_font.png" id="4_08flf"]
+[ext_resource type="FontFile" uid="uid://b1vhjdpx6tgnt" path="res://UserInterface/Fonts/luna_outline_font_full.png" id="4_08flf"]
 [ext_resource type="Script" path="res://UserInterface/Hotbar/hotkey_assign_button.gd" id="4_dalvd"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wwpt"]

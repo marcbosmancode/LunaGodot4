@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg3bg8bywajgm"]
+
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="1_30q8l"]
+[ext_resource type="Script" path="res://UserInterface/Settings/input_button.gd" id="2_vdbkl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2mfn"]
+bg_color = Color(0.113725, 0.109804, 0.121569, 0.352941)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_px43a"]
+bg_color = Color(0.360784, 0.360784, 0.380392, 0.352941)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jhwqa"]
+
+[node name="InputButton" type="Button"]
+custom_minimum_size = Vector2(0, 18)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+focus_mode = 0
+theme = ExtResource("1_30q8l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_v2mfn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_px43a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v2mfn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jhwqa")
+script = ExtResource("2_vdbkl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ActionLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "<Action>"
+vertical_alignment = 1
+
+[node name="KeyLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "<Assigned Key>"
+horizontal_alignment = 2
+vertical_alignment = 1

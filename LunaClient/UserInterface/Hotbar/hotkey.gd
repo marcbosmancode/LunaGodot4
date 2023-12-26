@@ -4,16 +4,20 @@ extends NinePatchRect
 @onready var key_label = $KeyLabel
 @onready var quantity_label = $QuantityLabel
 
+var key_index: int = 0
 var key_action: HotkeyAction = null
+var action_string: String = ""
 
 func _ready():
 	Globals.hotkey_action_changed.connect(_on_hotkey_action_changed)
+	MessageBus.input_key_changed.connect(_on_input_key_changed)
 	Inventory.items_changed.connect(_on_items_changed)
 	
-	var key_index = get_index()
-	key_label.text = Globals.hotbar_keys.get(key_index + 1)
+	key_index = get_index() + 1
+	action_string = "hotkey_" + str(key_index)
 	
-	update_action(key_index + 1)
+	update_input_key()
+	update_action(key_index)
 
 
 func update_action(hotkey_id: int) -> void:
@@ -38,10 +42,20 @@ func update_action(hotkey_id: int) -> void:
 		quantity_label.hide()
 
 
+func update_input_key() -> void:
+	# Get the input keys associated with the action
+	var events = InputMap.action_get_events(action_string)
+	
+	# Display the first input key
+	if events.size() > 0:
+		key_label.text = events[0].as_text()
+	else:
+		key_label.text = ""
+
+
 func _on_hotkey_action_changed(hotkey_id: int, _new_action: HotkeyAction):
-	var this_hotkey_id = get_index() + 1
-	if this_hotkey_id == hotkey_id:
-		update_action(this_hotkey_id)
+	if key_index == hotkey_id:
+		update_action(hotkey_id)
 
 
 func _on_items_changed(_slots):
@@ -50,3 +64,8 @@ func _on_items_changed(_slots):
 			# Clamp the maximum quantity shown on the label
 			var item_quantity = clamp(Inventory.get_item_quantity(key_action.action_id), 0, 999)
 			quantity_label.text = str(item_quantity)
+
+
+func _on_input_key_changed(action, _event):
+	if action == action_string:
+		update_input_key()

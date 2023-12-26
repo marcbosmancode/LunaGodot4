@@ -1,0 +1,173 @@
+[gd_scene load_steps=23 format=3 uid="uid://dqmaatmrg142p"]
+
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="1_bxcoy"]
+[ext_resource type="Script" path="res://UserInterface/full_screen_ui.gd" id="2_3ik64"]
+[ext_resource type="Shader" path="res://Shaders/blur_screen.gdshader" id="2_dg0w2"]
+[ext_resource type="PackedScene" uid="uid://cja118fj0vupp" path="res://UserInterface/Inventory/inventory_ui.tscn" id="3_iknbq"]
+[ext_resource type="PackedScene" uid="uid://chy38xtldjupm" path="res://UserInterface/Settings/settings_ui.tscn" id="4_on4u4"]
+[ext_resource type="Texture2D" uid="uid://bin1ybmbvw48t" path="res://UserInterface/Assets/Menu/inventory_icon.png" id="5_4xkpt"]
+[ext_resource type="Texture2D" uid="uid://bxlah8jg8ans6" path="res://UserInterface/Assets/Menu/inventory_icon_active.png" id="6_m6ym7"]
+[ext_resource type="Texture2D" uid="uid://7m1b7381i7v2" path="res://UserInterface/Assets/Menu/settings_icon.png" id="7_7kc6g"]
+[ext_resource type="Texture2D" uid="uid://bh6taqsacjv6x" path="res://UserInterface/Assets/Menu/settings_icon_active.png" id="8_uyoni"]
+[ext_resource type="Texture2D" uid="uid://duxmll11hl0fy" path="res://UserInterface/Assets/red_button.png" id="9_h3qcb"]
+[ext_resource type="Texture2D" uid="uid://cymfff6vv0qx1" path="res://UserInterface/Assets/red_button_hover.png" id="10_wojpf"]
+[ext_resource type="Texture2D" uid="uid://cr8knp0fj8m0w" path="res://UserInterface/Assets/red_button_press.png" id="11_c2l7l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ua8ca"]
+shader = ExtResource("2_dg0w2")
+shader_parameter/intensity = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_icvsb"]
+texture = ExtResource("5_4xkpt")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0d5c"]
+texture = ExtResource("6_m6ym7")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pfvpi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_anq1u"]
+texture = ExtResource("7_7kc6g")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qimji"]
+texture = ExtResource("8_uyoni")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6533b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oxy13"]
+content_margin_top = 4.0
+texture = ExtResource("9_h3qcb")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2rpof"]
+content_margin_top = 4.0
+texture = ExtResource("10_wojpf")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cit0l"]
+content_margin_bottom = 2.0
+texture = ExtResource("11_c2l7l")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="FullScreenUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bxcoy")
+script = ExtResource("2_3ik64")
+
+[node name="ScreenBlur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ua8ca")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.113725, 0.117647, 0.141176, 0.478431)
+
+[node name="TabList" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryUI" parent="TabList" instance=ExtResource("3_iknbq")]
+visible = false
+layout_mode = 1
+
+[node name="SettingsUI" parent="TabList" instance=ExtResource("4_on4u4")]
+visible = false
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 32.0
+grow_vertical = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="TabButtons" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="InventoryButton" type="Button" parent="MarginContainer/TabButtons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_icvsb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f0d5c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_f0d5c")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pfvpi")
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/TabButtons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_anq1u")
+theme_override_styles/hover = SubResource("StyleBoxTexture_qimji")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qimji")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6533b")
+
+[node name="CloseButton" type="Button" parent="."]
+custom_minimum_size = Vector2(48, 18)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -62.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = 32.0
+grow_horizontal = 0
+focus_mode = 0
+theme = ExtResource("1_bxcoy")
+theme_override_styles/normal = SubResource("StyleBoxTexture_oxy13")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2rpof")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cit0l")
+text = "Close"
+
+[connection signal="pressed" from="MarginContainer/TabButtons/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="MarginContainer/TabButtons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

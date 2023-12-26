@@ -1,6 +1,6 @@
 extends Control
 
-@onready var level_label = $StatPreview/ExperiencePreview/HeaderTexture/MarginContainer/LevelLabel
+@onready var level_label = $StatPreview/ExperiencePreview/HeaderTexture/LevelLabel
 @onready var health_bar = $Vitals/HealthPreview/TextureProgressBar
 @onready var health_details_label = $Vitals/HealthPreview/TextureProgressBar/DetailsLabel
 @onready var mana_bar = $Vitals/ManaPreview/TextureProgressBar

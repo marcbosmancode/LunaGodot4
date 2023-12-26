@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dkkrwjf566x3c" path="res://UserInterface/Fonts/Luna Tiny Font.ttf" id="5_2hr6t"]
 [ext_resource type="Texture2D" uid="uid://y1b6skwkapwb" path="res://UserInterface/Vitals/Assets/mana_header.png" id="6_kgdhy"]
 [ext_resource type="Texture2D" uid="uid://dkluxlqatiifw" path="res://UserInterface/Vitals/Assets/exp_header.png" id="8_tyjyj"]
-[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="9_ffd22"]
+[ext_resource type="FontFile" uid="uid://dl8g4uc5k1l3t" path="res://UserInterface/Fonts/luna_outline_font_0_9.png" id="9_6pilp"]
 [ext_resource type="Texture2D" uid="uid://fjuxpp0jn6xb" path="res://UserInterface/Vitals/Assets/exp_bar.png" id="9_q3v6h"]
 
 [node name="VitalsUI" type="Control"]
@@ -118,24 +118,15 @@ theme_override_constants/separation = -2
 layout_mode = 2
 texture = ExtResource("8_tyjyj")
 
-[node name="MarginContainer" type="MarginContainer" parent="StatPreview/ExperiencePreview/HeaderTexture"]
+[node name="LevelLabel" type="Label" parent="StatPreview/ExperiencePreview/HeaderTexture"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 7
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_bottom = 1
-
-[node name="LevelLabel" type="Label" parent="StatPreview/ExperiencePreview/HeaderTexture/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("9_ffd22")
+offset_left = 12.0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 11.0
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("9_6pilp")
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="StatPreview/ExperiencePreview"]
 show_behind_parent = true

@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://chy38xtldjupm"]
+
+[ext_resource type="Script" path="res://UserInterface/Settings/settings_ui.gd" id="1_qtm6b"]
+[ext_resource type="Texture2D" uid="uid://ducid6vv3uj5l" path="res://UserInterface/Inventory/Assets/nineslice_inv_vertical.png" id="4_eixmt"]
+[ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="5_ib254"]
+
+[node name="SettingsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qtm6b")
+
+[node name="SettingsBox" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_right = 400.0
+grow_vertical = 2
+mouse_filter = 0
+theme = ExtResource("5_ib254")
+texture = ExtResource("4_eixmt")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="HeaderLabel" type="Label" parent="SettingsBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.890196, 0.913725, 0.980392, 1)
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsBox/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="SectionLabel" type="Label" parent="SettingsBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Input Actions"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputSettingsContainer" type="ScrollContainer" parent="SettingsBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsBox/MarginContainer/VBoxContainer/InputSettingsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 7
+
+[node name="ActionContainer" type="VBoxContainer" parent="SettingsBox/MarginContainer/VBoxContainer/InputSettingsContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ResetButton" type="Button" parent="SettingsBox/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+text = "Reset to default"
+
+[connection signal="pressed" from="SettingsBox/MarginContainer/VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]

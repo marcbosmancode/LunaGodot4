@@ -30,19 +30,6 @@ var hotkey_actions: Dictionary = {
 	9: null,
 }
 
-# Controls
-var hotbar_keys: Dictionary = {
-	1: "1",
-	2: "2",
-	3: "3",
-	4: "4",
-	5: "5",
-	6: "6",
-	7: "Q",
-	8: "W",
-	9: "E",
-}
-
 func change_hotkey_action(hotkey_id: int, new_action: HotkeyAction, update_server: bool = true) -> void:
 	# Check if hotkey is the same and do nothing if true
 	var existing_action = hotkey_actions[hotkey_id]

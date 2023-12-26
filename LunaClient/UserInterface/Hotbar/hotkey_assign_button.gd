@@ -5,12 +5,16 @@ signal hotkey_pressed(index)
 @onready var action_texture = $MarginContainer/ActionTexture
 @onready var key_label = $KeyLabel
 
+var key_index: int = 0
+var action_string: String = ""
+
 func _ready():
 	Globals.hotkey_action_changed.connect(_on_hotkey_action_changed)
 	
-	var key_index = get_index() + 1
-	key_label.text = Globals.hotbar_keys.get(key_index)
+	key_index = get_index() + 1
+	action_string = "hotkey_" + str(key_index)
 	
+	update_input_key()
 	update_action(key_index)
 
 
@@ -46,3 +50,14 @@ func _on_hotkey_action_changed(hotkey_id: int, _new_action: HotkeyAction):
 	var this_hotkey_id = get_index() + 1
 	if this_hotkey_id == hotkey_id:
 		update_action(this_hotkey_id)
+
+
+func update_input_key() -> void:
+	# Get the input keys associated with the action
+	var events = InputMap.action_get_events(action_string)
+	
+	# Display the first input key
+	if events.size() > 0:
+		key_label.text = events[0].as_text()
+	else:
+		key_label.text = ""
