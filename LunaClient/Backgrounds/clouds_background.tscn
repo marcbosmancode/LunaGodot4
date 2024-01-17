@@ -6,11 +6,14 @@
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 script = ExtResource("1_xhmr5")
-scroll_speed = -10
+scroll_speed = 0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1280.0
-offset_bottom = 720.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.235294, 0.619608, 0.827451, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]

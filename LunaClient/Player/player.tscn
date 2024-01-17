@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d24ywyas8b5yb"]
+[gd_scene load_steps=33 format=3 uid="uid://d24ywyas8b5yb"]
 
 [ext_resource type="Texture2D" uid="uid://ogxfjrlutyer" path="res://Player/Assets/Hairstyles/hairstyle_b_1.png" id="1_3uf64"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kmhxu"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c83qyidr028ck" path="res://Player/Assets/Weapons/weapon_1.png" id="7_n7ylw"]
 [ext_resource type="Texture2D" uid="uid://y4xu2c71okao" path="res://Particles/Assets/dust.png" id="8_lkkcn"]
 [ext_resource type="Texture2D" uid="uid://b2mkv2s1baqdw" path="res://Particles/Assets/teleport_sparkles.png" id="9_5w3mn"]
+[ext_resource type="Script" path="res://Player/player_camera.gd" id="13_enkpe"]
 [ext_resource type="Theme" uid="uid://dfokevhqjjrs8" path="res://UserInterface/Themes/pixel_theme.tres" id="13_hs8w5"]
 [ext_resource type="PackedScene" uid="uid://bvqnms8n8am3v" path="res://Interactions/interaction_component.tscn" id="14_tubcd"]
 
@@ -240,18 +241,16 @@ gradient = SubResource("Gradient_2ui35")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1l552"]
 lifetime_randomness = 0.5
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 8.0
-particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-spread = 60.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 15.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 angle_min = -20.0
 angle_max = 20.0
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_lu4ao")
 anim_offset_max = 1.0
 
@@ -269,17 +268,15 @@ gradient = SubResource("Gradient_jwgud")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jo0x"]
 lifetime_randomness = 0.4
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(8, 12, 1)
-particle_flag_disable_z = true
-spread = 180.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_max = 5.0
-angular_velocity_max = 45.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 angle_min = -15.0
 angle_max = 15.0
+spread = 180.0
+initial_velocity_max = 5.0
+angular_velocity_max = 45.0
+gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_6ygg1")
 anim_offset_max = 1.0
 
@@ -331,10 +328,10 @@ position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_32pn5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_vtbe3")
 }
+autoplay = "idle"
 
 [node name="NetUpdateTimer" type="Timer" parent="."]
 
@@ -379,8 +376,10 @@ drag_left_margin = 0.3
 drag_top_margin = 0.3
 drag_right_margin = 0.3
 drag_bottom_margin = 0.3
+script = ExtResource("13_enkpe")
 
 [node name="UsernameLabel" type="Label" parent="."]
+texture_filter = 2
 offset_left = -25.0
 offset_top = 2.0
 offset_right = 25.0

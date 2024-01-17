@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var mouse_texture = $MouseTexture
+@onready var custom_cursor = $CustomCursor
 
 var ok_popup = preload("res://UserInterface/Popups/ok_popup.tscn")
 
@@ -39,4 +39,4 @@ func assign_hotkey(action_type: int, action_id: int) -> void:
 
 
 func _process(_delta):
-	mouse_texture.position = mouse_texture.get_global_mouse_position()
+	custom_cursor.position = custom_cursor.get_global_mouse_position()

@@ -43,9 +43,7 @@ offset_bottom = 48.0
 [node name="FullScreenUI" parent="." instance=ExtResource("7_lr6l0")]
 visible = false
 
-[node name="MouseTexture" type="TextureRect" parent="."]
-offset_right = 9.0
-offset_bottom = 9.0
-mouse_filter = 2
+[node name="CustomCursor" type="Sprite2D" parent="."]
+z_index = 100
 texture = ExtResource("8_7wtc4")
-stretch_mode = 3
+centered = false
