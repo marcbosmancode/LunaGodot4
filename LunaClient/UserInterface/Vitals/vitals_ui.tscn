@@ -26,12 +26,11 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -200.0
+offset_left = -103.0
 offset_top = 6.0
-offset_right = -103.0
+offset_right = -6.0
 offset_bottom = 46.0
 grow_horizontal = 0
-scale = Vector2(2, 2)
 theme_override_constants/separation = 0
 
 [node name="HealthPreview" type="HBoxContainer" parent="Vitals"]
@@ -109,7 +108,6 @@ offset_left = 6.0
 offset_top = 6.0
 offset_right = 183.0
 offset_bottom = 46.0
-scale = Vector2(2, 2)
 theme_override_constants/separation = -2
 
 [node name="ExperiencePreview" type="HBoxContainer" parent="StatPreview"]

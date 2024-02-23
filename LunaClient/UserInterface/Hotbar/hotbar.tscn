@@ -11,7 +11,6 @@ offset_left = -115.0
 offset_right = 115.0
 offset_bottom = 22.0
 grow_horizontal = 2
-scale = Vector2(2, 2)
 pivot_offset = Vector2(115, 0)
 mouse_filter = 0
 script = ExtResource("1_erme7")

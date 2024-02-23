@@ -34,6 +34,7 @@ window/size/viewport_height=900
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/stretch/scale=2.0
 window/stretch/scale_mode="integer"
 
 [filesystem]

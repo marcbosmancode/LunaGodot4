@@ -44,6 +44,6 @@ offset_bottom = 48.0
 visible = false
 
 [node name="CustomCursor" type="Sprite2D" parent="."]
-z_index = 100
+z_index = 4096
 texture = ExtResource("8_7wtc4")
 centered = false
